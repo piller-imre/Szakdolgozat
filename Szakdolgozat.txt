@@ -1,0 +1,152 @@
+
+?I.Bevezetés
+II.A különbözõ rácsok a játékokban
+Rácsok összehasonlítása
+B. Rácsok felhasználása
+III. Koordináta rendszerek
+Négyzet
+Hexagon
+Eltolásos koordináta rendszer (Offset coordinates)
+Kocka koordináta rendszer (Cube coordinates)
+Tengely koordináta rendszer (Axial coordinates)
+IV. Ábrázolás
+Négyzet
+B. Hexagon
+VI. Útkeresõ algoritmus
+VII. Mit választottam és miért
+VIII. Megvalósítás
+VI. Felhasználói dokumentáció?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I.Bevezetés
+
+A szakdolgozatom célja egy olyan procedurális generálási mód kidolgozása, amellyel izometrikus grafikájú játékokhoz változatos térképeket lehet elõállítani. A térképek hexagon alapúak. A dolgozat azt a többlépcsõs folyamatot mutatja be, amely során a program a nagyobb összefüggõ egységek meghatározása után sorban határozza meg a különbözõ részletességi szinteken lévõ elemeket.
+
+A szoftver C# programozási nyelven készül. A C# ismerete és a fejlesztéshez való alkalmazhatósága miatt esett a választásom erre a nyelvre, ezáltal a fejlesztéshez használt játékmotornak a Unity-t, fejlesztõ környezetnek pedig a Visual Studio-t választottam Windows 10 platformon.
+
+Elõzetes a fejezetekbõl
+
+II.A különbözõ rácsok a játékokban
+Rácsok összehasonlítása
+
+Legyen szó társasjátékról vagy számítógépes játékról, az egyik leggyakrabban használt rács a négyzetrács. Egyszerû, könnyen kezelhetõ és jól illeszthetõ a számítógép kijelzõjére. A cellák pozícióit a Descartes-féle derékszögû koordináta-rendszer (x, y) segítségével határozhatjuk meg. Kirajzolásához ismernünk kell a cellai méreteit (szélesség, magasság) illetve a rács méreteit (oszlopok, sorok száma). A nyilvántartáshoz ismernünk kell a viszonyítási pontot (origó), illetve tudnunk kell az objektum pozicióját (x, y).
+
+Könnyen kezelhetõsége mellett viszont van egy nagy hátránya:
+Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függõlegesen 2-2 szomszédja érhetõ el. További négy szomszédja átlósan található meg. A problémára akkor figyelünk fel, amikor megvizsgáljuk a távolságot a különbözõ szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza 1. Ha a négyzetek középpontjához viszonyítunk, akkor a függõlegesen és a vízszintesen lévõ szomszédok távolsága 1, míg az átlósan lévõk távolsága ?2 (Pitagorasz-tétel).
+
+A két fajta szomszéd közötti különbség miatt vetõdnek fel bizonyos kérdések:
+Hogyan kezeljük az átlós mozgást? 
+Egyáltalán engedélyezzük-e az átlós mozgást? 
+
+A problémára több megoldás is létezik:
+
+Nem alkalmazunk átlós mozgást. Ez a legegyszerûbb megoldás, amit az egyszerûsége miatt gyakranhasználnak
+Egy kevésbé elterjedt megoldás, hogy maradunk a négyzeteknél, viszont minden második sort/oszlopot eltolunk az oldal szélességének/hosszának a felével. Ekkor az összes szomszéd hasonló távolságra kerül.
+
+3. A leggyakoribb megoldás a hexagonok használata a négyzetek helyett. A négyzethez hasonlítva a hatszögnek csak hat szomszédja van (nyolc helyett). Ezek közül mindegyik oldal szomszéd, és nincs olyan szomszédja ami a sarkokhoz esne. Ezáltal minden szomszéd egyenlõen 1 távolságra van.
+B. Rácsok felhasználása
+
+Alapvetõen mindkét rácsnak megvan a maga helye a játékokban. 
+
+Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútor) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek,
+ha elvágjuk a hexagonokat. 
+
+Akkor azok hogyan viselkedjenek? 
+Lehessen-e rálépni?
+Ha nem lehet rálépni akkor miért van?
+
+Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el az a felhasználó számára furcsa összhatást nyújthat.
+
+Ha mindenképpen hexagonokat  szeretnénk használni kis méretû térképen (pl: 8x20), akkor lehetõleg ne egy zárt szobában alkalmazzuk hanem szabad téren (pl: mezõ, erdõ, tenger part) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
+
+Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt elõnyösebb a hexagonháló használata ezekben az esetekben.
+III. Koordináta rendszerek
+Négyzet
+Négyzetrács esetében egy derékszögû koordinátarendszer használata a legkézenfekvõbb. 
+
+A derékszögû koordináta-rendszert két egymásra merõleges számegyenes alkotja. Az egyeneseket koordinátatengelyeknek, metszéspontjukat kezdõpontnak, origónak nevezzük. Az origóhoz mindkét számegyenesen a 0-t rendeljük hozzá. A „vízszintes” tengely az x (abszcissza) tengely, a „függõleges” az y (ordináta) tengely.
+
+A koordináta-rendszer segítségével a sík bármely P pontjának a helyzete két jelzõszám (koordináta) segítségével egyértelmûen meghatározható. A pont helyzetét a két tengelytõl mért elõjeles távolságával határozzuk meg. A pontnak a tengelyektõl mért elõjeles távolságai a pont koordinátái (jelzõszámai). Az elõjelek a számegyenesek segítségével adhatók meg. A jelzõszámokat, a pont neve után zárójelben adjuk meg: P(x;y).
+Hexagon
+A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni. 
+Eltolásos koordináta rendszer (Offset coordinates)
+
+	A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektõl eltekintve gyakorlatilag megegyezik a négyzet koordináta rendszerrel. 
+
+
+Ha megnézzük a lenti képet, akkor láthatjuk, hogy a hexagonhálóhoz hasonló hatást kapunk, ha a négyzethálóban minden páros/páratlan sort/oszlopot eltolunk.
+
+
+Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért 4 fajta variáció érhetõ el összesen.
+		
+Kocka koordináta rendszer (Cube coordinates)
+
+
+	A kocka koordináta rendszerben az eddig megszokottakkal ellentétben nem kettõ, hanem három fõ tengely van.
+
+Tengely koordináta rendszer (Axial coordinates)
+IV. Ábrázolás
+Négyzet
+
+B. Hexagon
+
+A hexagonok alapvetõen kétféleképpen állhatnak. 
+Az egyik lehetõség, hogy az egyik csúcs van felül;
+a másik lehetõség, hogy az egyik oldal van felül. 
+
+
+
+
+
+
+
+
+
+A következõ lépésként vizsgáljuk meg, hogy hogyan tudjuk egymás mellé elhelyezni a hexagonokat.
+
+
+
+A felül hegyes elrendezés esetén vízszintesen a hexagon szélességével, függõlegesen pedig a hexagon magasságának a 3 -vel kell eltolni következõ hexagont. Ezen kívül minden páros/páratlan sort vízszintesen a szélesség felével kell még eltolni.
+
+
+A felül lapos elrendezés esetén vízszintesen az egymás melletti hexagonok közötti távolság a hexagon szélességének 3 része. Függõlegesen minden páros/páratlan oszlopot a magasság felével kell eltolni.
+
+VI. Útkeresõ algoritmus
+A hexagonok és a négyzetek esetén az útkeresés csak egy ponton különbözik (szomszédok száma) ezért az egyszerûség kedvért csak a négyzethálónál mutatom be
+
+VII. Mit választottam és miért
+hexagon
+offset coord
+pointy top
+VIII. Megvalósítás
+
+Bemenetként a térkép fõ jellemzõit, a generált térképpel szembeni elvárásokat kapja paraméterezésként.
+
+A térkép egy több lépcsõs folyamat végén fog elkészülni. 
+Az elsõ fázisban a nagyobb területi egységek (szigetek, folyók, ...) körvonalazódása történik. 
+A második lépésben a térkép alapegységeinek (tile) a konkretizálása történik meg, azaz leképzõdik egy hexagon háló. 
+Harmadik lépésként minden egyes tile-hoz hozzárendeli az algoritmus a megfelelõ textúrát a területi egységek alapján. 
+A negyedik fázisban városokat, településeket, falakat hoz létre a program. 
+Ötödik lépésként a növényzetet (fák, bokrok) generálja majd le. 
+A hatodik lépésben a dekorálás jön, ahol az évszakoknak és a különbözõ természeti hatásoknak megfelelõen módosulhat a textúra.
+
+
+ Elsõ lépésként szükségünk lesz egy csempére (tile), ami az alapelem lesz a térképen. Erre a célra én egy 3D-s hexagon modellt használtam különbözõ textúrákkal.
+Ezen kívül szükség van a generálni kívánt térkép méreteire (szélesség, magasság).
+
+VI. Felhasználói dokumentáció
+
