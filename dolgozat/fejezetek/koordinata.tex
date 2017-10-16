@@ -1,0 +1,37 @@
+\Chapter{Koordináta rendszerek}
+
+Négyzet
+Négyzetrács esetében egy derékszögû koordinátarendszer használata a legkézenfekvõbb. 
+
+A derékszögû koordináta-rendszert két egymásra merõleges számegyenes alkotja. Az egyeneseket koordinátatengelyeknek, metszéspontjukat kezdõpontnak, origónak nevezzük. Az origóhoz mindkét számegyenesen a 0-t rendeljük hozzá. A vízszintes tengely az x (abszcissza) tengely, a függõleges az y (ordináta) tengely.
+
+A koordináta-rendszer segítségével a sík bármely P pontjának a helyzete két jelzõszám (koordináta) segítségével egyértelmûen meghatározható. A pont helyzetét a két tengelytõl mért elõjeles távolságával határozzuk meg. A pontnak a tengelyektõl mért elõjeles távolságai a pont koordinátái (jelzõszámai). Az elõjelek a számegyenesek segítségével adhatók meg. A jelzõszámokat, a pont neve után zárójelben adjuk meg: P(x;y).
+Hexagon
+A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni. 
+Eltolásos koordináta rendszer (Offset coordinates)
+
+	A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektõl eltekintve gyakorlatilag megegyezik a négyzet koordináta rendszerrel. 
+
+Ha megnézzük a lenti képet, akkor láthatjuk, hogy a hexagonhálóhoz hasonló hatást kapunk, ha a négyzethálóban minden páros/páratlan sort/oszlopot eltolunk.
+
+Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért 4 fajta variáció érhetõ el összesen.
+		
+Kocka koordináta rendszer (Cube coordinates)
+
+	A kocka koordináta rendszerben az eddig megszokottakkal ellentétben nem kettõ, hanem három fõ tengely van.
+
+Tengely koordináta rendszer (Axial coordinates)
+IV. Ábrázolás
+Négyzet
+
+B. Hexagon
+
+A hexagonok alapvetõen kétféleképpen állhatnak. 
+Az egyik lehetõség, hogy az egyik csúcs van felül;
+a másik lehetõség, hogy az egyik oldal van felül. 
+
+A következõ lépésként vizsgáljuk meg, hogy hogyan tudjuk egymás mellé elhelyezni a hexagonokat.
+
+A felül hegyes elrendezés esetén vízszintesen a hexagon szélességével, függõlegesen pedig a hexagon magasságának a 3 -vel kell eltolni következõ hexagont. Ezen kívül minden páros/páratlan sort vízszintesen a szélesség felével kell még eltolni.
+
+A felül lapos elrendezés esetén vízszintesen az egymás melletti hexagonok közötti távolság a hexagon szélességének 3 része. Függõlegesen minden páros/páratlan oszlopot a magasság felével kell eltolni.
