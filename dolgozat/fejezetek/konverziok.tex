@@ -1,0 +1,80 @@
+\chapter{Koordináta konverziók}
+
+Mivel a tárolás, megjelenítés és a számítások nem ugyanabban a koordináta rendszerben fog megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a kocka koordináta rendszert fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
+
+\section{Tengelyes - Kocka konverziók}
+
+A tengelyes koordináta rendszer nagyon közel áll a kocka koordináta rendszerhez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján.
+
+\begin{verbatim}
+function cube_to_axial(cube):
+    var q = cube.x
+    var r = cube.z
+    return Hex(q, r)
+
+function axial_to_cube(hex):
+    var x = hex.q
+    var z = hex.r
+    var y = -x-z
+    return Cube(x, y, z)
+\end{verbatim}
+
+\section{Eltolásos - Kocka konverziók}
+
+Az eltolásos koordináta rendszernek négy fajta tipusa lehet, az alapján, hogy melyik sor/oszlop lett eltolva.
+
+Páratlan - sor:
+\begin{verbatim}
+function cube_to_oddr(cube):
+      col = cube.x + (cube.z - (cube.z&1)) / 2
+      row = cube.z
+      return Hex(col, row)
+
+function oddr_to_cube(hex):
+      x = hex.col - (hex.row - (hex.row&1)) / 2
+      z = hex.row
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páros - sor:
+\begin{verbatim}
+function cube_to_evenr(cube):
+      col = cube.x + (cube.z + (cube.z&1)) / 2
+      row = cube.z
+      return Hex(col, row)
+
+function evenr_to_cube(hex):
+      x = hex.col - (hex.row + (hex.row&1)) / 2
+      z = hex.row
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páratlan - oszlop:
+\begin{verbatim}
+function cube_to_oddq(cube):
+      col = cube.x
+      row = cube.z + (cube.x - (cube.x&1)) / 2
+      return Hex(col, row)
+
+function oddq_to_cube(hex):
+      x = hex.col
+      z = hex.row - (hex.col - (hex.col&1)) / 2
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páros - oszlop:
+\begin{verbatim}
+function cube_to_evenq(cube):
+      col = cube.x
+      row = cube.z + (cube.x + (cube.x&1)) / 2
+      return Hex(col, row)
+
+function evenq_to_cube(hex):
+      x = hex.col
+      z = hex.row - (hex.col + (hex.col&1)) / 2
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
