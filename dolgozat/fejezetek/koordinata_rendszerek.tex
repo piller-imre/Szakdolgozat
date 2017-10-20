@@ -44,7 +44,7 @@ Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is ál
 \newline
 \newline Az eltolásos kooridinátarendszernek az egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen halad a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.		
 
-\section{Kocka koordináta rendszer (Cube coordinates)}
+\subsection{Kocka koordináta rendszer (Cube coordinates)}
 
 Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordinátarendszereknek. 
 
@@ -88,7 +88,7 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 
 \noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn, ugyanakkor olyan esetekben mint az útkereső vagy a távolság számító algoritmusok az előnye egyértelműen látszik. 
 
-\section{Tengely koordináta rendszer (Axial coordinates)}
+\subsection{Tengely koordináta rendszer (Axial coordinates)}
 
 Tengely koordinátarendszer csak kettő koordinátát használ a kocka koordinátarendszer három koordinátája közül. Mivel a kocka koordinátarendszernél volt az a megkötés, hogy $x + y + z = 0$, és ahogy már a kocka koordinátarendszernél már leírtam a harmadik koordináta redundáns.  A tengelyes koordinátarendszer használható tárolásra és megjelenítésére és mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
 
