@@ -1,0 +1,55 @@
+\chapter{Távolság számítás}
+
+\section{Kocka koordináta rendszer}
+
+A kocka koordináta rendszerben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a kocka koordinátarendszerben. Ezáltal téve egyszerűvé a távolságszámítást. A négyzet koordinátarendszer esetén a Manhattan távolság képlet a következő: $abs(dx) + abs(dy)$. A kocka koordinátarendszerben pedig a Manhattan távolság $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a Manhattan távolság képlet a kockarács esetén fentálló távolság fele.
+\newline
+\newline Pseudo kóddal:
+\begin{verbatim}
+function cube_distance(a, b):
+    return (abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z)) / 2
+\end{verbatim}    
+
+\noindent Egy ezzel egyenértékű megközelítés az is, ha megfigyeljük azt, hogy a három koordináta közül az egyiknek mindenképpen a a másik kettő összegének kell, hogy legyen, ekkor az az egy lesz a távolság. 
+\newline
+\newline Pseudo kóddal:
+\begin{verbatim}
+function cube_distance(a, b):
+    return max(abs(a.x - b.x), abs(a.y - b.y), abs(a.z - b.z))
+\end{verbatim}
+
+\noindent Az, hogy melyik algoritmust váltjuk az szituáció és egyén függő, de az eredmény ugyanaz.
+
+\section{Tengelyes koordináta rendszer}
+
+A tengelyes koordináta rendszerben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a kocka koordináta rendszerre.
+\newline
+\newline Pseudo kóddal:
+\begin{verbatim}
+function hex_distance(a, b):
+    var ac = axial_to_cube(a)
+    var bc = axial_to_cube(b)
+    return cube_distance(ac, bc)
+\end{verbatim}    
+
+\noindent Egy másik módszer arra az esetre, ha egy függvényben szeretnénk megoldani:
+\begin{verbatim} 
+function hex_distance(a, b):
+    return (abs(a.q - b.q) 
+          + abs(a.q + a.r - b.q - b.r)
+          + abs(a.r - b.r)) / 2
+\end{verbatim}          
+
+\noindent Mivel a tengelyes koordináta rendszerben is a távolságokat kockarács esetén alkalmazható Manhattan távolság számító algoritmussal számítjuk ki, ezért valamilyen módon arra kell visszavezetni.
+
+\section{Eltolásos koordináta rendszer}
+
+Az eltolásos koordináta rendszer esetén is azt a megoldást fogjuk használni amit a tengelyes koordináta rendszer esetén is alkalmaztunk. Átalakítjuk a koordinátákat a kocka koordináta rendszerre.
+\newline
+\newline Pseudo kód:
+\begin{verbatim} 
+function offset_distance(a, b):
+    var ac = offset_to_cube(a)
+    var bc = offset_to_cube(b)
+    return cube_distance(ac, bc)
+\end{verbatim}  
