@@ -78,3 +78,5 @@ function evenq_to_cube(hex):
       y = -x-z
       return Cube(x, y, z)
 \end{verbatim}
+
+\noindent Érdemes bitenkénti “és” ($a \& 1$) operátort használni modulo ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben modulo számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
