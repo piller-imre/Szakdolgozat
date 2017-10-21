@@ -10,6 +10,11 @@ function cube_distance(a, b):
     return (abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z)) / 2
 \end{verbatim}    
 
+$$
+d_{\text{cube}}(a, b) =
+\dfrac{|a_x - b_x| + |a_y - b_y| + |a_z - b_z|}{2}
+$$
+
 \noindent Egy ezzel egyenértékű megközelítés az is, ha megfigyeljük azt, hogy a három koordináta közül az egyiknek mindenképpen a a másik kettő összegének kell, hogy legyen, ekkor az az egy lesz a távolság. 
 \newline
 \newline Pseudo kóddal:
@@ -17,6 +22,13 @@ function cube_distance(a, b):
 function cube_distance(a, b):
     return max(abs(a.x - b.x), abs(a.y - b.y), abs(a.z - b.z))
 \end{verbatim}
+
+$$
+d_{\text{cube}}(a, b) =
+\max(
+|a_x - b_x|, |a_y - b_y|, |a_z - b_z|
+)
+$$
 
 \noindent Az, hogy melyik algoritmust váltjuk az szituáció és egyén függő, de az eredmény ugyanaz.
 
