@@ -2,11 +2,13 @@
 
 \section{Rácsok összehasonlítása}
 
-Legyen szó társasjátékról vagy számítógépes játékról, az egyik leggyakrabban használt rács a négyzetrács. Egyszerű, könnyen kezelhető és jól illeszthető a számítógép kijelzőjére. A cellák pozícióit a Descartes-féle derékszögű koordináta-rendszer ($x, y$) segítségével határozhatjuk meg. Kirajzolásához ismernünk kell a cella méreteit (szélesség, magasság) illetve a rács méreteit (oszlopok, sorok száma). A nyilvántartáshoz ismernünk kell a viszonyítási pontot (origó), illetve tudnunk kell az objektum pozicióját ($x, y$).
+Legyen szó társasjátékról vagy számítógépes játékról, az egyik leggyakrabban használt rács a négyzetrács. Egyszerű, könnyen kezelhető és jól illeszthető a számítógép kijelzőjére.
+\newline A cellák pozícióit a Descartes-féle derékszögű koordináta-rendszer ($x, y$) segítségével határozhatjuk meg. 
+\newline Kirajzolásához ismernünk kell a cella méreteit (szélesség, magasság) illetve a rács méreteit (oszlopok, sorok száma). 
+\newline A nyilvántartáshoz ismernünk kell a viszonyítási pontot (origó), illetve tudnunk kell az objektum pozicióját ($x, y$).
 \newline
-\newline
-Könnyen kezelhetősége mellett viszont van egy nagy hátránya:
-Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A problémára akkor figyelünk fel, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza 1. Ha a négyzetek középpontjához viszonyítunk, akkor a függõlegesen és a vízszintesen lévő szomszédok távolsága 1, míg az átlósan lévők távolsága $\sqrt{2}$.
+\newline Könnyen kezelhetősége mellett viszont van egy nagy hátránya:
+Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A problémára akkor figyelünk fel, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza 1. Ha a négyzetek középpontjához viszonyítunk, akkor a függőlegesen és a vízszintesen lévő szomszédok távolsága 1, míg az átlósan lévők távolsága $\sqrt{2}$.
 \newline
 
 \begin{figure}[h]
@@ -24,7 +26,7 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 \newline A problémára több megoldás is létezik:
 
 \begin{itemize}
-\item Nem alkalmazunk átlós mozgást. Ez a legegyszerûbb megoldás, amit az egyszerûsége miatt gyakran használunk.
+\item Nem alkalmazunk átlós mozgást. Ez a legegyszerűbb megoldás, amit az egyszerűsége miatt gyakran használunk.
 \item Egy kevésbé elterjedt megoldás, hogy maradunk a négyzeteknél, viszont minden második sort/oszlopot eltolunk az oldal szélességének/hosszának a felével. Ekkor az összes szomszéd hasonló távolságra kerül.
 
 \begin{figure}[h]
@@ -46,13 +48,13 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 \label{fig:img23}
 \end{figure}
 
-\noindent A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy sokkal kézenfekvőbb a hat lehetséges mozgási iránynak a használata. Emelett még eszétikailag is kellemesebb érzeted nyújt a felhasználó számára.
+\noindent A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy sokkal kézenfekvőbb a hat lehetséges mozgási iránynak a használata. Emelett még eszétikailag is kellemesebb érzetet nyújt a felhasználó számára.
 
 \section{Rácsok felhasználása}
 
-Alapvetõen mindkét rácsnak megvan a maga helye a játékokban. 
-
-Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútor) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
+Alapvetően mindkét rácsnak megvan a maga helye a játékokban. 
+\newline
+\newline Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútor) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
 \newline
 
 \begin{figure}[h]
@@ -68,7 +70,7 @@ Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútor) álta
 \newline
 \newline Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el az a felhasználó számára furcsa összhatást nyújthat.
 \newline
-\newline Ha mindenképpen hexagonokat  szeretnénk használni kis méretû térképen (pl: $8 \times 20$), akkor lehetõleg ne egy zárt szobában alkalmazzuk hanem szabad téren (pl: mezõ, erdõ, tenger part) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
+\newline Ha mindenképpen hexagonokat  szeretnénk használni kis méretű térképen (pl: $8 \times 20$), akkor lehetőleg ne egy zárt szobában alkalmazzuk hanem szabad téren (pl: mező, erdő, tenger part) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
 \newline
-\newline Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt elõnyösebb a hexagonháló használata ezekben az esetekben.
+\newline Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
 

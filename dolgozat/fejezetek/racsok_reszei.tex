@@ -1,6 +1,6 @@
 \Chapter{Rácsok részei}
 
-A rácsoknak három különböző része van: a lap, élek és csúcsok. Minden lap két dimenziós felület élek által határolva. Minden él egy dimenziós szakasz aminek mind a két végén csúcsok találhatóak. Minden csúcs nulla dimenziós pont. 
+A rácsoknak három különböző része van: a lap, az élek és a csúcsok. Minden lap két dimenziós felület élek által határolva. Minden él egy dimenziós szakasz aminek mind a két végén csúcsok találhatóak. Minden csúcs nulla dimenziós pont. 
 
 \begin{figure}[h]
 \centering
@@ -11,16 +11,16 @@ A rácsoknak három különböző része van: a lap, élek és csúcsok. Minden 
 
 \noindent A játékok nagy többségében közös az, hogy a rácsoknak csak az egyik részére koncentrálnak. A nyugati játékoknál mint a sakk vagy a dáma a rácsnak a lap részén van a fókusz ellentétben a keleti játékokkal mint a go vagy a csillaghalma (Chinese Checkers).
 \newline
-\newline Lapok, élek és a csúcsok feltűnnek a különböző poligonokból álló  térképek esetén is. Az algoritmus ami a lapok, élek vagy csúcsok alapján működik de nincs szükség koordinátákra az működni fog poligoniális térképek esetén is.
+\newline Lapok, élek és csúcsok feltűnnek a különböző poligonokból álló  térképek esetén is. Az algoritmus ami a lapok, élek vagy csúcsok alapján működik de nincs szükség koordinátákra az működni fog poligoniális térképek esetén is.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{kepek/img32.png}
-\caption{Különböző polygonokból álló térkép.}
+\caption{Különböző poligonokból álló térkép.}
 \label{fig:img32}
 \end{figure}
 
-\noindent A rácsok és a poligoniális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok közötti élből pedig a csomópontok közötti gráf éleket készítünk. A gráf struktúra, hogy gráf algoritmusokat (például: legrövidebb út) használjunk a térképen.
+\noindent A rácsok és a poligoniális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok közötti élből pedig a csomópontok közötti gráf éleket készítünk. A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például: legrövidebb út) használjunk a térképen.
 
 \section*{Használatuk játékokban}
 
