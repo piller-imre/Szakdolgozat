@@ -2,19 +2,21 @@
 
 Az egyik leggyakoribb probléma a tengelyes koordináta rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta rendszer mellett. Azonban az összes korábban említett koordináta rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
 \newline
-\newline mellékletben képek
+\newline Mellékletben képek
 \newline
-\newline Vegyük észre a képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Ez három stratégiát ad nekünk a tárolásra:
-\newline
-\newline Hagyjuk figyelmen kívül a problémát. Használjunk mátrixot a tárolásra és használjunk valamilyen speciális jelzőt a nem létező mezőkre. Nem éri meg ennél komplikáltabb megoldást.
-Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni. (pl: $Grid(Tile(x,y))$);
-Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is.
+\newline Vegyük észre a képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Három lehetséges megoldás létezik a probléma kiküszöbölésére:
+\begin{itemize}
+\item Hagyjuk figyelmen kívül a problémát. Használjunk mátrixot a tárolásra és használjunk valamilyen speciális jelzőt a nem létező mezőkre. A legtöbb esetben nem éri meg ennél komplikáltabb megoldást alkalmazni.
+\item Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni. (pl: $Grid(Tile(x,y))$);
+\item Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is.
 \newline
 \newline Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - első_oszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
 \newline
 \newline Ha a térkép fix formájú, akkor az első oszlop menet közben is számítható ahelyett, hogy tárolnánk.
-\newline
-\newline A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta rendszerbe.
-A háromszög alakú térképek esetén, $első_oszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
-A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $első_oszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
-A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
+\begin{itemize}
+\item A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta rendszerbe.
+\item A háromszög alakú térképek esetén, $első_oszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
+\item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $első_oszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
+\item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
+\end{itemize}
+\end{itemize}
