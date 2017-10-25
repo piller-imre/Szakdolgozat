@@ -1,6 +1,6 @@
 \chapter{Útkereső algoritmus}
 
-A hexagonok és a négyzetek esetén az útkeresés csak egy ponton különbözik (szomszédok száma) ezért az egyszerűség kedvért csak a négyzethálónál mutatom be.
+A hexagonok és a négyzetek esetén az útkeresés csak egy ponton különbözik (szomszédok száma) ezért az egyszerűség kedvéért csak a négyzethálónál mutatom be.
 \newline
 \newline Az algoritmus:
 \begin{verbatim}
@@ -29,13 +29,13 @@ loop
 
 \section{Szomszédok}
 
-Ahhoz, hogy útkereső algoritmust tudjunk készíteni ismernünk kell, hogy a különböző alakzatok és koordináta rendszerek esetén milyen algoritmussal érhetjük el az adott alakzat szomszédait. 
+Ahhoz, hogy útkereső algoritmust tudjunk készíteni ismernünk kell, hogy a különböző alakzatok és koordináta-rendszerek esetén milyen algoritmussal érhetjük el az adott alakzat szomszédait. 
 \newline
 \newline Az algoritmusokat ebben a formában fogom megadni: $A \rightarrow B1, B2, B3 …$
 (Az $''A''$ és $''B''$ pontokat $''u''$, $''v''$ koordináták segítségével fogom megadni.)
 
 \subsection{Négyzet}
-A négyzet esetén egyszerű dolgunk van, mert csak egyfajta koordináta rendszerünk van.
+A négyzet esetén egyszerű dolgunk van, mert csak egyfajta koordináta-rendszerünk van.
 
 $$
 (u,v) \rightarrow (u,v+1) (u+1,v) (u,v-1), (u-1,v)
@@ -43,9 +43,9 @@ $$
 
 \subsection{Hexagon}
 
-Hexagon esetén több fajta koordináta rendszerünk is lehet.
+Hexagon esetén több fajta koordináta-rendszerünk is lehet.
 
-\subsubsection{Kocka koordináta rendszer (Cube coordinates)}
+\subsubsection{Kocka koordináta-rendszer (Cube coordinates)}
 
 \noindent Ahhoz, hogy elmozduljunk eggyel meg kell változtatnunk egyet a három kocka koordináta közül $+1$-el és egy másikat $-1$-el (a változtatások összege $0$ kell, hogy legyen). Három koordinátát lehet megváltoztatni $+1$-el, a másik két lehetséges koordináta közül az egyiket kell csökkenteni $-1$-el. Ez hat lehetséges változatot eredményez. Mindegyik megfeleltethető a hexagon egyik irányának. A lehető legegyszerűbb és leggyorsabb megoldás az, ha az összes lehetséges permutációt előre kikalkuláljuk és beleírjuk egy táblázatba ( Cube($dx, dy, dz$)).
 \newline
@@ -63,9 +63,9 @@ function cube_neighbor(cube, direction):
     return cube_add(cube, cube_direction(direction))
 \end{verbatim}
 
-\subsubsection{Tengely koordináta rendszer (Axial coordinates)}
+\subsubsection{Tengely koordináta-rendszer (Axial coordinates)}
 
-\noindent A kocka koordináta rendszer veszük alapul. Mégpedig úgy, hogy a Cube($ dx, dy, dz$) koordinátákat átalakitjuk Axial($ dx, dz$) -re.
+\noindent A kocka koordináta-rendszer veszük alapul. Mégpedig úgy, hogy a Cube($ dx, dy, dz$) koordinátákat átalakítjuk Axial($ dx, dz$) -re.
 \newline
 \newline Algoritmus:
 \begin{verbatim}
@@ -82,9 +82,9 @@ function hex_neighbor(hex, direction):
     return Hex(hex.q + dir.q, hex.r + dir.r)
 \end{verbatim}
 
-\subsubsection{Eltolásos koordináta rendszer (Offset coordinates)}
+\subsubsection{Eltolásos koordináta-rendszer (Offset coordinates)}
 
-\noindent Eltolásos koordináta rendszer esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól mintha egy nem eltolt oszlopban/sorban állnánk.
+\noindent Eltolásos koordináta-rendszer esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól mintha egy nem eltolt oszlopban/sorban állnánk.
 \newline
 \newline Ahogy a korábbi esetekben úgy most is kell készítenünk egy táblázatot amiben azt tároljuk majd, hogy a különböző tengelyeken mennyit kell hozzáadni, hogy elérjük a szomszédokat. De ebben az esetben most két tömbre lesz szükségünk, az egyik a páros sor/oszlop a másik pedig a páratlan sor/oszlop esetére.
 \newline
@@ -169,4 +169,4 @@ function cube_diagonal_neighbor(cube, direction):
     return cube_add(cube, cube_diagonals[direction])
 \end{verbatim}
 
-\noindent Tengelyes koordináta rendszer használta esetén is lehetséges az algoritmus használta.
+\noindent Tengelyes koordináta-rendszer használata esetén is lehetséges az algoritmus használata.

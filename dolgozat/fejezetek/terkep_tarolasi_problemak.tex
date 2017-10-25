@@ -1,6 +1,6 @@
 \chapter{Térkép tárolási probléma}
 
-Az egyik leggyakoribb probléma a tengelyes koordináta rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta rendszer mellett. Azonban az összes korábban említett koordináta rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
+Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta-rendszer mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
 \newline
 \newline Mellékletben képek
 \newline
@@ -14,7 +14,7 @@ Az egyik leggyakoribb probléma a tengelyes koordináta rendszerrel, hogy tégla
 \newline
 \newline Ha a térkép fix formájú, akkor az első oszlop menet közben is számítható ahelyett, hogy tárolnánk.
 \begin{itemize}
-\item A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta rendszerbe.
+\item A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
 \item A háromszög alakú térképek esetén, $első_oszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
 \item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $első_oszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
 \item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
