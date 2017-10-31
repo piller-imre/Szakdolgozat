@@ -1,31 +1,72 @@
 \chapter{Útkereső algoritmus}
 
 A hexagonok és a négyzetek esetén az útkeresés csak egy ponton különbözik (szomszédok száma) ezért az egyszerűség kedvéért csak a négyzethálónál mutatom be.
+
+\section{Algoritmusok}
+
+A kereső algoritmusokat két pont közötti út megtalálására alkalmazzuk. 
+A kereső algoritmusoknak több fajtája van, ezek különbözőképpen közelítik meg a problémát. 
 \newline
-\newline Az algoritmus:
-\begin{verbatim}
-OPEN //the set of nodes to be evaluated
-CLOSED //the set of nodes already evaluated
-add the start node to OPEN
+\newline Az egyik csoport minden esetben talál egy megoldást ami nem feltétlenül a legrövidebb út viszont egy elfogadható közelítése annak (\textit{A algoritmusok}). Ezek az algoritmusok széleskörűen alkalmazhatóak ellentétben a másik csoporttal, mivel azok csak speciális esetekben használhatóak, mivel ezekhez további információk szükségesek a gráfról, amik nem minden esetben állnak rendelkezésünkre.
+\newline A másik csoport ami minden esetben az optimális útvonalat találja meg, ha az létezik (\textit{A* algoritmus}).
+\newline
+\newline Az általános algoritmusok úgy keresik a megoldást, hogy a kezdő ponttól kiindulva végignézik a szomszédos csomópontokat és ezt ismétlik mindaddig amíg meg nem találják a végpontot. Az általános algoritmusok mint például a \textit{széltében először keresés} algoritmus is megtalálja az útvonalat ha megadjuk az ehhez szükséges időt, viszont olyan megoldások amik ''ismerik'' a gráfot általánosságban hamarabb elérik a célt. Gondoljuk csak végig mennyivel egyszerűbb megtalálni egy tárgyat ha tudjuk milyen irányban keressük ellentétben azzal, hogyha minden irányban kellene keresnünk azt.
+\newline
+\newline Két problémát kell megoldanunk az útkereséssel kapcsolatban 
+\begin{itemize}
+\item első az útvonal megtalálása két pont között, 
+\item a második az, hogy a legrövidebb utat találjuk meg. 
+\end{itemize}
 
-loop
-  current = node in OPEN  with the lowest f_cost
-  remove current from OPEN
-  add current to CLOSED
+\noindent Olyan alapvető algoritmusok mint a \textit{széltében először keresés} vagy a \textit{mélységben először keresés} nagyon egyszerűen megoldják az első problémánkat azáltal, hogy az összes lehetséges útvonalat bejárják. Ezek az algoritmusok $\mathcal{O}(|V| + |E|)$ (lineáris) futásidejűek, ahol $V$ a csúcsok száma és $E$ az élek száma.
+\newline
+\newline A legrövidebb út megtalálása már ennél jóval komplexebb probléma. 
+\newline
+\newline Edsger Dijkstra találta meg erre a problémára a megoldást 1956-ban. Az algoritmusából manapság már több változat is létezik. Dijkstra eredeti algoritmusa megtalálta a legrövidebb utat két csúcs között egy súlyozott gráfon, de manapság a leggyakoribb változata úgy változtatja meg az algoritmust, hogy egy megadott csúcsponthoz viszonyítva kiszámítja az összes többi csúcsponthoz vezető legrövidebb utat, ezáltal előállítva a legrövidebb út fát. Ennek a futásideje $\mathcal{O}(|E| + |V| log|V|)$. 
+\newline
+\newline A \textit{Bellman-Ford} algoritmus ugyanazt a problémát oldja meg mint a \textit{Dijkstra} algoritmus, viszont ez egy sokoldalúbb algoritmus, mivel az élek értéke negatív értéket is felvehet. Mindössze azt kell kizárni, hogy a gráf negatív összköltségű kört tartalmazzon. Negatív költségű él például úgy keletkezhet, hogy nagyobb bevételhez jutunk azon a szakaszon mint amennyi ráfordítással jár. A legrosszabb esetű futásideje $\mathcal{O}(|V||E|)$ (négyzetes idő), de bizonyos esetekben akár $\mathcal{O}(|V|)$ is lehet, ami azt jelenti, hogy legrosszabb esetben lassabb mint a \textit{Dijkstra}-féle algoritmus de akár gyorsabb is lehet. 
+\newline
+\newline Azonban nem szükséges az összes lehetséges útvonalat bejárni ahhoz, hogy megtaláljuk az optimális útvonalat. Olyan algoritmusok mint a \textit{Dijkstra} vagy az \textit{A*} stratégiája az, hogy heurisztikák segítségével eliminálja az olyan útvonalakat amik nem lehetségesek vagy nem vezetnek a megoldás felé. Ezáltal lehetővé téve, hogy elérjék az $\mathcal{O}(|E| log(|V|))$ futásidőt. 
+\newline
+\newline A fent említett algoritmusok a legjobb általános algoritmusok közé tartoznak amikkel előfeldolgozás nélkül is kilehet értékelni egy gráfot. Gyakorlatban elérhető még ezeknél is jobb idő komplexitású algoritmus, ha előfeldolgozzuk a gráfot.
+\newline
+\newline A leggyakrabban alkalmazott algoritmusok ismertetése:
 
-  if current is the target node //path has been found
-    return
+\subsection{Széltében először keresés algoritmus (breadth-first search)}
+A \textit{széltében először keresés} egy egyszerűnek számító keresési algoritmus. A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot ami a gyökér csomópontból elérhető kiértékeli. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki az algoritmus. Ez az algoritmus mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
 
-  foreach neighbour of the current node
-    if neighbour is not traversable or neighbour is in CLOSED
-      skip to the next neighbour
+\begin{figure}[h]
+\centering
+\includegraphics[scale=5.5]{kepek/img91.png}
+\caption{Széltében először keresés algoritmus lépései}
+\label{fig:img91}
+\end{figure}
 
-    if new path to neighbour is shorter OR neighbour is not in OPEN
-      set f_cost of neighbour
-      set parent of neighbour to current
-      if neighbour is not in OPEN
-        add neighbour to OPEN
-\end{verbatim}
+\noindent Mindazonáltal mivel ez egy teljes keresés az egész gráf kiértékelésre kerül, mivel nem feltétlenül a legmagasabban található cél csomóponthoz vezető úton jutunk el a leggyorsabban a célhoz, abban az esetben ha az éleknek különbözik a súlya. Ezért érdemes olyan esetekben használni amikor a gráf éleinek nincs súlya vagy egységes súlya van, mert abban az esetben elégséges lehet a legmagasabban található cél csomópontig eljutni.  Érdemes továbbá tisztázni, hogy ha a térképen egy darab célpontunk van az a gráfban több célcsomópontként is megjelenhet, mivel a gráf különböző útvonalai a különböző útvonalakat jelölik ugyanazon célhoz, de egyszerre akár több célunk is lehet a térképen.
+\newline
+\newline A széltében először keresés algoritmus legnagyobb hátránya a tárigénye. Vegyünk például egy hipotetikus állapotteret, ahol minden kifejtéskor $x$ darab új csomópontot kapunk állapotunk van. Tehát a gyökér kifejtésekor $x$ darab elemünk lesz. Második szinten $x^2$. Tegyük fel, hogy a cél csomópontunk n mélységben található, ekkor legrosszabb esetben $x^n - x$ csomópontot kell kiértékelnünk, mivel az utolsó mélységet már nem szükséges kiértékelnünk. 
+\newline
+\newline A széltében először keresés algoritmus egy nem informált keresés mivel a cél csomópontról nem rendelkezik információval. A továbbiakban csak informált keresésekről esik majd szó.
+
+\subsection{Dijkstra algoritmus}
+
+\noindent Gyakori példa a gráf alapú útkereső algoritmusra a \textit{Dijkstra} algoritmus. A széltében először keresés módszerrel ellentétben nem egységesen fedezi fel az utakat, hanem a kisebb útköltségűeket priorizálja. Ennek az algoritmusnak az elején szükségünk lesz egy kezdő csomópontra és egy listára a “Nyitott” csomópontoknak, ide kerülnek azok a csomópontok amiket még ki kell értékelnünk. Minden iterációban az a csomópont kerül kiértékelésre amelyiknek a legkisebb az útköltsége a kezdő csomóponttól mérve. Az útköltség függhet attól, hogy milyen területen haladunk (magassági viszonyok változásától, a talaj anyagától, időjárási viszonyoktól, egyéb környezeti viszonyoktól, ha az úton ellenség van akkor is megnövelhetjük az út költségét). Az algoritmus alapvetően súlyozott élek esetén működik, de használható súlyozatlan élek esetén is, ekkor a súlyozatlan élek értékét válasszuk 1-nek. Akkor kerül egy csomópont “lezárásra”, hogyha már az összes szomszédja hozzá lett adva a nyitott csomópontok listájához vagy már lezárásra került. Ez a folyamat addig ismétlődik amíg az algoritmus megtalálja az első útvonalat a célhoz (ami lehet akár az összes csomópont is). Mivel mindig a legkisebb útköltségre lévő út fog kiértékelődni, ezért amit először megtalál, az lesz a legrövidebb út. Tehát változatos útköltségek esetén érdemesebb a \textit{Dijkstra} algoritmust használni a széltében először keresés módszer helyett.
+
+\subsection{A* algoritmus}
+
+\noindent Az \textit{A*} algoritmus a \textit{Dijkstra} algoritmus tovább gondolása, amit gyorsasága és a pontossága miatt előszeretettel alkalmaznak játékok készítésekor, olyan esetekben, amikor csak egy konkrét végponthoz kell eljutni. A két algoritmus közötti fő különbség abban rejlik, hogy melyik csomópontot választja ki az algoritmus kiértékelésre a nyitott csomópontok közül. Ahhoz, hogy megértsük az \textit{A*} kiválasztási módszerét először meg kell ismernünk 3 fogalmat.
+
+\begin{itemize}
+\item \textit{G költség}: Az adott csomóponthoz vezető út költsége a kezdő csomóponthoz képest.
+\item \textit{H költség (heurisztikus költség)}: A becsült távolság a célhoz képest.
+\item \textit{F költség}: $F = G + H$. Ez az érték alapján kerül kiválasztásra a kiértékelendő csomópont.
+\end{itemize}
+
+\noindent A \textit{Dijkstra} Algoritmussal ellentétben nem az útköltségek alapján priorizál hanem a célponttól lévő távolság alapján.
+\newline
+\newline A \textit{G költség} tulajdonképpen a \textit{Dijkstra} algoritmus használata és ezt egészíti ki az \textit{A*} algoritmus egy heurisztikus költséggel, ami azért szükséges, hogy kizárjuk a hosszabb útvonalakat. Heurisztikaként leggyakrabban a Manhattan-formulát szokták használni. Ha a heurisztikus költséget 0-ra ''állítjuk be'', akkor az algoritmus megegyezik a \textit{Dijkstra} algoritmussal.
+\newline
+\newline Az útkereső algoritmus készítéséhez szükséges ismernünk azt, hogy a térkép egy mezőjéről hogyan érhetőek el a szomszédos mezők és szükséges ismernünk a távolság számító algoritmusokat is. Mivel a távolság számító algoritmusokat már ismertettem korábban ezért most nézzük meg a szomszédokat.
 
 \section{Szomszédok}
 
