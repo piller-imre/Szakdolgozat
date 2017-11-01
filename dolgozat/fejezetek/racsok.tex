@@ -27,7 +27,7 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 
 \begin{itemize}
 \item Nem alkalmazunk átlós mozgást. Ez a legegyszerűbb megoldás, amit az egyszerűsége miatt gyakran használunk.
-\item Egy kevésbé elterjedt megoldás, hogy maradunk a négyzeteknél, viszont minden második sort/oszlopot eltolunk az oldal szélességének/hosszának a felével. Ekkor az összes szomszéd hasonló távolságra kerül.
+\item Egy kevésbé elterjedt megoldás, hogy maradunk a négyzeteknél, viszont minden második sort/oszlopot eltolunk az oldal hosszának a felével. Ekkor az összes szomszéd hasonló távolságra kerül.
 
 \begin{figure}[h]
 \centering
@@ -39,7 +39,7 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 \item A leggyakoribb megoldás a hexagonok használata a négyzetek helyett. A négyzethez hasonlítva a hatszögnek csak hat szomszédja van (nyolc helyett). Ezek közül mindegyik oldal szomszéd, és nincs olyan szomszédja ami a sarkokhoz esne. Ezáltal minden szomszéd egyenlően 1 távolságra van.
 \end{itemize}
 
-\noindent A hexagonokat azért szokták játékokban használni mert kevésbé torzítják a távolságokat mint a négyzetrács. Ez azért van mert nincs átlós szomszédja ellentétben a négyzettel. (Az átlós szomszédok torzítják a távolságokat.)
+\noindent A hexagonrácsot azért szokták játékokban használni mert kevésbé torzítják a távolságokat mint a négyzetrács. Ez azért van mert nincs átlós szomszédja ellentétben a négyzettel. (Az átlós szomszédok torzítják a távolságokat.)
 
 \begin{figure}[h]
 \centering
@@ -52,9 +52,9 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 
 \section{Rácsok felhasználása}
 
-Alapvetően mindkét rácsnak megvan a maga helye a játékokban. 
+Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben. 
 \newline
-\newline Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútor) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
+\newline Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútorok) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
 \newline
 
 \begin{figure}[h]
