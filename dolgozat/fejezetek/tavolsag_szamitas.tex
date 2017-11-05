@@ -2,7 +2,7 @@
 
 \section{Kocka koordináta-rendszer}
 
-A kocka koordináta-rendszerben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a kocka koordináta-rendszerben. Ezáltal téve egyszerűvé a távolságszámítást. A négyzet koordináta-rendszer esetén a Manhattan távolság képlet a következő: $abs(dx) + abs(dy)$. A kocka koordináta-rendszerben pedig a Manhattan távolság $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a Manhattan távolság képlet a kockarács esetén fennálló távolság fele.
+A kocka koordináta-rendszerben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a kocka koordináta-rendszerben. Ezáltal téve egyszerűvé a távolságszámítást. A négyzet koordináta-rendszer esetén a Manhattan-távolság képlet a következő: $abs(dx) + abs(dy)$. A kocka koordináta-rendszerben pedig a Manhattan-távolság $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a Manhattan-távolság képlet a kockarács esetén fennálló távolság fele.
 \newline
 \newline Pseudo kóddal:
 \begin{verbatim}
@@ -52,7 +52,7 @@ function hex_distance(a, b):
           + abs(a.r - b.r)) / 2
 \end{verbatim}          
 
-\noindent Mivel a tengelyes koordináta-rendszerben is a távolságokat kockarács esetén alkalmazható Manhattan távolság számító algoritmussal számítjuk ki, ezért valamilyen módon arra kell visszavezetni.
+\noindent Mivel a tengelyes koordináta-rendszerben is a távolságokat kockarács esetén alkalmazható Manhattan-távolság számító algoritmussal számítjuk ki, ezért valamilyen módon arra kell visszavezetni.
 
 \section{Eltolásos koordináta-rendszer}
 
