@@ -55,7 +55,7 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 \label{fig:img43}
 \end{figure}
 
-\noindent Ahhoz, hogy megértsük a kocka koordináta-rendszert képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni. Azáltal, hogy használhatjuk a Descartes-féle koordináta-rendszerben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
+\noindent Ahhoz, hogy megértsük a kocka koordináta-rendszert képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a Descartes-féle koordináta-rendszerben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
 \newline
 \newline Egy szemléletesebb példaként vizsgáljuk meg a Q*bert nevű játékot.
 
@@ -84,7 +84,7 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 
 \end{itemize}
 
-\noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn, ugyanakkor olyan esetekben mint az útkereső vagy a távolság számító algoritmusok az előnye egyértelműen látszik. 
+\noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
 
 \subsection{Tengely koordináta-rendszer (Axial coordinates)}
 
@@ -98,3 +98,109 @@ Tengely koordináta-rendszer csak kettő koordinátát használ a kocka koordin�
 \end{figure}
 
 \noindent Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya ennek a rendszernek a téglalap alakú térképek esetén való tárolás. 
+
+\section{Térkép tárolási probléma}
+
+Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta-rendszer mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
+\newline
+\newline Mellékletben képek
+\newline
+\newline Vegyük észre a képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Három lehetséges megoldás létezik a probléma kiküszöbölésére:
+\begin{itemize}
+\item Hagyjuk figyelmen kívül a problémát. Használjunk mátrixot a tárolásra és használjunk valamilyen speciális jelzőt a nem létező mezőkre. A legtöbb esetben nem éri meg ennél komplikáltabb megoldást alkalmazni.
+\item Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni. (pl: $Grid(Tile(x,y))$);
+\item Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is.
+\newline
+\newline Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - első_oszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
+\newline
+\newline Ha a térkép fix formájú, akkor az első oszlop menet közben is számítható ahelyett, hogy tárolnánk.
+\begin{itemize}
+\item A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
+\item A háromszög alakú térképek esetén, $első_oszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
+\item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $első_oszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
+\item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
+\end{itemize}
+\end{itemize}
+
+\section{Koordináta konverziók}
+
+Mivel a tárolás, megjelenítés és a számítások nem ugyanabban a koordináta-rendszerben fog megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a kocka koordináta-rendszert fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
+
+\subsection{Tengelyes - Kocka konverziók}
+
+A tengelyes koordináta-rendszer nagyon közel áll a kocka koordináta-rendszerhez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján.
+
+\begin{verbatim}
+function cube_to_axial(cube):
+    var q = cube.x
+    var r = cube.z
+    return Hex(q, r)
+
+function axial_to_cube(hex):
+    var x = hex.q
+    var z = hex.r
+    var y = -x-z
+    return Cube(x, y, z)
+\end{verbatim}
+
+\subsection{Eltolásos - Kocka konverziók}
+
+Az eltolásos koordináta-rendszernek négy fajta tipusa lehet, az alapján, hogy melyik sor/oszlop lett eltolva.
+
+Páratlan - sor:
+\begin{verbatim}
+function cube_to_oddr(cube):
+      col = cube.x + (cube.z - (cube.z&1)) / 2
+      row = cube.z
+      return Hex(col, row)
+
+function oddr_to_cube(hex):
+      x = hex.col - (hex.row - (hex.row&1)) / 2
+      z = hex.row
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páros - sor:
+\begin{verbatim}
+function cube_to_evenr(cube):
+      col = cube.x + (cube.z + (cube.z&1)) / 2
+      row = cube.z
+      return Hex(col, row)
+
+function evenr_to_cube(hex):
+      x = hex.col - (hex.row + (hex.row&1)) / 2
+      z = hex.row
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páratlan - oszlop:
+\begin{verbatim}
+function cube_to_oddq(cube):
+      col = cube.x
+      row = cube.z + (cube.x - (cube.x&1)) / 2
+      return Hex(col, row)
+
+function oddq_to_cube(hex):
+      x = hex.col
+      z = hex.row - (hex.col - (hex.col&1)) / 2
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+Páros - oszlop:
+\begin{verbatim}
+function cube_to_evenq(cube):
+      col = cube.x
+      row = cube.z + (cube.x + (cube.x&1)) / 2
+      return Hex(col, row)
+
+function evenq_to_cube(hex):
+      x = hex.col
+      z = hex.row - (hex.col + (hex.col&1)) / 2
+      y = -x-z
+      return Cube(x, y, z)
+\end{verbatim}
+
+\noindent Érdemes bitenkénti “és” ($a \& 1$) operátort használni modulo ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben modulo számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
