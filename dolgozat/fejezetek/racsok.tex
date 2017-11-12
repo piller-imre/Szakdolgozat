@@ -8,20 +8,16 @@ Legyen szó társasjátékról vagy számítógépes játékról, az egyik leggy
 \newline A nyilvántartáshoz ismernünk kell a viszonyítási pontot (origó), illetve tudnunk kell az objektum pozícióját ($x, y$).
 \newline
 \newline Könnyen kezelhetősége mellett viszont van egy nagy hátránya:
-Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A problémára akkor figyelünk fel, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza 1. Ha a négyzetek középpontjához viszonyítunk, akkor a függőlegesen és a vízszintesen lévő szomszédok távolsága 1, míg az átlósan lévők távolsága $\sqrt{2}$.
-\newline
+Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A problémára akkor figyelünk fel, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza 1. Ha a négyzetek középpontjához viszonyítunk, akkor a függőlegesen és a vízszintesen lévő szomszédok távolsága 1, míg az átlósan lévők távolsága $\sqrt{2}$. Ez azért baj, mert így az átlós szomszédok torzítják a távolságot, ezáltal nem lesz arányos a mozgás minden irányban.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/img21.png}
 \caption{A szomszédok távolsága a négyzetrács esetén}
 \label{fig:img21}
 \end{figure}
 
-\noindent A két fajta szomszéd közötti különbség miatt vetődnek fel bizonyos kérdések:
-\newline
-\newline Hogyan kezeljük az átlós mozgást? 
-\newline Egyáltalán engedélyezzük-e az átlós mozgást? 
+\noindent A két fajta szomszéd közötti különbség miatt vetődnek fel bizonyos kérdések: Hogyan kezeljük az átlós mozgást? Egyáltalán engedélyezzük-e az átlós mozgást? A mozgás természetessége és arányossága érdekében hogyan érhetnénk el azt, hogy minden szomszéd azonos távolságra legyen egymástól?
 \newline
 \newline A problémára több megoldás is létezik:
 
@@ -29,7 +25,7 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 \item Nem alkalmazunk átlós mozgást. Ez a legegyszerűbb megoldás, amit az egyszerűsége miatt gyakran használunk.
 \item Egy kevésbé elterjedt megoldás, hogy maradunk a négyzeteknél, viszont minden második sort/oszlopot eltolunk az oldal hosszának a felével. Ekkor az összes szomszéd hasonló távolságra kerül.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{kepek/img22.png}
 \caption{Az Eltolásos négyzetrács}
@@ -39,38 +35,35 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 \item A leggyakoribb megoldás a hexagonok használata a négyzetek helyett. A négyzethez hasonlítva a hatszögnek csak hat szomszédja van (nyolc helyett). Ezek közül mindegyik oldal szomszéd, és nincs olyan szomszédja ami a sarkokhoz esne. Ezáltal minden szomszéd egyenlően 1 távolságra van.
 \end{itemize}
 
-\noindent A hexagonrácsot azért szokták játékokban használni mert kevésbé torzítják a távolságokat mint a négyzetrács. Ez azért van mert nincs átlós szomszédja ellentétben a négyzettel. (Az átlós szomszédok torzítják a távolságokat.)
+\noindent A hexagonrácsot azért szokták játékokban használni mert kevésbé torzítják a távolságokat mint a négyzetrács. Ez azért van mert nincs átlós szomszédja ellentétben a négyzettel.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/img23.png}
 \caption{A szomszédok távolsága a hexagonháló esetén}
 \label{fig:img23}
 \end{figure}
 
-\noindent A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy sokkal kézenfekvőbb a hat lehetséges mozgási iránynak a használata. Emellett még esztétikailag is kellemesebb érzetet nyújt a felhasználó számára.
+\noindent A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy sokkal kézenfekvőbb a hat lehetséges mozgási iránynak a használata. Sok ember számára zavaró vagy nem teljesen egyértelmű első ránézésre, hogy hogyan történik a horizontális mozgás az eltolt négyzetrács esetén. Emellett még esztétikailag is kellemesebb érzetet nyújt a felhasználó számára.
 
 \section{Rácsok felhasználása}
 
 Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben. 
 \newline
-\newline Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútorok) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket. Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
-\newline
+\newline Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútorok) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel. Ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=0.1]{kepek/img24.png}
 \caption{A hexagon és a négyzet rács zárt térbeli összehasonlítása.}
 \label{fig:img24}
 \end{figure}
 
-\noindent Akkor azok hogyan viselkedjenek? 
-\newline Lehessen-e rálépni?
-\newline Ha nem lehet rálépni akkor miért van?
-\newline
-\newline Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el az a felhasználó számára furcsa összhatást nyújthat.
-\newline
-\newline Ha mindenképpen hexagonokat  szeretnénk használni kis méretű térképen (pl: $8 \times 20$), akkor lehetőleg ne egy zárt szobában alkalmazzuk hanem szabad téren (pl: mező, erdő, tengerpart) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
-\newline
-\newline Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
+Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
+
+\begin{itemize}
+\item Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el az a felhasználó számára furcsa összhatást nyújthat.
+\item Ha mindenképpen hexagonokat  szeretnénk használni kis méretű térképen (pl: $8 \times 20$), akkor lehetőleg ne egy zárt szobában alkalmazzuk hanem szabad téren (pl: mező, erdő, tengerpart) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
+\item Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
+\end{itemize}
 

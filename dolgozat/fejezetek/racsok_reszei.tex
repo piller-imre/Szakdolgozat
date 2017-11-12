@@ -20,8 +20,8 @@ A rácsoknak három különböző része van: a lapok, az élek és a csúcsok. 
 \label{fig:img32}
 \end{figure}
 
-\noindent A rácsok és a poligonális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok közötti élből pedig a csomópontok közötti gráf éleket készítünk. A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például: legrövidebb út) használjunk a térképen.
+\noindent A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például: legrövidebb út) használjunk a térképen. A rácsok és a poligonális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok közötti élből pedig a csomópontok közötti gráf éleket készítünk.
 
 \section*{Használatuk játékokban}
 
-A számítógépes játékok mind a három típust használhatják, de a lap a leggyakoribb. Épületek, terület típusok (fű, sivatag, stb.) és a terület birtoklás a lapokat használja. Terület határok és az “áramlás” (“flow”) algoritmusok (ami szimulálja az áramlását a víznek, embereknek, termékeknek, stb. a szomszédos csempék között) használják az éleket. Az utakhoz lehet használni a lapokat és az éleket is.
+A számítógépes játékok mind a három típust használhatják, de a lap a leggyakoribb. Épületek, terület típusok (fű, sivatag, stb.) és a terület birtoklás a lapokat használja. Az “áramlás” (“flow”) algoritmusok (ami szimulálja az áramlását a víznek, embereknek, termékeknek, stb. a szomszédos csempék között) használják az éleket. Az élek a két lap közötti kapcsolatot írják le, tehát megadják, hogy az egyik lapról elérhető a másik lap. A magasság a csúcsokat használja. Az utakhoz lehet használni a lapokat és az éleket is.
