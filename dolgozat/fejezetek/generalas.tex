@@ -1,4 +1,4 @@
-\chapter{Megvalósítás}
+\chapter{Generálás}
 
 Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek,
  hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomhoz. Ehhez eltolásos koordináta-rendszert fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tűnt célszerű döntésnek. Viszont mivel az eltolásos koordináta-rendszerben a számítások bonyolultabbak mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a kocka koordináta-rendszerbeli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az A* -ra esett a választásom, mivel az adott esetben ez a leghatékonyabb.
@@ -10,6 +10,17 @@ A játékban szereplő grafikai stílusként a low-poly irányzatot választotta
 \newline A játék fejlesztése során 3D-s modelleket használtam, mert ezáltal lehetőség nyílt arra, hogy a térképet forgatni lehessen és különböző szemszögekből lehessen látni a történéseket. Úgy ítéltem meg, hogy ez több előnnyel járna mint amennyi plusz energiát követelne meg.
 \newline
 \newline A térkép hexagonokból épül fel és a hexagonháló egyik fő jellemzője az, hogy a háló szélein lévő hexagonok nem egy vonalba esnek. Ennek az előnyeit és hátrányait korábban a 3.2 fejezetben már taglaltam. Jelen esetben a már említett problémák nem okoznak gondot, mivel nem kell igazodni semmilyen körülhatároló objektumhoz.
+
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Sivatag & Normál & Havas \\ \hline
+    Kisebb növények / kövek & 14 & 6 & 0 \\ \hline
+    Fák & 4 & 4 & 4 \\ \hline
+    Épületek & 6 & 6 & 6 \\ \hline
+    Hegyek & 2 & 2 & 2 \\ \hline
+  \end{tabular}
+\end{center}
 
 \section{Kamera}
 
@@ -23,13 +34,11 @@ Ezek közül a 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerett
 \newline
 \newline A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalósítása, mivel ha jól működik senki sem veszi észre, ha pedig hibásan működik akkor a teljes felhasználói élményt tönkreteheti. Ezért úgy döntöttem, hogy egy olyan kódot használok fel a Unity store-ból amit már korábban is használtam és kisebb módosítások alkalmazásával minden szempontot megvalósít.
 
-\section{Generálás}
+\section{Generálás lépései}
 
 Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként a program. Bizonyos paraméterek szabályozhatóak a generálás után is (“hőmérséklet”), de a többségük nem. A térképnek a főbb paraméterei szabályozhatóak: méret, környezeti viszonyok, domborzat, folyók, növényzet, épületek. Egyéb apró paraméterei nem módosíthatóak a játék használta közben, de a Unity szerkesztőben (Unity editor) az Inspector ablakokban a többségük állítható. Ezt azért alakítottam így ki mert nem akartam a felhasználói felületet túl komplikálttá tenni inkább az egyszerűségre törekedtem. Az Inspector ablakon lehetséges módosítani a mesh-eket, textúrákat, shadereket, konstansokat.
 \newline
 \newline A térkép egy több lépcsős folyamat végén fog elkészülni. Ezeket a lépéseket a következő pontban fogom bemutatni.
-
-\section{Generálás lépései}
 
 Első lépésként szükségünk lesz egy csempére (tile), ami az alapelem lesz a térképen. Erre a célra én egy 3D-s hexagon modellt használtam különböző textúrákkal. A különböző textúrák és a modellek csak a Unity-n belül egy úgynevezett Inspector panelen módosíthatóak. A játékban jelenleg a hexagonhoz 6 különböző textúra szerepel (fű, homok, hó, víz, jég, óceán (térkép széle)).
 \newline
