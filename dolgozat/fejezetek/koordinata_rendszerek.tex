@@ -20,50 +20,55 @@ A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenl
 
 A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a négyzet koordináta-rendszerrel. 
 \newline
-\newline\newline
+\newline A négyzet koordináta-rendszerhez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és oszlopokat.
+\newline
+\newline Az eltolásos koordináta-rendszernek az egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen halad a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.	
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img41.png}
-\caption{Az eltolásos koordináta-rendszerben a tengelyek elhelyezkedése.}
-\label{fig:img41}
+\includegraphics[scale=0.2]{kepek/OffsetCoord.jpg}
+\caption{Eltolásos koordináta-rendszerben a tengelyek}
+\label{fig:OffsetCoord}
 \end{figure}
 
 \noindent A négyzethálóval is elérhetünk a hexagonhálóhoz hasonló hatást, ha a négyzethálóban minden páros/páratlan sort/oszlopot eltolunk.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img42.png}
+\includegraphics[scale=0.25]{kepek/Hex_Sq.jpg}
 \caption{Hexagon rács az eltolt négyzetrácshoz viszonyítva}
-\label{fig:img42}
+\label{fig:Hex_Sq}
 \end{figure}
 
-Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért 4 fajta variáció érhető el összesen.
-\newline
-\newline A négyzet koordináta-rendszerhez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és oszlopokat.
-\newline
-\newline Az eltolásos koordináta-rendszernek az egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen halad a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.		
+Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért négy fajta variáció érhető el összesen.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.2]{kepek/OffsetFour.jpg}
+\caption{A négyféle ábrázolási mód}
+\label{fig:OffsetFour}
+\end{figure}
 
 \subsection{Kocka koordináta-rendszer (Cube coordinates)}
 
 Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek. 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/img43.png}
+\includegraphics[scale=0.2]{kepek/CubeCoord.jpg}
 \caption{A kocka koordináta rendszerben a tengelyek elhelyezkedése.}
-\label{fig:img43}
+\label{fig:CubeCoord}
 \end{figure}
 
 \noindent Ahhoz, hogy megértsük a kocka koordináta-rendszert képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a Descartes-féle koordináta-rendszerben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
 \newline
 \newline Egy szemléletesebb példaként vizsgáljuk meg a Q*bert nevű játékot.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/img44.png}
+\includegraphics[scale=0.3]{kepek/Qbert.png}
 \caption{A Q*bert című játék.}
-\label{fig:img44}
+\label{fig:Qbert}
 \end{figure}
 
 \noindent A játék egy $28$ kockából álló piramis szerű játékmezőn zajlik (Ilyen alakzatot kapunk, ha végrehajtjuk a fent írtakat.). A játékos Q*bert-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt.
@@ -73,15 +78,7 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 \begin{itemize}
 \item Minden hexagonnak 3 koordinátája van. 
 \item Mindegyik tengely egy egyenes vonalnak felel meg a hexagon hálón.
-\item Minden irány a hexagonon másik két iránynak a kombinációja a kocka koordináta-rendszeren. Például, ha a 4.5. ábrán felfelé szeretnénk mozogni, akkor az a {\color{magenta} $+y$} és {\color{blue} $-z$} között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az {\color{magenta} $y$}-hoz és el kell vennünk 1-et a {\color{blue} $z$}-ből. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.3]{kepek/img45.png}
-\caption{A kocka koordináta-rendszer.}
-\label{fig:img45}
-\end{figure}
-
+\item Minden irány a hexagonon másik két iránynak a kombinációja a kocka koordináta-rendszeren. Például, ha a \ref{fig:Qbert}. ábrán felfelé szeretnénk mozogni, akkor az a $+y$ és $-z$ között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az $y$-hoz és el kell vennünk 1-et a $z$-ből. 
 \end{itemize}
 
 \noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
@@ -90,34 +87,42 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 
 Tengely koordináta-rendszer csak kettő koordinátát használ a kocka koordináta-rendszer három koordinátája közül. Mivel a kocka koordináta-rendszernél volt az a megkötés, hogy $x + y + z = 0$, és ahogy már a kocka koordináta-rendszernél már leírtam a harmadik koordináta redundáns.  A tengelyes koordináta-rendszer használható tárolásra és megjelenítésére és mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img46.png}
+\includegraphics[scale=0.2]{kepek/AxialCoord.jpg}
 \caption{A tengelyes koordináta rendszerben a tengelyek elhelyezkedése.}
-\label{fig:img46}
+\label{fig:AxialCoord}
 \end{figure}
 
 \noindent Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya ennek a rendszernek a téglalap alakú térképek esetén való tárolás. 
+
+\newpage 
 
 \section{Térkép tárolási probléma}
 
 Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta-rendszer mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
 \newline
-\newline Mellékletben képek
-\newline
-\newline Vegyük észre a képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Három lehetséges megoldás létezik a probléma kiküszöbölésére:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.2]{kepek/StorageProblem.jpg}
+\caption{Bal oldalt a különböző alakú térképek, jobb oldalt pedig a hozzájuk tárolt adat látható}
+\label{fig:StorageProblem}
+\end{figure}
+
+\noindent Vegyük észre a \ref{fig:StorageProblem}. ábrán látható képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Három lehetséges megoldás létezik a probléma kiküszöbölésére:
 \begin{itemize}
 \item Hagyjuk figyelmen kívül a problémát. Használjunk mátrixot a tárolásra és használjunk valamilyen speciális jelzőt a nem létező mezőkre. A legtöbb esetben nem éri meg ennél komplikáltabb megoldást alkalmazni.
 \item Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni. (pl: $Grid(Tile(x,y))$);
 \item Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is.
 \newline
-\newline Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - első_oszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
+\newline Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - elsooszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
 \newline
 \newline Ha a térkép fix formájú, akkor az első oszlop menet közben is számítható ahelyett, hogy tárolnánk.
 \begin{itemize}
-\item A téglalap alakú térképek esetén, $első_oszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
-\item A háromszög alakú térképek esetén, $első_oszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
-\item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $első_oszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
+\item A téglalap alakú térképek esetén, $elsooszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
+\item A háromszög alakú térképek esetén, $elsooszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
+\item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $elsooszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
 \item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
 \end{itemize}
 \end{itemize}

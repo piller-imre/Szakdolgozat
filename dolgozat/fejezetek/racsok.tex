@@ -12,9 +12,9 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/img21.png}
+\includegraphics[scale=0.4]{kepek/SqDistance.jpg}
 \caption{A szomszédok távolsága a négyzetrács esetén}
-\label{fig:img21}
+\label{fig:SqDistance}
 \end{figure}
 
 \noindent A két fajta szomszéd közötti különbség miatt vetődnek fel bizonyos kérdések: Hogyan kezeljük az átlós mozgást? Egyáltalán engedélyezzük-e az átlós mozgást? A mozgás természetessége és arányossága érdekében hogyan érhetnénk el azt, hogy minden szomszéd azonos távolságra legyen egymástól?
@@ -27,9 +27,9 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/img22.png}
+\includegraphics[scale=0.3]{kepek/SqOffsetDistance.jpg}
 \caption{Az Eltolásos négyzetrács}
-\label{fig:img22}
+\label{fig:SqOffsetDistance}
 \end{figure}
 
 \item A leggyakoribb megoldás a hexagonok használata a négyzetek helyett. A négyzethez hasonlítva a hatszögnek csak hat szomszédja van (nyolc helyett). Ezek közül mindegyik oldal szomszéd, és nincs olyan szomszédja ami a sarkokhoz esne. Ezáltal minden szomszéd egyenlően 1 távolságra van.
@@ -39,9 +39,9 @@ Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valami
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/img23.png}
+\includegraphics[scale=0.4]{kepek/HexDistance.jpg}
 \caption{A szomszédok távolsága a hexagonháló esetén}
-\label{fig:img23}
+\label{fig:HexDistance}
 \end{figure}
 
 \noindent A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy sokkal kézenfekvőbb a hat lehetséges mozgási iránynak a használata. Sok ember számára zavaró vagy nem teljesen egyértelmű első ránézésre, hogy hogyan történik a horizontális mozgás az eltolt négyzetrács esetén. Emellett még esztétikailag is kellemesebb érzetet nyújt a felhasználó számára.
@@ -54,9 +54,9 @@ Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.1]{kepek/img24.png}
-\caption{A hexagon és a négyzet rács zárt térbeli összehasonlítása.}
-\label{fig:img24}
+\includegraphics[scale=0.1]{kepek/SqVsHex.png}
+\caption{A hexagon és a négyzet rács zárt térbeli összehasonlítása}
+\label{fig:SqVsHex}
 \end{figure}
 
 Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
@@ -67,3 +67,30 @@ Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a he
 \item Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
 \end{itemize}
 
+\section{Rácsok részei}
+
+A rácsoknak három különböző része van: a lapok, az élek és a csúcsok. Minden lap két dimenziós felület élek által határolva. Minden él egy dimenziós szakasz aminek mind a két végén csúcsok találhatóak. Minden csúcs nulla dimenziós pont. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{kepek/PartsOfGrid.jpg}
+\caption{A rácsok részei}
+\label{fig:PartsOfGrid}
+\end{figure}
+
+\noindent A játékok nagy többségében közös az, hogy a rácsoknak csak az egyik részére koncentrálnak. A nyugati játékoknál mint a sakk vagy a dáma a rácsnak a lap részén van a fókusz ellentétben a keleti játékokkal mint a Go vagy a Csillaghalma (Chinese Checkers), ahol a csúcsokon van.
+\newline
+\newline Lapok, élek és csúcsok feltűnnek a különböző poligonokból álló  térképek esetén is. Egy olyan algoritmus ami a lapok, élek vagy csúcsok alapján működik de nincs szükség koordinátákra az működni fog ilyen térképek esetén is.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{kepek/PartsOfGrid2.jpg}
+\caption{Különböző poligonokból álló térképen a rács részei}
+\label{fig:PartsOfGrid2}
+\end{figure}
+
+\noindent A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például: legrövidebb út) használjunk a térképen. A rácsok és a poligonális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok közötti élből pedig a csomópontok közötti gráf éleket készítünk.
+
+\section*{Használatuk játékokban}
+
+A számítógépes játékok mind a három típust használhatják, de a lap a leggyakoribb. Épületek, terület típusok (fű, sivatag, stb.) és a terület birtoklás a lapokat használja. Az “áramlás” (“flow”) algoritmusok (ami szimulálja az áramlását a víznek, embereknek, termékeknek, stb. a szomszédos csempék között) használják az éleket. Az élek a két lap közötti kapcsolatot írják le, tehát megadják, hogy az egyik lapról elérhető a másik lap. A magasság a csúcsokat használja. Az utakhoz lehet használni a lapokat és az éleket is.

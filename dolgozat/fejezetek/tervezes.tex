@@ -1,7 +1,6 @@
-\chapter{Generálás}
+\chapter{Tervezés}
 
-Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek,
- hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomhoz. Ehhez eltolásos koordináta-rendszert fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tűnt célszerű döntésnek. Viszont mivel az eltolásos koordináta-rendszerben a számítások bonyolultabbak mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a kocka koordináta-rendszerbeli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az A* -ra esett a választásom, mivel az adott esetben ez a leghatékonyabb.
+Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomhoz. Ehhez eltolásos koordináta-rendszert fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tűnt célszerű döntésnek. Viszont mivel az eltolásos koordináta-rendszerben a számítások bonyolultabbak mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a kocka koordináta-rendszerbeli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az A* -ra esett a választásom, mivel az adott esetben ez a leghatékonyabb.
 
 \section{Stílus és modellek}
 
@@ -60,16 +59,16 @@ A folyók generálásakor két különböző esetet különböztettem meg. Amiko
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/img11_4_3_1.JPG}
+\includegraphics[scale=0.3]{kepek/Island.JPG}
 \caption{Sziget}
-\label{fig:img11_4_3_1}
+\label{fig:Island}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/img11_4_3_2.JPG}
+\includegraphics[scale=0.3]{kepek/Branch.JPG}
 \caption{Elágazások a folyón}
-\label{fig:img11_4_3_2}
+\label{fig:Branch}
 \end{figure}
 
 \subsection{Sík területek generálása}
@@ -86,16 +85,16 @@ A vízszint meghatározása minden mezőre a növényzet generálásához szüks
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1.0]{kepek/img11_4_6_1.jpg}
+\includegraphics[scale=1]{kepek/Places.jpg}
 \caption{Az épületek és fák elhelyezkedési pontjai a hexagonon}
-\label{fig:img11_4_6_1}
+\label{fig:Places}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/img11_4_6_2.JPG}
+\includegraphics[scale=0.3]{kepek/Buildings.JPG}
 \caption{Egy épület normál körülmények között (bal oldal) és havas körülmények között (jobb oldal).}
-\label{fig:img11_4_6_2}
+\label{fig:Buildings}
 \end{figure}
 
 \subsection{Növényzet}
@@ -108,64 +107,62 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_7_1.JPG}
+\includegraphics[scale=0.35]{kepek/Tree_Normal.JPG}
 \caption{Normál esetben a fák lombja a zöld különböző árnyalataiból állhat.}
-\label{fig:img11_4_7_1}
+\label{fig:Tree_Normal}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_7_2.JPG}
+\includegraphics[scale=0.35]{kepek/Tree_Fall.JPG}
 \caption{“Ősz” A lomb színei ebben az esetben több különböző szín árnyalatából tevődik össze (piros, barna, sárga).}
-\label{fig:img11_4_7_2}
+\label{fig:Tree_Fall}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_7_3.JPG}
+\includegraphics[scale=0.35]{kepek/Tree_Winter.JPG}
 \caption{Kiszáradt vagy jeges Ebben az esetben mint látható az algoritmus elrejti a lombokat.}
-\label{fig:img11_4_7_3}
+\label{fig:Tree_Winter}
 \end{figure}
 
+\newpage
 \subsubsection{Kisebb objektumok}
 
 Véletlenszerű pozíciókban fogja majd generálni az algoritmus a sík mezőkön. A kisebb objektumok közé tartoznak a virágok, kaktuszok, kövek. A kaktuszok és a kövek a homokos területeken, míg a virágok a füves területeken fordulnak elő.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_7_4.JPG}
+\includegraphics[scale=0.4]{kepek/Flowers.JPG}
 \caption{Virágok}
-\label{fig:img11_4_7_4}
+\label{fig:Flowers}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_7_5.JPG}
+\includegraphics[scale=0.4]{kepek/Cactus.JPG}
 \caption{Kaktuszok és kövek}
-\label{fig:img11_4_7_5}
+\label{fig:Cactus}
 \end{figure}
 
 \subsection{Hőmérséklet}
 
-Lehetőség van az évszakok között váltogatni, ez a funkció fontos volt a játék tovább fejlesztésével kapcsolatban, mivel a játékban szerepet kap majd az évszakok változása. A tavasz és az ősz nem változtatja az alap hőmérsékleti viszonyokat csak a nyár és a tél módosítja a globális hőmérsékletet egy konstans értékkel. 
+Lehetőség lesz az évszakok között váltogatni, ez a funkció fontos a játék tovább fejlesztésével kapcsolatban, mivel a játékban szerepet kap majd az évszakok változása. A tavasz és az ősz nem változtatja az alap hőmérsékleti viszonyokat csak a nyár és a tél módosítja a globális hőmérsékletet egy konstans értékkel. 
 \newline
-\newline A különböző objektumokra a térképen elfoglalt helyük alapján és egyéb tulajdonságaik miatt különböző módon hat az időjárás. Ezt próbálom meg most lépésről lépésre bemutatni.
+\newline A különböző objektumokra a térképen elfoglalt helyük alapján és egyéb tulajdonságaik miatt különböző módon hat majd az időjárás. Ezt próbálom meg most lépésről lépésre bemutatni.
 \newline
-\newline Elsődlegesen egy globális hőmérséklet paramétert készítettem ami minden egyes mezőre egységes mértékben vonatkozik és a többi paraméter pedig ehhez adódik hozzá. Ezzel már volt lehetőség a különböző “évszakokat” tesztelni a játékban. Amikor a különböző grafikai elemek elkészültek, akkor kezdtem el a további paramétereket hozzáadni.
+\newline Elsődlegesen egy globális hőmérséklet paramétert készítek ami minden egyes mezőre egységes mértékben vonatkozik és a többi paraméter pedig ehhez adódik hozzá. Ezzel már lesz lehetőség a különböző ''évszakokat'' tesztelni a játékban. Amikor a különböző grafikai elemek is elkészülnek, akkor kezd el a további paramétereket hozzáadni.
 \newline
-\newline Ekkor úgy egészítettem ki az algoritmust, hogy a térkép “teteje” és “alja” között lehetséges legyen egy átmenetet megvalósítani, mintha egy nagyobb kontinens lenne. Ennek a paraméternek lehetséges negatív és pozitív értéket is megadni, amelyek azt befolyásolják, hogy milyen mértékben fog növekedni vagy csökkenni a hőmérséklet mezőről mezőre.
-\newline
-\newline
+\newline Ekkor úgy egészítem ki az algoritmust, hogy a térkép “teteje” és “alja” között lehetséges legyen egy átmenetet megvalósítani, mintha egy nagyobb kontinens lenne. Ennek a paraméternek lehetséges negatív és pozitív értéket is megadni, amelyek azt befolyásolják, hogy milyen mértékben fog növekedni vagy csökkenni a hőmérséklet mezőről mezőre.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/img11_4_8_1.png}
+\includegraphics[scale=0.5]{kepek/transition.png}
 \caption{Hőmérséklet átmenet}
-\label{fig:img11_4_8_1}
+\label{fig:transition}
 \end{figure}
 
-\newpage
-\noindent Majd pedig egy olyan paraméter készült amivel dinamikusan lehetett a generált térképen változtatni a hőmérsékletet. Ez is változtatható pozitív és negatív értékűre annak függvényében, hogy “melegebb” vagy hidegebb környezetet szeretnénk elérni.
+\noindent Majd pedig egy olyan paraméter készítek amivel dinamikusan lehet a generált térképen változtatni a hőmérsékletet. Ez is változtatható pozitív és negatív értékűre annak függvényében, hogy “melegebb” vagy hidegebb környezetet szeretnénk elérni.
 \newline
-\newline Végezetül a különböző objektumok tulajdonságaival kezdtem le foglalkozni. Ezalatt azt értem, hogy a vizes mezők alacsonyabb hőmérséklet mellett kezdenek el “befagyni” mint a sík mezők vagy azok a mezők hamarabb kezdenek el kiszáradni, ahol kevesebb a víz.
+\newline Végezetül a különböző objektumok tulajdonságaival fogok foglalkozni. Ezalatt azt értem, hogy a vizes mezők alacsonyabb hőmérséklet mellett kezdenek el “befagyni” mint a sík mezők vagy azok a mezők hamarabb kezdenek el kiszáradni, ahol kevesebb a víz.
 

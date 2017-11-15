@@ -30,34 +30,28 @@ A BaseMapObject osztályból származik le az összes modellekhez kapcsolt oszt�
 \newline
 \newline Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák és a materiálok, ezeket az inspector panelen lehet megadni.
 
+\newpage
 \section{UI és paraméterek szabályzása}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{kepek/Panel.JPG}
-\caption{Panel}
-\label{fig:Panel}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.6]{kepek/UI.png}
+\includegraphics[scale=0.37]{kepek/UI.png}
 \caption{UI}
 \label{fig:UI}
 \end{figure}
 
-A fenti képen bal oldalt látható a programban szereplő felhasználói felület. Az ezen található vezérlő elemek segítségével szabályozhatjuk a generálni kívánt térkép paramétereit. Minden vezérlő elemhez tartozik egy script fájl ami a játék indításakor beállítja a vezérlő elemekhez tartozó alapértéket és bizonyos esetekben a minimum, maximum vagy a további lehetséges értékeket is. Ezek az értékek az Engine osztályban vannak “beégetve”. A paraméterek aktuális értékét az Engine megfelelő metódusainak meghívásával lehet módosítani.
+\noindent A \ref{fig:UI} ábrán bal oldalt látható a programban szereplő felhasználói felület. Az ezen található vezérlő elemek segítségével szabályozhatjuk a generálni kívánt térkép paramétereit. Minden vezérlő elemhez tartozik egy script fájl ami a játék indításakor beállítja a vezérlő elemekhez tartozó alapértéket és bizonyos esetekben a minimum, maximum vagy a további lehetséges értékeket is. Ezek az értékek az Engine osztályban vannak “beégetve”. A paraméterek aktuális értékét az Engine megfelelő metódusainak meghívásával lehet módosítani.
 \newline
 \newline A CameraMovement osztály felelős a kamera mozgatásért. Ennek az osztálynak a kódját a Unity store-ból szereztem be, mivel minden alapvető kritériumnak megfelelt amit terveztem és csak apróbb módosításokra volt szükségem (tengelyeken való mozgás limitálásának kiegészítése). 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{kepek/generalas.png}
-\caption{generalas}
+\includegraphics[scale=0.4]{kepek/generalas.png}
+\caption{Generálás}
 \label{fig:generalas}
 \end{figure}
 
-A MapGenerator osztály ami a generálást elvégzi, a Tervezés fejezetben már ismertetett 8 lépés alapján.
+\noindent A MapGenerator osztály ami a generálást elvégzi, a Tervezés fejezetben már ismertetett 8 lépés alapján.
 
 \subsection{Térkép szélének generálása:}
 

@@ -35,11 +35,11 @@ A kereső algoritmusoknak több fajtája van, ezek különbözőképpen közelí
 \subsection{Széltében először keresés algoritmus (breadth-first search)}
 A \textit{széltében először keresés} egy egyszerűnek számító keresési algoritmus. A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot ami a gyökér csomópontból elérhető kiértékeli. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki az algoritmus. Ez az algoritmus mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=5.5]{kepek/img91.png}
+\includegraphics[scale=0.4]{kepek/breadth-first_search.jpg}
 \caption{Széltében először keresés algoritmus lépései}
-\label{fig:img91}
+\label{fig:breadth-first_search}
 \end{figure}
 
 \noindent Mindazonáltal mivel ez egy teljes keresés az egész gráf kiértékelésre kerül, mivel nem feltétlenül a legmagasabban található cél csomóponthoz vezető úton jutunk el a leggyorsabban a célhoz, abban az esetben ha az éleknek különbözik a súlya. Ezért érdemes olyan esetekben használni amikor a gráf éleinek nincs súlya vagy egységes súlya van, mert abban az esetben elégséges lehet a legmagasabban található cél csomópontig eljutni.  Érdemes továbbá tisztázni, hogy ha a térképen egy darab célpontunk van az a gráfban több célcsomópontként is megjelenhet, mivel a gráf különböző útvonalai a különböző útvonalakat jelölik ugyanazon célhoz, de egyszerre akár több célunk is lehet a térképen.
@@ -194,9 +194,9 @@ function evenq_offset_neighbor(hex, direction):
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{kepek/img81.JPG}
+\includegraphics[scale=0.3]{kepek/Diagonals.jpg}
 \caption{"Átlós" szomszédok}
-\label{fig:img81}
+\label{fig:Diagonals}
 \end{figure}
 
 \noindent Algoritmus:
