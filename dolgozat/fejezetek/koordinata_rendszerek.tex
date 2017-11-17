@@ -85,7 +85,7 @@ Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthat
 
 \subsection{Tengely koordináta-rendszer (Axial coordinates)}
 
-Tengely koordináta-rendszer csak kettő koordinátát használ a kocka koordináta-rendszer három koordinátája közül. Mivel a kocka koordináta-rendszernél volt az a megkötés, hogy $x + y + z = 0$, és ahogy már a kocka koordináta-rendszernél már leírtam a harmadik koordináta redundáns.  A tengelyes koordináta-rendszer használható tárolásra és megjelenítésére és mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
+A tengely koordináta-rendszer csak kettő koordinátát használ a kocka koordináta-rendszer három koordinátája közül. Mivel a kocka koordináta-rendszernél volt az a megkötés, hogy $x + y + z = 0$, és ahogy már a kocka koordináta-rendszernél már leírtam a harmadik koordináta redundáns.  A tengelyes koordináta-rendszer használható tárolásra és megjelenítésére és mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
 
 \begin{figure}[h!]
 \centering
@@ -122,14 +122,14 @@ Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy tégla
 \begin{itemize}
 \item A téglalap alakú térképek esetén, $elsooszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
 \item A háromszög alakú térképek esetén, $elsooszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
-\item A hexagon formájú $N$ sugarú térképek, ahol $N = max(abs(x), abs(y), abs(z))$, és $elsooszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
+\item A hexagon formájú $N$ sugarú térképek, ahol $N$ $=$ $max(abs(x)$, $abs(y)$, $abs(z))$, és $elsooszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
 \item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
 \end{itemize}
 \end{itemize}
 
 \section{Koordináta konverziók}
 
-Mivel a tárolás, megjelenítés és a számítások nem ugyanabban a koordináta-rendszerben fog megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a kocka koordináta-rendszert fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
+Mivel a három terület ahol koordinátákat használjuk (tárolás, megjelenítés, számítások) nem feltétlenül ugyanabban a koordináta-rendszerben fognak megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a kocka koordináta-rendszert fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
 
 \subsection{Tengelyes - Kocka konverziók}
 
