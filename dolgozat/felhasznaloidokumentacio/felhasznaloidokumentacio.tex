@@ -1,0 +1,98 @@
+\chapter*{Felhasználói dokumentáció}
+
+\section*{Az alkalmazás futtatásához szükséges alapvető ismeretek}
+
+A futtatáshoz szükséges alapvető rendszerkövelmények:
+\begin{itemize}
+\item OS: Windows 7 SP1+
+\item Videókártya: DX9 (shader model 3.0) vagy DX11 feature level 9.3 +
+\item CPU: SSE2 utasításkészlet  támogatás.
+\end{itemize}
+
+\noindent A program futtatásához nincs szükség telepítésre, csak a futtatható állományra és egyéb függőségekre, amik mellékelve vannak.
+\newline
+\newline Szükséges állományok:
+\begin{itemize}
+\item Szakdolgozat.exe
+\item Assembly-CSharp.dll
+\item Mono.Security.dll
+\item mscorlib.dll
+\item System.Core.dll
+\item System.dll
+\item UnityEngine.dll
+\item UnityEngine.Networking.dll
+\item UnityEngine.PlaymodeTestsRunner.dll
+\item UnityEngine.UI.dll
+\item UnityEngine.dll.mdb
+\item mono.dll
+\item MonoPosixHelper.dll
+\item DefaultWsdlHelpGenerator.aspx
+\item machine.config
+\item Compat.browser
+\item DefaultWsdlHelpGenerator.aspx
+\item machine.config
+\item settings.map
+\item web.config
+\item config.xml
+\item browscap.ini
+\item unity default resources
+\item unity\_builtin\_extra
+\item app.info
+\item globalgamemanagers
+\item globalgamemanagers.assets
+\item level0
+\item sharedassets0.assets
+\end{itemize}
+
+\section*{Használat}
+A programot a Szakdolgozat.exe futtatható állomány megnyitásával indíthatjuk el, ami után a \ref{fig:UnityStartUp}. ábrán látható ablak fogad minket.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{kepek/UnityStartUp.JPG}
+\caption{A program grafikai beállítási lehetőségei}
+\label{fig:UnityStartUp}
+\end{figure}
+
+\noindent Itt van lehetőségünk a különböző grafikai beállításokat módosítani. Beállíthatjuk a kívánt felbontást, hogy teljes képernyős módban fusson az alkalmazás vagy ne. A grafikai beállítás leginkább a fényekre és az árnyékokra van hatással. Maximális beállítások mellett valósidejű árnyékokat generál az alkalmazás, viszont minimális beállítások mellett kikapcsolja az árnyékokat. Ezért nagyobb méretű térképek generálásakor vagy gyengébb specifikációjú rendszerek esetén érdemes az alacsonyabb grafikai beállításokat választani.
+\newline
+\newline A \ref{fig:UserGuide1}. ábrán látható a generálás előtti felhasználói felület, a \ref{fig:UserGuide2}. ábrán pedig a generálás utáni állapot. Ahogy az ábrákon látható nem minden beállítási lehetőség módosítható a generálás után, csak a hőmérsékletet lehet befolyásolni utólag. A térkép generálásához 10 db beállítási lehetőség tartozik.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25]{kepek/UserGuide1.JPG}
+\caption{A program grafikai beállítási lehetőségei}
+\label{fig:UserGuide1}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25]{kepek/UserGuide2.JPG}
+\caption{A program grafikai beállítási lehetőségei}
+\label{fig:UserGuide2}
+\end{figure}
+
+\noindent Beállítási lehetőségek (felülről lefelé):
+\begin{itemize}
+\item Térkép magassága
+\item Térkép szélessége
+\item Hegyek számossága a térkép méretének megfelelő arányban
+\item Folyók számossága a térkép méretének megfelelő arányban
+\item Statikus hőmérséklet
+\item Dinamikus hőmérséklet
+\item Hőmérséklet átmenet a térkép teteje és az alja között
+\item Évszakok beállítása
+\item A növényzet számossága a a térképen százalékban kifejezve
+\item A városok számossága a a térképen százalékban kifejezve
+\end{itemize}
+
+\noindent A “Generate Map” gomb megnyomására a kiválasztott beállításoknak a használatával az algoritmus létrehoz egy térképet. A “Clear Map” gomb megnyomására a legenerált térkép tőrlődik. Az “Exit” gomb megnyomására az alkalmazás bezárul.
+
+\section*{Kamerakezelés}
+
+\begin{itemize}
+\item A “W,A,S,D” gombok, a nyilak és az egér mozgatásával (miközben lenyomva tartjuk a görgőt) lehetséges mozgatni a kamerát a vízszintes tengelyek mentén.
+\item A “Q, E” gombok és az egér mozgatásával (jobb gomb lenyomvatartása közben) lehetséges forgatni a kamerát a vertikális tengely mentén.
+\item A “R, F” gombok és az egér görgőjének a görgetésével lehet a kamera magasságát befolyásolni.
+
+\end{itemize}
