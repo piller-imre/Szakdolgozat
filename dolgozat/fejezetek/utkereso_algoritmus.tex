@@ -33,7 +33,7 @@ keresés} vagy a \textit{mélységben először keresés} nagyon egyszerűen meg
 \newline
 \newline A leggyakrabban alkalmazott algoritmusok ismertetése:
 
-\subsection{Szélességi keresés algoritmus (breadth-first search)}
+\subsection{A szélességi keresés algoritmusa (breadth-first search)}
 A \textit{szélességi keresés} egy egyszerűnek számító keresési algoritmus. A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot ami a gyökér csomópontból elérhető kiértékeli. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki az algoritmus. Ez az algoritmus mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
 
 \begin{figure}[h!]
@@ -92,7 +92,7 @@ Hexagon esetén több fajta koordináta-rendszerünk is lehet.
 \noindent Ahhoz, hogy elmozduljunk eggyel meg kell változtatnunk egyet a három kocka koordináta közül $+1$-el és egy másikat $-1$-el (a változtatások összege $0$ kell, hogy legyen). Három koordinátát lehet megváltoztatni $+1$-el, a másik két lehetséges koordináta közül az egyiket kell csökkenteni $-1$-el. Ez hat lehetséges változatot eredményez. Mindegyik megfeleltethető a hexagon egyik irányának. A lehető legegyszerűbb és leggyorsabb megoldás az, ha az összes lehetséges permutációt előre kikalkuláljuk és beleírjuk egy táblázatba ( Cube($dx, dy, dz$)).
 \newline
 \newline Algoritmus: 
-\begin{verbatim}
+\begin{cpp}
 var cube_directions = [
    Cube(+1, -1,  0), Cube(+1,  0, -1), Cube( 0, +1, -1),
    Cube(-1, +1,  0), Cube(-1,  0, +1), Cube( 0, -1, +1)
@@ -103,14 +103,14 @@ function cube_direction(direction):
 
 function cube_neighbor(cube, direction):
     return cube_add(cube, cube_direction(direction))
-\end{verbatim}
+\end{cpp}
 
 \subsubsection{Tengely koordináta-rendszer (Axial coordinates)}
 
 \noindent A kocka koordináta-rendszer veszük alapul. Mégpedig úgy, hogy a Cube($ dx, dy, dz$) koordinátákat átalakítjuk Axial($ dx, dz$) -re.
 \newline
 \newline Algoritmus:
-\begin{verbatim}
+\begin{cpp}
 var axial_directions = [
    Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
    Hex(-1,  0), Hex(-1, +1), Hex( 0, +1)
@@ -122,7 +122,7 @@ function hex_direction(direction):
 function hex_neighbor(hex, direction):
     var dir = hex_direction(direction)
     return Hex(hex.q + dir.q, hex.r + dir.r)
-\end{verbatim}
+\end{cpp}
 
 \subsubsection{Eltolásos koordináta-rendszer (Offset coordinates)}
 
@@ -133,7 +133,7 @@ function hex_neighbor(hex, direction):
 \newline A táblázat különbözik mind a négy eltolásos módszernél.
 \newline
 \newline Páratlan sor: 
-\begin{verbatim}
+\begin{cpp}
 var oddr_directions = [
    [ Hex(+1,  0), Hex( 0, -1), Hex(-1, -1),
      Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
@@ -145,9 +145,9 @@ function oddr_offset_neighbor(hex, direction):
     var parity = hex.row & 1
     var dir = oddr_directions[parity][direction]
     return Hex(hex.col + dir.col, hex.row + dir.row)
-\end{verbatim}
+\end{cpp}
 Páros sor: 
-\begin{verbatim}
+\begin{cpp}
 var evenr_directions = [
    [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
      Hex(-1,  0), Hex( 0, +1), Hex(+1, +1) ],
@@ -159,9 +159,9 @@ function evenr_offset_neighbor(hex, direction):
     var parity = hex.row & 1
     var dir = evenr_directions[parity][direction]
     return Hex(hex.col + dir.col, hex.row + dir.row)
-\end{verbatim}
+\end{cpp}
 Páratlan oszlop: 
-\begin{verbatim}
+\begin{cpp}
 var oddq_directions = [
    [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
      Hex(-1, -1), Hex(-1,  0), Hex( 0, +1) ],
@@ -173,9 +173,9 @@ function oddq_offset_neighbor(hex, direction):
     var parity = hex.col & 1
     var dir = oddq_directions[parity][direction]
     return Hex(hex.col + dir.col, hex.row + dir.row)
-\end{verbatim}
+\end{cpp}
 Páros oszlop: 
-\begin{verbatim}
+\begin{cpp}
 var evenq_directions = [
    [ Hex(+1, +1), Hex(+1,  0), Hex( 0, -1),
      Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
@@ -187,7 +187,7 @@ function evenq_offset_neighbor(hex, direction):
     var parity = hex.col & 1
     var dir = evenq_directions[parity][direction]
     return Hex(hex.col + dir.col, hex.row + dir.row)
-\end{verbatim}
+\end{cpp}
 
 \subsubsection{Átlós szomszédok}
 
@@ -201,7 +201,7 @@ function evenq_offset_neighbor(hex, direction):
 \end{figure}
 
 \noindent Algoritmus:
-\begin{verbatim}
+\begin{cpp}
 var cube_diagonals = [
    Cube(+2, -1, -1), Cube(+1, +1, -2), Cube(-1, +2, -1), 
    Cube(-2, +1, +1), Cube(-1, -1, +2), Cube(+1, -2, +1)
@@ -209,6 +209,6 @@ var cube_diagonals = [
 
 function cube_diagonal_neighbor(cube, direction):
     return cube_add(cube, cube_diagonals[direction])
-\end{verbatim}
+\end{cpp}
 
 \noindent Tengelyes koordináta-rendszer használata esetén is lehetséges az algoritmus használata.

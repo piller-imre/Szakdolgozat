@@ -66,18 +66,18 @@ Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hex
 \newline
 \newline Algoritmus:
 
-\begin{verbatim}
-for (int x = 0; x < TérképSzélesség; x++)
+\begin{cpp}
+for (int x = 0; x < TerkepSzelesseg; x++)
 {
-   CsempeLétrehozása(x, 0);
-   CsempeLétrehozása(x, TérképMagasság);
+   CsempeLetrehozasa(x, 0);
+   CsempeLetrehozasa(x, TerkepMagassag);
 }
-for (int y = 0; y < TérképMagasság; y++)
+for (int y = 0; y < TerkepMagassag; y++)
 {
-   CsempeLétrehozása(0, y);
-   CsempeLétrehozása(TérképSzélesség, y);
+   CsempeLetrehozasa(0, y);
+   CsempeLetrehozasa(TerkepSzelesseg, y);
 }
-\end{verbatim}
+\end{cpp}
 
 \subsection{Domborzat generálása:}
 
