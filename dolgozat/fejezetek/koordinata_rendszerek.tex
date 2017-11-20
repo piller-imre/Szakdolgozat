@@ -40,7 +40,7 @@ A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektő
 \label{fig:Hex_Sq}
 \end{figure}
 
-Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért négy fajta variáció érhető el összesen.
+\noindent Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért négy fajta variáció érhető el összesen.
 
 \begin{figure}[h!]
 \centering
@@ -209,3 +209,68 @@ function evenq_to_cube(hex):
 \end{verbatim}
 
 \noindent Érdemes bitenkénti “és” ($a \& 1$) operátort használni modulo ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben modulo számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
+
+\section{Távolság számítás}
+
+\subsection{Kocka koordináta-rendszer}
+
+A kocka koordináta-rendszerben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a kocka koordináta-rendszerben. Ezáltal téve egyszerűvé a távolságszámítást. A négyzet koordináta-rendszer esetén a Manhattan-távolság képlet a következő: $abs(dx) + abs(dy)$. A kocka koordináta-rendszerben pedig a Manhattan-távolság $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a Manhattan-távolság képlet a kockarács esetén fennálló távolság fele.
+\newline
+\newline Képlettel:
+
+$$
+d_{\text{cube}}(a, b) =
+\dfrac{|a_x - b_x| + |a_y - b_y| + |a_z - b_z|}{2}
+$$
+
+\noindent Egy ezzel egyenértékű megközelítés az is, ha megfigyeljük azt, hogy a három koordináta közül az egyiknek mindenképpen a a másik kettő összegének kell, hogy legyen, ekkor az az egy lesz a távolság. 
+\newline
+\newline Képlettel:
+
+$$
+d_{\text{cube}}(a, b) =
+\max(
+|a_x - b_x|, |a_y - b_y|, |a_z - b_z|
+)
+$$
+
+\noindent Az, hogy melyik algoritmust váltjuk az szituáció és egyén függő, de az eredmény ugyanaz.
+
+\subsection{Tengelyes koordináta-rendszer}
+
+A tengelyes koordináta-rendszerben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a kocka koordináta-rendszerre.
+\newline
+\newline Pseudo kóddal:
+\begin{verbatim}
+function hex_distance(a, b):
+    var ac = axial_to_cube(a)
+    var bc = axial_to_cube(b)
+    return cube_distance(ac, bc)
+\end{verbatim}    
+
+\noindent Egy másik módszer arra az esetre, ha egy függvényben szeretnénk megoldani:
+\begin{verbatim} 
+function hex_distance(a, b):
+    return (abs(a.q - b.q) 
+          + abs(a.q + a.r - b.q - b.r)
+          + abs(a.r - b.r)) / 2
+\end{verbatim}    
+
+$$
+d_{hex}(a, b) = \frac{|a.x - b.x| + |a.x + a.y - b.x - b.y| + |a.z - b.z|}{2}
+$$
+
+\noindent Mivel a tengelyes koordináta-rendszerben is a távolságokat kockarács esetén alkalmazható Manhattan-távolság számító algoritmussal számítjuk ki, ezért valamilyen módon arra kell visszavezetni.
+
+\subsection{Eltolásos koordináta-rendszer}
+
+Az eltolásos koordináta-rendszer esetén is azt a megoldást fogjuk használni amit a tengelyes koordináta-rendszer esetén is alkalmaztunk. Átalakítjuk a koordinátákat a kocka koordináta-rendszerre.
+\newline
+\newline Pseudo kód:
+\begin{verbatim} 
+function offset_distance(a, b):
+    var ac = offset_to_cube(a)
+    var bc = offset_to_cube(b)
+    return cube_distance(ac, bc)
+\end{verbatim}  
+

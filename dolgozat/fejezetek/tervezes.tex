@@ -23,13 +23,13 @@ A játékban szereplő grafikai stílusként a low-poly irányzatot választotta
 
 \section{Kamera}
 
-A programban isometrikus kamerát használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az isomtrikus nézet nem fedi a matematikai értelemben vett izometrikus nézetet ($\textasciitilde 35$ fok). Gyakran előfordul 30, 45, 53, 60 fokos kamera is. Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott. 
+A programban izometrikus kamerát használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az izometrikus nézet nem fedi a matematikai értelemben vett izometrikus nézetet ($\textasciitilde 35$ fok). Gyakran előfordul 30, 45, 53, 60 fokos kamera is. Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott. 
 
 $$
 atan(4 / 3) = 53.1301024 \space deg
 $$
 
-Ezek közül a 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerettem volna, végül a 45 fokos szög mellett döntöttem a laposabb szög miatt. Ehhez 60 fokos látószöget (FOV) alkalmaztam. A kamera körbeforgatható a horizontális tengely körül 360 fokban, ezt a 3D-s modellek miatt van lehetőség megoldani, ezáltal van lehetőség több szempontból megvizsgálni a térképen az objektumok elhelyezkedését. Lehetőség van arra, hogy a térképre ráközelítsünk vagy távolodjunk tőle, ennek megvan a felső és alsó határa. Igyekeztem úgy megválasztani ezeket a határokat, hogy ne lehessen túl közel vagy túl távol vinni a kamerát a térképtől, mindazonáltal ez a funkció még betudja tölteni a szerepét. A kamera természetesen a térkép mentén mozgatható mind a 4 irányban. 
+\noindent Ezek közül a 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerettem volna, végül a 45 fokos szög mellett döntöttem a laposabb szög miatt. Ehhez 60 fokos látószöget (FOV) alkalmaztam. A kamera körbeforgatható a horizontális tengely körül 360 fokban, ezt a 3D-s modellek miatt van lehetőség megoldani, ezáltal van lehetőség több szempontból megvizsgálni a térképen az objektumok elhelyezkedését. Lehetőség van arra, hogy a térképre ráközelítsünk vagy távolodjunk tőle, ennek megvan a felső és alsó határa. Igyekeztem úgy megválasztani ezeket a határokat, hogy ne lehessen túl közel vagy túl távol vinni a kamerát a térképtől, mindazonáltal ez a funkció még betudja tölteni a szerepét. A kamera természetesen a térkép mentén mozgatható mind a 4 irányban. 
 \newline
 \newline A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalósítása, mivel ha jól működik senki sem veszi észre, ha pedig hibásan működik akkor a teljes felhasználói élményt tönkreteheti. Ezért úgy döntöttem, hogy egy olyan kódot használok fel a Unity store-ból amit már korábban is használtam és kisebb módosítások alkalmazásával minden szempontot megvalósít.
 
@@ -39,13 +39,13 @@ Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvár
 \newline
 \newline A térkép egy több lépcsős folyamat végén fog elkészülni. Ezeket a lépéseket a következő pontban fogom bemutatni.
 
-Első lépésként szükségünk lesz egy csempére (tile), ami az alapelem lesz a térképen. Erre a célra én egy 3D-s hexagon modellt használtam különböző textúrákkal. A különböző textúrák és a modellek csak a Unity-n belül egy úgynevezett Inspector panelen módosíthatóak. A játékban jelenleg a hexagonhoz 6 különböző textúra szerepel (fű, homok, hó, víz, jég, óceán (térkép széle)).
+\noindent Első lépésként szükségünk lesz egy csempére (tile), ami az alapelem lesz a térképen. Erre a célra én egy 3D-s hexagon modellt használtam különböző textúrákkal. A különböző textúrák és a modellek csak a Unity-n belül egy úgynevezett Inspector panelen módosíthatóak. A játékban jelenleg a hexagonhoz 6 különböző textúra szerepel (fű, homok, hó, víz, jég, óceán (térkép széle)).
 \newline
 \newline Ezen kívül szükség van a generálni kívánt térkép méreteire (szélesség, magasság). Ezek a paraméterek a generálás előtt a felhasználó által is szabályozhatóak bizonyos keretek között.
 
 \subsection{Térkép széle}
 
-A térkép körülhatárolására egy speciális hexagon textúrát hoztam létre ami az óceánt szimbolizálná. Ez gyakori megközelítés a stratégiai játékok esetén a térkép körülhatárolására (pl: \textit{Civilization IV: Colonization}). A játékfejlesztők különböző módszerekkel határolják körbe a térképet: felhők, hegyek, várfal, óceán. A lényege, hogy a karakterek ne tudjanak a széleket határoló néhány mezőre lépni. Fontos még, hogy valami speciális mező legyen.
+A térkép körülhatárolására egy speciális hexagon textúrát hoztam létre ami az óceánt szimbolizálná. Ez gyakori megközelítés a stratégiai játékok esetén a térkép körülhatárolására (pl: \textit{Civilization IV: Colonization}). A játékfejlesztők különböző módszerekkel határolják körbe a térképet: felhők, hegyek, várfalak, óceánok, stb. A lényege, hogy a karakterek ne tudjanak a széleket határoló néhány mezőre lépni. Fontos még, hogy valami speciális mező legyen.
 \newline
 \newline A beállított magasság és szélesség értékeken felül fog az algoritmus minden egyes szélre egy plusz sort generálni a széleknek, ezáltal, ha a felhasználó a térkép méreteit $x \times y$ -nak adta meg a kapott térkép mérete $(x+2) \times (y+2)$ méretű lesz.
 

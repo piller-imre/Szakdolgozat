@@ -59,7 +59,7 @@ Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben.
 \label{fig:SqVsHex}
 \end{figure}
 
-Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
+\noindent Egyik megoldással sem lehetünk maradéktalanul elégedettek, ha elvágjuk a hexagonokat. 
 
 \begin{itemize}
 \item Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el az a felhasználó számára furcsa összhatást nyújthat.
@@ -94,3 +94,35 @@ A rácsoknak három különböző része van: a lapok, az élek és a csúcsok. 
 \section*{Használatuk játékokban}
 
 A számítógépes játékok mind a három típust használhatják, de a lap a leggyakoribb. Épületek, terület típusok (fű, sivatag, stb.) és a terület birtoklás a lapokat használja. Az “áramlás” (“flow”) algoritmusok (ami szimulálja az áramlását a víznek, embereknek, termékeknek, stb. a szomszédos csempék között) használják az éleket. Az élek a két lap közötti kapcsolatot írják le, tehát megadják, hogy az egyik lapról elérhető a másik lap. A magasság a csúcsokat használja. Az utakhoz lehet használni a lapokat és az éleket is.
+
+\section{Ábrázolás}
+
+\subsection{Négyzet}
+
+A négyzetháló esetén van a legkönnyebb dolgunk ismételten. A négyzetek alapvetően egy féle képpen állnak, úgy, hogy a lapjuk áll felfelé.  A négyzeteket ebben az esetben, úgy tudjuk egymás mellé helyezni, hogy a szomszédos négyzetek középpontjai közötti távolság megegyezik az oldal hosszal. 
+\newline
+\newline Abban az esetben sincs sokkal nehezebb dolgunk, ha úgy döntünk, hogy az eltolt négyzetrácsos megoldást választjuk, ebben az esetben minden páros/páratlan sort/oszlopot kell eltolnunk az oldalhosszának felével.
+
+\subsection{Hexagon}
+
+A hexagonok alapvetően kétféleképpen állhatnak. Az egyik lehetőség, hogy az egyik csúcs van felül, a másik lehetőség, hogy az egyik oldal van felül. 
+\newline
+\newline A következő lépésként vizsgáljuk meg, hogy hogyan tudjuk egymás mellé elhelyezni a hexagonokat.
+\newline
+\newline A felül hegyes elrendezés esetén vízszintesen a hexagon szélességével, függőlegesen pedig a hexagon magasságának a $\frac{3}{4}$ vel kell eltolni következő hexagont. Ezen kívül minden páros/páratlan sort vízszintesen a szélesség felével kell még eltolni.
+\newline
+\newline A felül lapos elrendezés esetén vízszintesen az egymás melletti hexagonok közötti távolság a hexagon szélességének $\frac{3}{4}$ része. Függőlegesen minden páros/páratlan oszlopot a magasság felével kell eltolni.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1.2]{kepek/PointyTop.jpg}
+\caption{Felül hegyes elrendezés esetén az eltolások}
+\label{fig:PointyTop}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1.2]{kepek/FlatTop.jpg}
+\caption{Felül lapos elrendezés esetén az eltolások}
+\label{fig:FlatTop}
+\end{figure}
