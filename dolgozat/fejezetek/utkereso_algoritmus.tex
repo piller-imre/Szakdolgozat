@@ -93,16 +93,26 @@ Hexagon esetén több fajta koordináta-rendszerünk is lehet.
 \newline
 \newline Algoritmus: 
 \begin{cpp}
-var cube_directions = [
+Cube[] cubeDirections = 
+{ 
    Cube(+1, -1,  0), Cube(+1,  0, -1), Cube( 0, +1, -1),
-   Cube(-1, +1,  0), Cube(-1,  0, +1), Cube( 0, -1, +1)
-]
+   Cube(-1, +1,  0), Cube(-1,  0, +1), Cube( 0, -1, +1) 
+};
 
-function cube_direction(direction):
-    return cube_directions[direction]
+public Cube CubeDirection(int direction)
+{
+   return cubeDirections[direction];
+}
 
-function cube_neighbor(cube, direction):
-    return cube_add(cube, cube_direction(direction))
+public Cube CubeNeighbor(Cube cube, int direction)
+{
+   return Cube
+   (
+      cube.x + cubeDirections[direction].x, 
+      cube.y + cubeDirections[direction].y, 
+      cube.z + cubeDirections[direction].z
+   );
+}
 \end{cpp}
 
 \subsubsection{Tengely koordináta-rendszer (Axial coordinates)}
@@ -111,17 +121,25 @@ function cube_neighbor(cube, direction):
 \newline
 \newline Algoritmus:
 \begin{cpp}
-var axial_directions = [
-   Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
-   Hex(-1,  0), Hex(-1, +1), Hex( 0, +1)
-]
+Axial[] axialDirections = 
+{ 
+   Axial(+1,  0), Axial(+1, -1), Axial( 0, -1),
+   Axial(-1,  0), Axial(-1, +1), Axial( 0, +1)
+};
 
-function hex_direction(direction):
-    return axial_directions[direction]
+public Axial AxialDirection(int direction)
+{
+   return axialDirections[direction];
+}
 
-function hex_neighbor(hex, direction):
-    var dir = hex_direction(direction)
-    return Hex(hex.q + dir.q, hex.r + dir.r)
+public Axial AxialNeighbor(Axial axial, int direction)
+{
+   return Axial
+   (
+      axial.x + axialDirections[direction].x, 
+      axial.y + axialDirections[direction].y, 
+   );
+}
 \end{cpp}
 
 \subsubsection{Eltolásos koordináta-rendszer (Offset coordinates)}
@@ -134,59 +152,94 @@ function hex_neighbor(hex, direction):
 \newline
 \newline Páratlan sor: 
 \begin{cpp}
-var oddr_directions = [
-   [ Hex(+1,  0), Hex( 0, -1), Hex(-1, -1),
-     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
-   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
-     Hex(-1,  0), Hex( 0, +1), Hex(+1, +1) ]
-]
+OddRow[,] oddRowDirections = 
+{ 
+   [ 
+      OddRow(+1,  0), OddRow( 0, -1), OddRow(-1, -1),
+      OddRow(-1,  0), OddRow(-1, +1), OddRow( 0, +1) 
+   ],
+   [ 
+      OddRow(+1,  0), OddRow(+1, -1), OddRow( 0, -1),
+      OddRow(-1,  0), OddRow( 0, +1), OddRow(+1, +1) 
+   ]
+};
 
-function oddr_offset_neighbor(hex, direction):
-    var parity = hex.row & 1
-    var dir = oddr_directions[parity][direction]
-    return Hex(hex.col + dir.col, hex.row + dir.row)
+public OddRow OddRowNeighbor(OddRow oddRow, int direction)
+{
+   int parity = oddRow.row \% 2;
+   OddRow dir = oddRowDirections[parity][direction];
+   return OddRow(oddRow.col + dir.col, oddRow.row + dir.row);
+}   
 \end{cpp}
+
 Páros sor: 
-\begin{cpp}
-var evenr_directions = [
-   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
-     Hex(-1,  0), Hex( 0, +1), Hex(+1, +1) ],
-   [ Hex(+1,  0), Hex( 0, -1), Hex(-1, -1),
-     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ]
-]
+\begin{cpp}  
+EvenRow[,] evenRowDirections = 
+{ 
+   [
+      EvenRow(+1,  0), EvenRow(+1, -1), EvenRow( 0, -1),
+      EvenRow(-1,  0), EvenRow( 0, +1), EvenRow(+1, +1) 
+   ],
+   [ 
+      EvenRow(+1,  0), EvenRow( 0, -1), EvenRow(-1, -1),
+      EvenRow(-1,  0), EvenRow(-1, +1), EvenRow( 0, +1) 
+   ]
+};
 
-function evenr_offset_neighbor(hex, direction):
-    var parity = hex.row & 1
-    var dir = evenr_directions[parity][direction]
-    return Hex(hex.col + dir.col, hex.row + dir.row)
+public EvenRow EvenRowNeighbor(EvenRow evenRow, int direction)
+{
+   int parity = evenRow.row \% 2;
+   EvenRow dir = evenRowDirections[parity][direction];
+   return EvenRow(evenRow.col + dir.col, evenRow.row + dir.row);
+}   
 \end{cpp}
+
 Páratlan oszlop: 
 \begin{cpp}
-var oddq_directions = [
-   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
-     Hex(-1, -1), Hex(-1,  0), Hex( 0, +1) ],
-   [ Hex(+1, +1), Hex(+1,  0), Hex( 0, -1),
-     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ]
-]
+OddColumn[,] oddColumnDirections = 
+{ 
+   [ 
+      OddColumn(+1,  0), OddColumn(+1, -1), OddColumn( 0, -1),
+      OddColumn(-1, -1), OddColumn(-1,  0), OddColumn( 0, +1) 
+   ],
+   [ 
+      OddColumn(+1, +1), OddColumn(+1,  0), OddColumn( 0, -1),
+      OddColumn(-1,  0), OddColumn(-1, +1), OddColumn( 0, +1) 
+   ]
+};
 
-function oddq_offset_neighbor(hex, direction):
-    var parity = hex.col & 1
-    var dir = oddq_directions[parity][direction]
-    return Hex(hex.col + dir.col, hex.row + dir.row)
+public OddColumn OddColumnNeighbor(OddColumn oddColumn, int direction)
+{
+   int parity = oddColumn.col \% 2;
+   OddColumn dir = oddColumnDirections[parity][direction];
+   return OddColumn(oddColumn.col + dir.col, oddColumn.row + dir.row);
+}   
 \end{cpp}
+
 Páros oszlop: 
 \begin{cpp}
-var evenq_directions = [
-   [ Hex(+1, +1), Hex(+1,  0), Hex( 0, -1),
-     Hex(-1,  0), Hex(-1, +1), Hex( 0, +1) ],
-   [ Hex(+1,  0), Hex(+1, -1), Hex( 0, -1),
-     Hex(-1, -1), Hex(-1,  0), Hex( 0, +1) ]
-]
+EvenColumn[,] evenColumnnDirections = 
+{ 
+   [ 
+      EvenColumn(+1, +1), EvenColumn(+1,  0), EvenColumn( 0, -1),
+      EvenColumn(-1,  0), EvenColumn(-1, +1), EvenColumn( 0, +1) 
+   ],
+   [  
+      EvenColumn(+1,  0), EvenColumn(+1, -1), EvenColumn( 0, -1),
+      EvenColumn(-1, -1), EvenColumn(-1,  0), EvenColumn( 0, +1) 
+   ]
+};
 
-function evenq_offset_neighbor(hex, direction):
-    var parity = hex.col & 1
-    var dir = evenq_directions[parity][direction]
-    return Hex(hex.col + dir.col, hex.row + dir.row)
+public EvenColumn EvenColumnNeighbor
+(
+   EvenColumn evenColumn, 
+   int direction
+)
+{
+   int parity = evenColumn.col \% 2;
+   EvenColumn dir = evenColumnDirections[parity][direction];
+   return EvenColumn(evenColumn.col + dir.col, evenColumn.row + dir.row);
+}   
 \end{cpp}
 
 \subsubsection{Átlós szomszédok}
@@ -201,14 +254,22 @@ function evenq_offset_neighbor(hex, direction):
 \end{figure}
 
 \noindent Algoritmus:
-\begin{cpp}
-var cube_diagonals = [
-   Cube(+2, -1, -1), Cube(+1, +1, -2), Cube(-1, +2, -1), 
-   Cube(-2, +1, +1), Cube(-1, -1, +2), Cube(+1, -2, +1)
-]
+\begin{cpp}  
+Diagonals[] diagonalsDirections = 
+{ 
+   Diagonals(+2, -1, -1), Diagonals(+1, +1, -2), Diagonals(-1, +2, -1), 
+   Diagonals(-2, +1, +1), Diagonals(-1, -1, +2), Diagonals(+1, -2, +1)
+};
 
-function cube_diagonal_neighbor(cube, direction):
-    return cube_add(cube, cube_diagonals[direction])
+public Diagonals DiagonalsNeighbor(Diagonals diagonals, int direction)
+{
+   return Diagonals
+   (
+      diagonals.x + diagonalsDirections[direction].x, 
+      diagonals.y + diagonalsDirections[direction].y, 
+      diagonals.z + diagonalsDirections[direction].z
+   );
+}         
 \end{cpp}
 
 \noindent Tengelyes koordináta-rendszer használata esetén is lehetséges az algoritmus használata.
