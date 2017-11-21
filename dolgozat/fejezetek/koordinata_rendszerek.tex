@@ -140,13 +140,32 @@ function cube_to_axial(cube):
     var q = cube.x
     var r = cube.z
     return Hex(q, r)
-
 function axial_to_cube(hex):
     var x = hex.q
     var z = hex.r
     var y = -x-z
     return Cube(x, y, z)
 \end{verbatim}
+
+$$
+cube\_to\_axial_{q,r}(cube_{x}, cube_{y}) = 
+\left \{
+  \begin{tabular}{c}
+  $axial_{q} = cube_{x}$ \\
+  $axial_{r} = cube_{y}$
+  \end{tabular}
+  \right.
+$$
+
+$$
+axial\_to\_cube_{x,y,z} (axial_{q}, axial_{r}) =  \left \{
+  \begin{tabular}{c}
+  $cube_{x} = axial_{q}$ \\
+  $cube_{z} = axial_{r}$ \\
+  $cube_{y} = axial_{q} - axial_{r}$
+  \end{tabular}
+  \right.
+$$
 
 \subsection{Eltolásos - Kocka konverziók}
 
@@ -234,43 +253,25 @@ d_{\text{cube}}(a, b) =
 )
 $$
 
-\noindent Az, hogy melyik algoritmust váltjuk az szituáció és egyén függő, de az eredmény ugyanaz.
+\noindent Az, hogy melyik képletet választjuk az szituáció és egyén függő, de az eredmény ugyanaz.
 
 \subsection{Tengelyes koordináta-rendszer}
 
 A tengelyes koordináta-rendszerben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a kocka koordináta-rendszerre.
 \newline
-\newline Pseudo kóddal:
-\begin{verbatim}
-function hex_distance(a, b):
-    var ac = axial_to_cube(a)
-    var bc = axial_to_cube(b)
-    return cube_distance(ac, bc)
-\end{verbatim}    
-
-\noindent Egy másik módszer arra az esetre, ha egy függvényben szeretnénk megoldani:
-\begin{verbatim} 
-function hex_distance(a, b):
-    return (abs(a.q - b.q) 
-          + abs(a.q + a.r - b.q - b.r)
-          + abs(a.r - b.r)) / 2
-\end{verbatim}    
+\newline Képlettel:
 
 $$
 d_{hex}(a, b) = \frac{|a.x - b.x| + |a.x + a.y - b.x - b.y| + |a.z - b.z|}{2}
 $$
 
-\noindent Mivel a tengelyes koordináta-rendszerben is a távolságokat kockarács esetén alkalmazható Manhattan-távolság számító algoritmussal számítjuk ki, ezért valamilyen módon arra kell visszavezetni.
-
 \subsection{Eltolásos koordináta-rendszer}
 
-Az eltolásos koordináta-rendszer esetén is azt a megoldást fogjuk használni amit a tengelyes koordináta-rendszer esetén is alkalmaztunk. Átalakítjuk a koordinátákat a kocka koordináta-rendszerre.
+Az eltolásos koordináta-rendszer esetén azt a megoldást fogjuk használni, hogy átalakítjuk a koordinátákat a kocka koordináta-rendszerre.
 \newline
-\newline Pseudo kód:
-\begin{verbatim} 
-function offset_distance(a, b):
-    var ac = offset_to_cube(a)
-    var bc = offset_to_cube(b)
-    return cube_distance(ac, bc)
-\end{verbatim}  
+\newline Képlettel:
+
+$$
+d_{offset} (a, b) = d_{cube}(offset\_to\_Cube(a), offset\_to\_Cube(b)) 
+$$
 
