@@ -6,28 +6,28 @@ Négyzetrács esetében egy derékszögű koordináta-rendszer használata a leg
 \newline
 \newline A derékszögű koordináta rendszert két egymásra merőleges számegyenes alkotja. Az egyeneseket koordináta tengelyeknek, metszéspontjukat kezdőpontnak, origónak nevezzük. Az origóhoz mindkét számegyenesen a $0$-t rendeljük hozzá. A „vízszintes” tengely az $x$ (abszcissza) tengely, a „függőleges” az $y$ (ordináta) tengely.
 \newline
-\newline A koordináta rendszer segítségével a sík bármely $P$ pontjának a helyzete két jelzőszám (koordináta) segítségével egyértelműen meghatározható. A pont helyzetét a két tengelytől mért előjeles távolságával határozzuk meg. A pontnak a tengelyektől mért előjeles távolságai a pont koordinátái (jelzőszámai). Az előjelek a számegyenesek segítségével adhatók meg. A jelzőszámokat, a pont neve után zárójelben adjuk meg: $P(x;y)$.
+\newline A koordináta rendszer segítségével a sík bármely $P$ pontjának a helyzete két jelzőszám (koordináta) segítségével egyértelműen meghatározható. A pont helyzetét a két tengelytől mért előjeles távolságával határozzuk meg. A pontnak a tengelyektől mért előjeles távolságai a pont koordinátái (jelzőszámai). Az előjelek a számegyenesek segítségével adhatóak meg. A jelzőszámokat, a pont neve után zárójelben adjuk meg: $P(x;y)$.
 
 \section{Hexagon}
 
 A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyező fokúak. A szakdolgozatomban csak szabályos hatszögekkel fogok foglalkozni. 
 \newline
-\newline Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagonoknak hat csúcsa van, minden csúcson 3 hexagon osztozik.
+\newline Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagonnak hat csúcsa van, minden csúcson 3 hexagon osztozik.
 \newline
-\newline A hexagonháló esetében többfajta megközelítés is szóbajöhet, hogyan kezeljük őket koordináta rendszerben, most ezek közül fogok néhányat ismertetni. 
+\newline A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni. 
 
 \subsection{Eltolásos koordináta-rendszer (Offset coordinates)}
 
-A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a négyzet koordináta-rendszerrel. 
+A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a \textit{négyzet koordináta-rendszer}rel. 
 \newline
-\newline A négyzet koordináta-rendszerhez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és oszlopokat.
+\newline A \textit{négyzet koordináta-rendszer}hez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és az oszlopokat.
 \newline
-\newline Az eltolásos koordináta-rendszernek az egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen halad a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.	
+\newline Az \textit{eltolásos koordináta-rendszer} egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen haladnak a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.	
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/OffsetCoord.jpg}
-\caption{Eltolásos koordináta-rendszerben a tengelyek}
+\caption{\textit{Eltolásos koordináta-rendszer}ben a tengelyek elhelyezkedése}
 \label{fig:OffsetCoord}
 \end{figure}
 
@@ -51,56 +51,56 @@ A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektő
 
 \subsection{Kocka koordináta-rendszer (Cube coordinates)}
 
-Egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek. 
+Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/CubeCoord.jpg}
-\caption{A kocka koordináta rendszerben a tengelyek elhelyezkedése.}
+\caption{A \textit{kocka koordináta rendszer}ben a tengelyek elhelyezkedése}
 \label{fig:CubeCoord}
 \end{figure}
 
-\noindent Ahhoz, hogy megértsük a kocka koordináta-rendszert képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a Descartes-féle koordináta-rendszerben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
+\noindent Ahhoz, hogy megértsük a \textit{kocka koordináta-rendszer}t képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a \textit{Descartes-féle koordináta-rendszer}ben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
 \newline
-\newline Egy szemléletesebb példaként vizsgáljuk meg a Q*bert nevű játékot.
+\newline Egy szemléletesebb példaként vizsgáljuk meg a \textit{Q*bert} nevű játékot.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.3]{kepek/Qbert.png}
-\caption{A Q*bert című játék.}
+\caption{A \textit{Q*bert} című játék}
 \label{fig:Qbert}
 \end{figure}
 
-\noindent A játék egy $28$ kockából álló piramis szerű játékmezőn zajlik (Ilyen alakzatot kapunk, ha végrehajtjuk a fent írtakat.). A játékos Q*bert-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt.
+\noindent A játék egy $28$ kockából álló piramis szerű játékmezőn zajlik (Ilyen alakzatot kapunk, ha végrehajtjuk a fent leírtakat.). A játékos \textit{Q*bert}-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt.
 \newline
-\newline Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha 2D-ben rendereljük, ha így nézzük, akkor Q*bert 6 különböző irányba is léphet. Ez azt jelenti, hogy a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként.
+\newline Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha 2D-ben render-eljük, ha így nézzük, akkor \textit{Q*bert} 6 különböző irányba is léphet. Ez azt jelenti, hogy ha a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként.
 
 \begin{itemize}
 \item Minden hexagonnak 3 koordinátája van. 
 \item Mindegyik tengely egy egyenes vonalnak felel meg a hexagon hálón.
-\item Minden irány a hexagonon másik két iránynak a kombinációja a kocka koordináta-rendszeren. Például, ha a \ref{fig:Qbert}. ábrán felfelé szeretnénk mozogni, akkor az a $+y$ és $-z$ között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az $y$-hoz és el kell vennünk 1-et a $z$-ből. 
+\item Minden irány a hexagonon másik két iránynak a kombinációja a \textit{kocka koordináta-rendszer}en. Például, ha a \ref{fig:Qbert}. ábrán felfelé szeretnénk mozogni, akkor az a $+y$ és $-z$ között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az $y$-hoz és el kell vennünk 1-et a $z$-ből. 
 \end{itemize}
 
 \noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
 
 \subsection{Tengely koordináta-rendszer (Axial coordinates)}
 
-A tengely koordináta-rendszer csak kettő koordinátát használ a kocka koordináta-rendszer három koordinátája közül. Mivel a kocka koordináta-rendszernél volt az a megkötés, hogy $x + y + z = 0$, és ahogy már a kocka koordináta-rendszernél már leírtam a harmadik koordináta redundáns.  A tengelyes koordináta-rendszer használható tárolásra és megjelenítésére és mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
+A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül. Mivel a \textit{kocka koordináta-rendszer}nél volt az a megkötés, hogy $x + y + z = 0$, és ahogy a \textit{kocka koordináta-rendszer}nél már leírtam a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/AxialCoord.jpg}
-\caption{A tengelyes koordináta rendszerben a tengelyek elhelyezkedése.}
+\caption{A \textit{tengelyes koordináta-                                   rendszer}ben a tengelyek elhelyezkedése}
 \label{fig:AxialCoord}
 \end{figure}
 
-\noindent Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya ennek a rendszernek a téglalap alakú térképek esetén való tárolás. 
+\noindent Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya ennek a rendszernek, a téglalap alakú térképek esetén való tárolás. 
 
 \newpage 
 
 \section{Térkép tárolási probléma}
 
-Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az eltolásos koordináta-rendszer mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
+Az egyik leggyakoribb probléma a \textit{tengelyes koordináta-rendszer}rel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az \textit{eltolásos koordináta-rendszer} mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
 \newline
 
 \begin{figure}[h!]
@@ -123,17 +123,17 @@ Az egyik leggyakoribb probléma a tengelyes koordináta-rendszerrel, hogy tégla
 \item A téglalap alakú térképek esetén, $elsooszlop[r] == -floor(r/2)$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q + r/2]$, ami ekvivalens azzal mintha konvertálnánk eltolásos koordináta-rendszerbe.
 \item A háromszög alakú térképek esetén, $elsooszlop[r] == 0$, és ezáltal érjük el a hexagonokat úgy, hogy $grid[r][q]$. Abban az esetben, ha a háromszög nem a képen látható módon áll, hanem csúccsal felfelé, akkor $grid[r][q + r]$.
 \item A hexagon formájú $N$ sugarú térképek, ahol $N$ $=$ $max(abs(x)$, $abs(y)$, $abs(z))$, és $elsooszlop[r] == -N - min(0, r)$. Viszont hogyha $r < 0$ értékkel kezdünk, akkor el kell tolnunk a sorokat és úgy érhetjük el $grid[r + N][q + N + min(0, r)]$.
-\item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak $grid[r][q]$ formát használjuk.
+\item A rombusz formájú térkép esetén minden tökéletesen egyezik ezért egyszerűen csak a $grid[r][q]$ formát használjuk.
 \end{itemize}
 \end{itemize}
 
 \section{Koordináta konverziók}
 
-Mivel a három terület ahol koordinátákat használjuk (tárolás, megjelenítés, számítások) nem feltétlenül ugyanabban a koordináta-rendszerben fognak megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a kocka koordináta-rendszert fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
+Mivel a három terület ahol a koordinátákat használjuk (tárolás, megjelenítés, számítások) nem feltétlenül ugyanabban a koordináta-rendszerben fognak megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a \textit{kocka koordináta-rendszer}t fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
 
 \subsection{Tengelyes - Kocka konverziók}
 
-A tengelyes koordináta-rendszer nagyon közel áll a kocka koordináta-rendszerhez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján.
+A \textit{tengelyes koordináta-rendszer} nagyon közel áll a \textit{kocka koordináta-rendszer}hez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján.
 
 \begin{verbatim}
 function cube_to_axial(cube):
@@ -169,7 +169,7 @@ $$
 
 \subsection{Eltolásos - Kocka konverziók}
 
-Az eltolásos koordináta-rendszernek négy fajta tipusa lehet, az alapján, hogy melyik sor/oszlop lett eltolva.
+Az \textit{eltolásos koordináta-rendszer}nek négy fajta tipusa lehet, az alapján, hogy melyik sor/oszlop lett eltolva.
 \newline
 \newline Páratlan - sor:
 \begin{verbatim}
@@ -303,13 +303,13 @@ $$
   \right.
 $$
 
-\noindent Érdemes bitenkénti “és” ($a \& 1$) operátort használni modulo ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben modulo számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
+\noindent Érdemes \textit{bitenkénti “és”} ($a \& 1$) operátort használni \textit{modulo} ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben \textit{modulo} számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
 
 \section{Távolság számítás}
 
 \subsection{Kocka koordináta-rendszer}
 
-A kocka koordináta-rendszerben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a kocka koordináta-rendszerben. Ezáltal téve egyszerűvé a távolságszámítást. A négyzet koordináta-rendszer esetén a Manhattan-távolság képlet a következő: $abs(dx) + abs(dy)$. A kocka koordináta-rendszerben pedig a Manhattan-távolság $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a Manhattan-távolság képlet a kockarács esetén fennálló távolság fele.
+A \textit{kocka koordináta-rendszer}ben, minden hexagon egy kockának felel meg a 3D térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a \textit{kocka koordináta-rendszer}ben. Ezáltal téve egyszerűvé a távolságszámítást. A \textit{négyzet koordináta-rendszer} esetén a \textit{Manhattan-távolság} képlet a következő: $abs(dx) + abs(dy)$. A \textit{kocka koordináta-rendszer}ben pedig a \textit{Manhattan-távolság} $abs(dx) + abs(dy) + abs(dz)$. Ezekből következik, hogy a hexagon rács esetén a \textit{Manhattan-távolság} képlet a kockarács esetén fennálló távolság fele.
 \newline
 \newline Képlettel:
 
@@ -333,7 +333,7 @@ $$
 
 \subsection{Tengelyes koordináta-rendszer}
 
-A tengelyes koordináta-rendszerben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a kocka koordináta-rendszerre.
+A \textit{tengelyes koordináta-rendszer}ben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a \textit{kocka koordináta-rendszer}re.
 \newline
 \newline Képlettel:
 
@@ -343,11 +343,11 @@ $$
 
 \subsection{Eltolásos koordináta-rendszer}
 
-Az eltolásos koordináta-rendszer esetén azt a megoldást fogjuk használni, hogy átalakítjuk a koordinátákat a kocka koordináta-rendszerre.
+Az \textit{eltolásos koordináta-rendszer} esetén azt a megoldást fogjuk használni, hogy átalakítjuk a koordinátákat a \textit{kocka koordináta-rendszer}re.
 \newline
 \newline Képlettel:
 
 $$
-d_{offset} (a, b) = d_{cube}(offset\_to\_Cube(a), offset\_to\_Cube(b)) 
+d_{of\!fset} (a, b) = d_{cube}(of\!fset\_to\_Cube(a), of\!fset\_to\_Cube(b)) 
 $$
 
