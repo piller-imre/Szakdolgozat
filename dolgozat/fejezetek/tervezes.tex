@@ -1,6 +1,6 @@
 \chapter{Tervezés}
 
-Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomhoz. Ehhez eltolásos koordináta-rendszert fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tűnt célszerű döntésnek. Viszont mivel az eltolásos koordináta-rendszerben a számítások bonyolultabbak mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a kocka koordináta-rendszerbeli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az A* -ra esett a választásom, mivel az adott esetben ez a leghatékonyabb.
+Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomban. Ehhez \textit{eltolásos koordináta-rendszer}t fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tűnt célszerű döntésnek. Viszont mivel az \textit{eltolásos koordináta-rendszer}ben a számítások bonyolultabbak mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a \textit{kocka koordináta-rendszer}beli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az \textit{A*} -ra esett a választásom, mivel az adott esetben ez a leghatékonyabb.
 
 \section{Stílus és modellek}
 
@@ -9,6 +9,8 @@ A játékban szereplő grafikai stílusként a low-poly irányzatot választotta
 \newline A játék fejlesztése során 3D-s modelleket használtam, mert ezáltal lehetőség nyílt arra, hogy a térképet forgatni lehessen és különböző szemszögekből lehessen látni a történéseket. Úgy ítéltem meg, hogy ez több előnnyel járna mint amennyi plusz energiát követelne meg.
 \newline
 \newline A térkép hexagonokból épül fel és a hexagonháló egyik fő jellemzője az, hogy a háló szélein lévő hexagonok nem egy vonalba esnek. Ennek az előnyeit és hátrányait korábban a 3.2 fejezetben már taglaltam. Jelen esetben a már említett problémák nem okoznak gondot, mivel nem kell igazodni semmilyen körülhatároló objektumhoz.
+\newline
+\newline A generálás során a térképen a különböző környezeti viszonyoknak megfelelően más és más objektumok jelennek meg. Az alábbi táblázaton azt láthatjuk, hogy a különböző objektum tipusokból a különböző környezeti viszonyok között mennyi szerepel.
 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
@@ -26,7 +28,7 @@ A játékban szereplő grafikai stílusként a low-poly irányzatot választotta
 A programban izometrikus kamerát használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az izometrikus nézet nem fedi a matematikai értelemben vett izometrikus nézetet ($\textasciitilde 35$ fok). Gyakran előfordul 30, 45, 53, 60 fokos kamera is. Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott. 
 
 $$
-atan(4 / 3) = 53.1301024 \space deg
+atan(4 / 3) = 53.1301024 \; deg
 $$
 
 \noindent Ezek közül a 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerettem volna, végül a 45 fokos szög mellett döntöttem a laposabb szög miatt. Ehhez 60 fokos látószöget (FOV) alkalmaztam. A kamera körbeforgatható a horizontális tengely körül 360 fokban, ezt a 3D-s modellek miatt van lehetőség megoldani, ezáltal van lehetőség több szempontból megvizsgálni a térképen az objektumok elhelyezkedését. Lehetőség van arra, hogy a térképre ráközelítsünk vagy távolodjunk tőle, ennek megvan a felső és alsó határa. Igyekeztem úgy megválasztani ezeket a határokat, hogy ne lehessen túl közel vagy túl távol vinni a kamerát a térképtől, mindazonáltal ez a funkció még betudja tölteni a szerepét. A kamera természetesen a térkép mentén mozgatható mind a 4 irányban. 
@@ -51,7 +53,7 @@ A térkép körülhatárolására egy speciális hexagon textúrát hoztam létr
 
 \subsection{Domborzat}
 
-A második elem ami majd a térképen meghatározásra kerül az a domborzat, mely két fajta magasságban jelenik majd meg (domb, hegy), ehhez két különböző modellt fog használni. A térkép méreteihez viszonyítva lehet majd százalékos arányban kifejezni a domborzat mennyiséget, egy $0\%$-tól $40\%$-ig terjedő skálán. Ezt az intervallumot találtam megfelelőnek ahhoz, hogy ha sok hegyek akarunk akkor sok hegyet kapjunk de még a karakterek által bejárható maradhasson a térkép. Ezt az intervallumot a generálás előtt áll majd módjában a felhasználónak beállítani. A hegyek és a dombok véletlenszerű pozícióban fognak elhelyezkedni. A különböző környezeti viszonyokhoz három különböző textúra áll rendelkezésre (fű, homok, hó). A hegyek és a dombok eloszlása teljesen véletlenszerűen lesz kialakítva és nincs beleszólása a felhasználónak.
+A második elem ami majd a térképen meghatározásra kerül az a domborzat, mely két fajta magasságban jelenik meg (domb, hegy), ehhez két különböző modellt fogok használni. A térkép méreteihez viszonyítva lehet majd százalékos arányban kifejezni a domborzat mennyiséget, egy $0\%$-tól $40\%$-ig terjedő skálán. Ezt az intervallumot találtam megfelelőnek ahhoz, hogy ha sok hegyek akarunk akkor sok hegyet kapjunk de még a karakterek által bejárható maradhasson a térkép. Ezt az intervallumot a generálás előtt áll majd módjában a felhasználónak beállítani. A hegyek és a dombok véletlenszerű pozícióban fognak elhelyezkedni. A különböző környezeti viszonyokhoz három különböző textúra áll rendelkezésre (fű, homok, hó). A hegyek és a dombok eloszlása teljesen véletlenszerűen lesz kialakítva és nincs beleszólása a felhasználónak.
 
 \subsection{Folyók}
 

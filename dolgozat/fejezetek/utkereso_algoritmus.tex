@@ -244,7 +244,7 @@ public EvenColumn EvenColumnNeighbor
 
 \subsubsection{Átlós szomszédok}
 
-\noindent Az “átlós” szomszédok a kocka koordináták esetén úgy működik, hogy a lehetséges három koordináta közül az egyiket $ \pm 2$ -vel, míg a másik kettőt $\mp 1$ -el módosítjuk, hogy a három koordináta összege mindig $0$ legyen.
+\noindent Az “átlós” szomszédok a kocka koordináták esetén úgy kerülnek meghatározásra, hogy a lehetséges három koordináta közül az egyiket $ \pm 2$ -vel, míg a másik kettőt $\mp 1$ -el módosítjuk, hogy a három koordináta összege mindig $0$ legyen.
 
 \begin{figure}[h!]
 \centering
@@ -255,21 +255,21 @@ public EvenColumn EvenColumnNeighbor
 
 \noindent Algoritmus:
 \begin{cpp}  
-Diagonals[] diagonalsDirections = 
+Diagonal[] diagonalDirections = 
 { 
-   Diagonals(+2, -1, -1), Diagonals(+1, +1, -2), Diagonals(-1, +2, -1), 
-   Diagonals(-2, +1, +1), Diagonals(-1, -1, +2), Diagonals(+1, -2, +1)
+   Diagonal(+2, -1, -1), Diagonal(+1, +1, -2), Diagonal(-1, +2, -1), 
+   Diagonal(-2, +1, +1), Diagonal(-1, -1, +2), Diagonal(+1, -2, +1)
 };
 
-public Diagonals DiagonalsNeighbor(Diagonals diagonals, int direction)
+public Diagonal DiagonalNeighbor(Diagonal diagonal, int direction)
 {
-   return Diagonals
+   return Diagonal
    (
-      diagonals.x + diagonalsDirections[direction].x, 
-      diagonals.y + diagonalsDirections[direction].y, 
-      diagonals.z + diagonalsDirections[direction].z
+      diagonal.x + diagonalDirections[direction].x, 
+      diagonal.y + diagonalDirections[direction].y, 
+      diagonal.z + diagonalDirections[direction].z
    );
 }         
 \end{cpp}
 
-\noindent Tengelyes koordináta-rendszer használata esetén is lehetséges az algoritmus használata.
+\noindent \textit{Tengelyes koordináta-rendszer} használata esetén is lehetséges az algoritmus használata.
