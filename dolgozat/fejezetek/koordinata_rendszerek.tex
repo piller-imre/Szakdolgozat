@@ -204,7 +204,7 @@ cube_{x,y,z} (oddrow_{row}, oddrow_{col}) = \left \{
   \right.
 $$
 
-Páros - sor:
+\noindent Páros - sor:
 \begin{verbatim}
 function cube_to_evenr(cube):
       col = cube.x + (cube.z + (cube.z&1)) / 2
@@ -218,7 +218,26 @@ function evenr_to_cube(hex):
       return Cube(x, y, z)
 \end{verbatim}
 
-Páratlan - oszlop:
+$$
+evenrow_{row,col} (cube_{x}, cube_{z}) = \left \{
+  \begin{tabular}{c}
+  $evenrow_{row} = cube_{z}$ \\
+  $evenrow_{col} = cube_{x} + \frac{cube_{z} + (cube_{z} \; mod \; 2)}{2}$
+  \end{tabular}
+  \right.
+$$
+
+$$
+\scalebox{0.9}{ $cube_{x,y,z} (evenrow_{row}, evenrow_{col}) =$} \left \{
+  \begin{tabular}{c}
+  $cube_{x} = evenrow_{col} - \frac{evenrow_{row} + (evenrow_{row} \; mod \; 2)}{2}$ \\
+  $cube_{y} = -cube_{x} - cube_{z}$ \\
+  $cube_{z} = evenrow_{row}$
+  \end{tabular}
+  \right.
+$$
+
+\noindent Páratlan - oszlop:
 \begin{verbatim}
 function cube_to_oddq(cube):
       col = cube.x
@@ -232,7 +251,26 @@ function oddq_to_cube(hex):
       return Cube(x, y, z)
 \end{verbatim}
 
-Páros - oszlop:
+$$
+oddcolumn_{row, col} (cube_{x}, cube_{z}) = \left \{
+  \begin{tabular}{c}
+  $oddcolumn_{row} = cube_{z} + \frac{cube_{x} - (cube_{x} \; mod \; 2)}{2}$ \\
+  $oddcolumn_{col} = cube_{x}$
+  \end{tabular}
+  \right.
+$$
+
+$$
+\scalebox{0.8}{$cube_{x,y,z} (oddcolumn_{row}, oddcolumn_{col}) =$} \left \{
+  \begin{tabular}{c}
+  $cube_{x} = oddcolumn_{col} $ \\
+  $cube_{y} = -cube_{x} - cube_{z}$ \\
+  $\scalebox{0.8}{$cube_{z} = oddcolumn_{row}$} - \frac{oddcolumn_{col} - (oddcolumn_{col} \; mod \; 2)}{2}$
+  \end{tabular}
+  \right.
+$$
+
+\noindent Páros - oszlop:
 \begin{verbatim}
 function cube_to_evenq(cube):
       col = cube.x
@@ -245,6 +283,25 @@ function evenq_to_cube(hex):
       y = -x-z
       return Cube(x, y, z)
 \end{verbatim}
+
+$$
+evencolumn_{row, col} (cube_{x}, cube_{z}) = \left \{
+  \begin{tabular}{c}
+  $evencolumn_{row} = cube_{z} + \frac{cube_{x} + (cube_{x} \; mod \; 2)}{2}$ \\
+  $evencolumn_{col} = cube_{x}$
+  \end{tabular}
+  \right.
+$$
+
+$$
+\scalebox{0.7}{$cube_{x,y,z} (evencolumn_{row}, evencolumn_{col}) =$} \left \{
+  \begin{tabular}{c}
+  $cube_{x} = evencolumn_{col} $ \\
+  $cube_{y} = -cube_{x} - cube_{z}$ \\
+  $\scalebox{0.7}{$cube_{z} = evencolumn_{row}$} - \frac{evencolumn_{col} + (evencolumn_{col} \; mod \; 2)}{2}$
+  \end{tabular}
+  \right.
+$$
 
 \noindent Érdemes bitenkénti “és” ($a \& 1$) operátort használni modulo ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben modulo számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
 
