@@ -148,7 +148,7 @@ function axial_to_cube(hex):
 \end{verbatim}
 
 $$
-cube\_to\_axial_{q,r}(cube_{x}, cube_{y}) = 
+axial_{q,r}(cube_{x}, cube_{y}) = 
 \left \{
   \begin{tabular}{c}
   $axial_{q} = cube_{x}$ \\
@@ -158,7 +158,7 @@ cube\_to\_axial_{q,r}(cube_{x}, cube_{y}) =
 $$
 
 $$
-axial\_to\_cube_{x,y,z} (axial_{q}, axial_{r}) =  \left \{
+cube_{x,y,z} (axial_{q}, axial_{r}) =  \left \{
   \begin{tabular}{c}
   $cube_{x} = axial_{q}$ \\
   $cube_{z} = axial_{r}$ \\
@@ -170,8 +170,8 @@ $$
 \subsection{Eltolásos - Kocka konverziók}
 
 Az eltolásos koordináta-rendszernek négy fajta tipusa lehet, az alapján, hogy melyik sor/oszlop lett eltolva.
-
-Páratlan - sor:
+\newline
+\newline Páratlan - sor:
 \begin{verbatim}
 function cube_to_oddr(cube):
       col = cube.x + (cube.z - (cube.z&1)) / 2
@@ -184,6 +184,25 @@ function oddr_to_cube(hex):
       y = -x-z
       return Cube(x, y, z)
 \end{verbatim}
+
+$$
+oddrow_{row,col}(cube_{x},cube_{z}) = \left \{
+  \begin{tabular}{c}
+  $oddrow_{row} = cube_{x} + \frac{cube_{z} - (cube_{z}\; mod \; 2)}{2}$ \\
+  $oddrow_{col} = cube_{z}$
+  \end{tabular}
+  \right.
+$$
+
+$$
+cube_{x,y,z} (oddrow_{row}, oddrow_{col}) = \left \{
+  \begin{tabular}{c}
+  $cube_{x} = oddrow_{col} - \frac{oddrow_{row} - (oddrow_{row}\; mod \; 2)}{2}$ \\
+  $cube_{y} = oddrow_{row}$ \\
+  $cube_{z} = -cube_{x} - cube_{y}$
+  \end{tabular}
+  \right.
+$$
 
 Páros - sor:
 \begin{verbatim}
