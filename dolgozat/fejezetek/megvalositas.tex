@@ -24,7 +24,7 @@ A BaseMapObject osztályból származik le az összes modellekhez kapcsolt oszt�
 \newline
 \newline Minden egyes hexagon modell egy map elnevezésű üres objektum leszármazottjaként jön létre. Az összes többi modell pedig a hexagon modell leszármazottja lesz. Ezáltal könnyebben kereshetőek az objektumok a Unity API-k segítségével.
 \newline
-\newline A Tree osztályban egy tömbben megadható a fa modelleknek azok a részei amik a lombot alkotják. Az algoritmus pedig az környezeti viszonyoknak megfelelően módosítja (szabályozza a láthatóságát vagy az évszaknak megfelelően módosítja a színeket).
+\newline A Tree osztályban egy tömbben megadható a fa modelleknek azok a részei amik a lombot alkotják. Az algoritmus pedig a környezeti viszonyoknak megfelelően módosítja (szabályozza a láthatóságát vagy az évszaknak megfelelően módosítja a színeket).
 \newline
 \newline Az épületek esetében is a fáknál már megismert módszert alkalmaztam arra, hogy szabályozzam a környezeti viszonyoknak a behatását az épületekre vonatkozóan.
 \newline
@@ -60,7 +60,7 @@ A BaseMapObject osztályból származik le az összes modellekhez kapcsolt oszt�
 
 \noindent A MapGenerator osztály ami a generálást elvégzi, a Tervezés fejezetben már ismertetett 8 lépés alapján.
 
-\subsection{Térkép szélének generálása:}
+\subsection{Térkép szélének generálása}
 
 Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hexagonnal lehet körülhatárolni, de jövőbeli igény esetén minimális módosítások által elérhető lesz más objektumok használata is. 
 \newline
@@ -84,7 +84,7 @@ for (int y = 0; y < map.GetLength(1); y++)
 }
 \end{cpp}
 
-\subsection{Domborzat generálása:}
+\subsection{Domborzat generálása}
 
 A domborzat generálása véletlenszerű pozíciókba történik.
 \newline
@@ -118,9 +118,9 @@ while (i < maxNumOfMountainTiles)
 }
 \end{cpp}
 
-\subsection{Folyók generálása:}
+\subsection{Folyók generálása}
 
-A folyók generálásához A* útkereső algoritmust használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt.
+A folyók generálásához \textit{A* útkereső algoritmus}t használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt.
 \newline
 \newline Algoritmus:
 
@@ -151,7 +151,7 @@ loop
 
 \noindent Fontosnak tartom még megemlíteni azt, hogy az algoritmus során szükséges tárolnunk minden egyes csomópontról, hogy melyik csomópontról értük el. Amikor vizsgálunk egy csomópontot, akkor az összes szomszédját megvizsgáljuk, hogy rajta vannak-e valamelyik listán. Ha már rajta van a lezárt listán akkor tovább lépünk a következőre, viszont, ha a vizsgálandó csomópontok listáján szerepel, akkor meg kell, hogy vizsgáljuk, hogy az aktuálisan vizsgált csomópontról nem rövidebb-e az út mint a korábbi útvonal volt.
 
-\subsection{További mezők generálása:}
+\subsection{További mezők generálása}
 
 Olyan mezők generálása amelyeken nem szerepel folyó vagy hegy de szerepelhetnek épületek vagy növények.
 \newline
@@ -179,7 +179,7 @@ MaxNumOfBiome = (int)(OpenFlatTiles.Count *
 
 \noindent A szabad mezők nyilvántartásba vételére azért van szükség, hogy a generálás későbbi szakaszaiban tudjuk, hogy mennyi épületet vagy növényzetet kell generálni.
 
-\subsection{Épületek:}
+\subsection{Épületek}
 Az alábbi algoritmus véletlenszerűen kiválasztott mezőkre generál épületeket/városokat a korábban meghatározott mértékben.
 \newline
 \newline Algoritmus:
@@ -203,7 +203,7 @@ if (OpenFlatTiles.Count > 0)
 }
 \end{cpp}
 
-\subsection{Növények:}
+\subsection{Növények}
 Ebben a pontban azt az algoritmust mutatom be, amelyik meghatározza, hogy a szabad mezők közül melyikre és milyen növényzetet generáljon.
 \newline
 \newline Algoritmus:

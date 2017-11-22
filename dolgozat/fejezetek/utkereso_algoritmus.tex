@@ -117,7 +117,7 @@ public Cube CubeNeighbor(Cube cube, int direction)
 
 \subsubsection{Tengely koordináta-rendszer (Axial coordinates)}
 
-\noindent A kocka koordináta-rendszer veszük alapul. Mégpedig úgy, hogy a Cube($ dx, dy, dz$) koordinátákat átalakítjuk Axial($ dx, dz$) -re.
+\noindent A kocka koordináta-rendszert veszük alapul. Mégpedig úgy, hogy a Cube($ dx, dy, dz$) koordinátákat átalakítjuk Axial($ dx, dz$) -re.
 \newline
 \newline Algoritmus:
 \begin{cpp}
@@ -144,7 +144,7 @@ public Axial AxialNeighbor(Axial axial, int direction)
 
 \subsubsection{Eltolásos koordináta-rendszer (Offset coordinates)}
 
-\noindent Eltolásos koordináta-rendszer esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól mintha egy nem eltolt oszlopban/sorban állnánk.
+\noindent \textit{Eltolásos koordináta-rendszer} esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól mintha egy nem eltolt oszlopban/sorban állnánk.
 \newline
 \newline Ahogy a korábbi esetekben úgy most is kell készítenünk egy táblázatot amiben azt tároljuk majd, hogy a különböző tengelyeken mennyit kell hozzáadni, hogy elérjük a szomszédokat. De ebben az esetben most két tömbre lesz szükségünk, az egyik a páros sor/oszlop a másik pedig a páratlan sor/oszlop esetére.
 \newline
