@@ -28,7 +28,7 @@ A BaseMapObject osztályból származik le az összes modellekhez kapcsolt oszt�
 \newline
 \newline Az épületek esetében is a fáknál már megismert módszert alkalmaztam arra, hogy szabályozzam a környezeti viszonyoknak a behatását az épületekre vonatkozóan.
 \newline
-\newline Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák és a anyagjellemzők (material), ezeket az inspector panelen lehet megadni.
+\newline Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák és az anyagjellemzők (material), ezeket az inspector panelen lehet megadni.
 
 \begin{figure}[h!]
 \centering
@@ -67,15 +67,20 @@ Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hex
 \newline Algoritmus:
 
 \begin{cpp}
-for (int x = 0; x < TerkepSzelesseg; x++)
+for (int x = 0; x < map.GetLength(0); x++)
 {
-   CsempeLetrehozasa(x, 0);
-   CsempeLetrehozasa(x, TerkepMagassag);
+   CreateTile(this.transform, new Vector3(x, 0, 0),
+   TileTypes.MapEdge, SelectionInfoTypes.NonSelectable);
+   CreateTile(this.transform, new Vector3(x, 0, map.GetLength(1) - 1),
+   TileTypes.MapEdge, SelectionInfoTypes.NonSelectable);
 }
-for (int y = 0; y < TerkepMagassag; y++)
+
+for (int y = 0; y < map.GetLength(1); y++)
 {
-   CsempeLetrehozasa(0, y);
-   CsempeLetrehozasa(TerkepSzelesseg, y);
+   CreateTile(this.transform, new Vector3(0, 0, y),
+   TileTypes.MapEdge, SelectionInfoTypes.NonSelectable);
+   CreateTile(this.transform, new Vector3(map.GetLength(0) - 1, 0, y),
+   TileTypes.MapEdge, SelectionInfoTypes.NonSelectable);
 }
 \end{cpp}
 
@@ -85,23 +90,33 @@ A domborzat generálása véletlenszerű pozíciókba történik.
 \newline
 \newline Algoritmus:
 
-\begin{verbatim}
-int DomborzatMaximálisSzáma = (TérképSzélesség * TérképMagasság
-* (ParaméterÉrtéke / 100.0));
+\begin{cpp}
+int maxNumOfMountainTiles = 
+(int)(Engine.Instance.MapWidth.Value * Engine.Instance.MapHeight.Value * 
+(Engine.Instance.MountainPercent.Value / 100.0));
+
+System.Random rnd = new System.Random();
 
 int i = 0;
-while (i < DomborzatMaximálisSzáma)
+while (i < maxNumOfMountainTiles)
 {
-   Vector3 pozíció= new Vector3(rnd.Next(1, TérképSzélesség - 1),
-   0, rnd.Next(1, TérképMagasság - 1));
+   Vector3 position = new Vector3
+   (
+      rnd.Next(1, map.GetLength(0) - 1),
+      0, rnd.Next(1, map.GetLength(1) - 1)
+   );
 
-   if (Térkép[pozíció.x, pozíció.y] == null)
+   if (map[(int)position.x, (int)position.z] == null)
    {
-      CsempeLétrehozásaHeggyel(pozíció);
+      CreateTile
+      (
+         this.transform, position, TileTypes.Mountain, 
+         SelectionInfoTypes.ChildObject
+      );
       i++;
    }
 }
-\end{verbatim}
+\end{cpp}
 
 \subsection{Folyók generálása:}
 
@@ -109,9 +124,9 @@ A folyók generálásához A* útkereső algoritmust használtam. A nagy terjede
 \newline
 \newline Algoritmus:
 
-\begin{verbatim}
-OPEN //the set of nodes to be evaluated
-CLOSED //the set of nodes already evaluated
+\begin{cpp}
+OPEN 
+CLOSED 
 add the start node to OPEN
 
 loop
@@ -119,7 +134,7 @@ loop
    remove current from OPEN
    add current to CLOSED
 
-   if current is the target node //path has been found
+   if current is the target node
       return
 
    foreach neighbour of the current node
@@ -132,7 +147,7 @@ loop
          
          if neighbour is not in OPEN
             add neighbour to OPEN
-\end{verbatim}
+\end{cpp}
 
 \noindent Fontosnak tartom még megemlíteni azt, hogy az algoritmus során szükséges tárolnunk minden egyes csomópontról, hogy melyik csomópontról értük el. Amikor vizsgálunk egy csomópontot, akkor az összes szomszédját megvizsgáljuk, hogy rajta vannak-e valamelyik listán. Ha már rajta van a lezárt listán akkor tovább lépünk a következőre, viszont, ha a vizsgálandó csomópontok listáján szerepel, akkor meg kell, hogy vizsgáljuk, hogy az aktuálisan vizsgált csomópontról nem rövidebb-e az út mint a korábbi útvonal volt.
 
@@ -142,24 +157,25 @@ Olyan mezők generálása amelyeken nem szerepel folyó vagy hegy de szerepelhet
 \newline
 \newline Algoritmus:   
 
-\begin{verbatim}
-for (int y = 0; y < TérképMagasság; y++)
+\begin{cpp}
+for (int y = 0; y < map.GetLength(1); y++)
 {
-   for (int x = 0; x < TérképSzélesség; x++)
+   for (int x = 0; x < map.GetLength(0); x++)
    {
-      if (Térkép[x, y] == null)
+      if (map[x, y] == null)
       {
-         CsempeLétrehozása(x, y);
-         SzabadMezők.Hozzáad(új mező(x, y));
+         CreateTile(this.transform, new Vector3(x, 0, y),
+         TileTypes.Flat, SelectionInfoTypes.Selectable);
+         OpenFlatTiles.Add(new Vector2(x, y));
       }
    }
 }
 
-VárosokMaximálisSzáma= (int)(SzabadMezők.Száma 
-*(ParaméterÉrtéke / 100.0));
-NövényzetMaximálisSzáma= (int)(SzabadMezők.Száma 
-* (ParaméterÉrtéke / 100.0));
-\end{verbatim}
+MaxNumOfCities = (int)(OpenFlatTiles.Count * 
+(Engine.Instance.CityPercent.Value / 100.0));
+MaxNumOfBiome = (int)(OpenFlatTiles.Count * 
+(Engine.Instance.BiomePercent.Value / 100.0));
+\end{cpp}
 
 \noindent A szabad mezők nyilvántartásba vételére azért van szükség, hogy a generálás későbbi szakaszaiban tudjuk, hogy mennyi épületet vagy növényzetet kell generálni.
 
@@ -168,78 +184,89 @@ Az alábbi algoritmus véletlenszerűen kiválasztott mezőkre generál épület
 \newline
 \newline Algoritmus:
 
-\begin{verbatim}
-if (SzabadMezők.Száma > 0)
+\begin{cpp}
+if (OpenFlatTiles.Count > 0)
 {
-   int EddigiVárosokSzáma= 0;
+   int numOfCities = 0;
     
-   while ( (EddigiVárosokSzáma < VárosokMaximálisSzáma) &&
-   (SzabadMezők.Száma > 0))
+   while ( (numOfCities < MaxNumOfCities) && (OpenFlatTiles.Count > 0))
    {
-      Vector2 index = SzabadMezők[Véletlenszám(0, SzabadMezők.Száma)];
+      Vector2 index = OpenFlatTiles[UnityEngine.Random.Range(0, 
+      OpenFlatTiles.Count)];
 
-      VárosLétrehozása(index.x, index.y);
-      EddigiVárosokSzáma++;
-      SzabadMezők.Eltávolítás(index);
+      map[(int)index.x, (int)index.y].GetComponent<Hexagon>
+      ().AddMapObject(HexagonComponents.LargeMapObject, 
+      LargeMapObjectTypes.City);
+      numOfCities++;
+      OpenFlatTiles.Remove(index);
    }
 }
-\end{verbatim}
+\end{cpp}
 
 \subsection{Növények:}
 Ebben a pontban azt az algoritmust mutatom be, amelyik meghatározza, hogy a szabad mezők közül melyikre és milyen növényzetet generáljon.
 \newline
 \newline Algoritmus:
 
-\begin{verbatim}
-if (SzabadMezők.Száma > 0)
+\begin{cpp}
+if (OpenFlatTiles.Count > 0)
 {
-   int KisebbObjektumokSzáma = 0;
-   int NagyobbObjektumokSzáma  = 0;
+   int numOfSmall = 0;
+   int numOfLarge = 0;
 
-   while ( (KisebbObjektumokSzáma < NövényzetMaximálisSzáma ||
-   NagyobbObjektumokSzáma  < NövényzetMaximálisSzáma ) && 
-   (SzabadMezők.Száma > 0) )
+   while ( (numOfSmall < MaxNumOfBiome || numOfLarge < MaxNumOfBiome )
+   && (OpenFlatTiles.Count > 0) )
    {
-      Vector2 index = SzabadMezők[Véletlenszám(0, SzabadMezők.Száma)];
+      Vector2 index = OpenFlatTiles[UnityEngine.Random.Range(0, 
+      OpenFlatTiles.Count)];
                 
-      int MeglévőNövényzet= 0;
+      int hexComponentIndex = 0;
 
-      if (Térkép[index.x, index.y].RendelkezikKisNövényzettel)
+      if (map[(int)index.x, (int)index.y].GetComponent
+      <SmallMapObjects>() != null)
       {
-         MeglévőNövényzet += 1;
+         hexComponentIndex += 1;
       }
-      
-      if (Térkép[index.x, index.y].RendelkezikNagyNövényzettel)
+      if (map[(int)index.x, (int)index.y].GetComponent
+      <LargeMapObjects>() != null)
       {
-         MeglévőNövényzet += 2;
+         hexComponentIndex += 2;
       }
 
-      switch (MeglévőNövényzet)
+      switch (hexComponentIndex)
       {
          case 0:
-            if (Véletlenszám(0, 1) == 0)
+            if (UnityEngine.Random.Range(0, 2) == 0)
             {
-               KisNövényzetHozzáadása(Térkép[index.x, index.y]);
-               KisebbObjektumokSzáma++;
+               map[(int)index.x, (int)index.y].GetComponent
+               <Hexagon>().AddMapObject(HexagonComponents.SmallMapObject, 
+               LargeMapObjectTypes.Trees);
+               numOfSmall++;
             }
             else
             {
-               NagyNövényzetHozzáadása(Térkép[index.x, index.y]);
-               NagyobbObjektumokSzáma ++;
+               map[(int)index.x, (int)index.y].GetComponent
+               <Hexagon>().AddMapObject(HexagonComponents.LargeMapObject, 
+               LargeMapObjectTypes.Trees);
+               numOfLarge++;
             }
             break;
          case 1:
-            NagyNövényzetHozzáadása(Térkép[index.x, index.y]);
-            NagyobbObjektumokSzáma ++;
+            map[(int)index.x, (int)index.y].GetComponent
+            <Hexagon>().AddMapObject(HexagonComponents.LargeMapObject, 
+            LargeMapObjectTypes.Trees);
+            numOfLarge++;
             break;
          case 2:
-            KisNövényzetHozzáadása(Térkép[index.x, index.y]);
-            KisebbObjektumokSzáma++;
+            map[(int)index.x, (int)index.y].GetComponent
+            <Hexagon>().AddMapObject(HexagonComponents.SmallMapObject, 
+            LargeMapObjectTypes.Trees);
+            numOfSmall++;
             break;
          case 3:
-            SzabadMezők.Eltávolítás(index);
+            OpenFlatTiles.Remove(index);
             break;
       }
    }
 }
-\end{verbatim}
+\end{cpp}

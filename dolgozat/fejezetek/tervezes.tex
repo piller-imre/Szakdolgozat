@@ -57,7 +57,7 @@ A második elem ami majd a térképen meghatározásra kerül az a domborzat, me
 
 \subsection{Folyók}
 
-A folyók generálásakor két különböző esetet különböztettem meg. Amikor vannak hegyek és amikor nincsenek. Amikor vannak hegyek akkor az egyik hegy lábától egy másik vizes mezőig (a térkép szélei vagy egy már meglévő folyó) generál az algoritmus folyó egy útkereső algoritmus felhasználásával. Abban az esetben amikor nincs egy darab hegy sem akkor az algoritmus vagy véletlenszerűen választ egy mezőt a térképen és egy vizes mezőig generál. A domborzathoz hasonlóan a vizes mezők mértéke is szabályozható a felhasználó által a generálás előtt. Ez is a domborzatnál már megismert $0\%$-tól $40\%$-ig tartó skálán mozog a térkép méretéhez viszonyítva. A környezeti viszonyokhoz alkalmazkodva kétfajta textúra jöhet szóba: normál és jeges. Ez a módszer viszonylag könnyen implementálható az útkereső algoritmus ismeretében és kellően egyedi megjelenést tud kölcsönözni a térképnek. Keletkezhetnek szigetek, szélesebb folyók, torkolatok. Ezen kívül minden vizes mező hozzáadódik egy listához aminek majd a vízszint meghatározásában lesz szerepe.
+A folyók generálásakor két különböző esetet különböztettem meg. Amikor vannak hegyek és amikor nincsenek. Amikor vannak hegyek akkor az egyik hegy lábától egy másik vizes mezőig (a térkép szélei vagy egy már meglévő folyó) generál az algoritmus folyót egy útkereső algoritmus felhasználásával. Abban az esetben amikor nincs egy darab hegy sem akkor az algoritmus vagy véletlenszerűen választ egy mezőt a térképen és egy vizes mezőig generál. A domborzathoz hasonlóan a vizes mezők mértéke is szabályozható a felhasználó által a generálás előtt. Ez is a domborzatnál már megismert $0\%$-tól $40\%$-ig tartó skálán mozog a térkép méretéhez viszonyítva. A környezeti viszonyokhoz alkalmazkodva kétfajta textúra jöhet szóba: normál és jeges. Ez a módszer viszonylag könnyen implementálható az útkereső algoritmus ismeretében és kellően egyedi megjelenést tud kölcsönözni a térképnek. Keletkezhetnek szigetek, szélesebb folyók, torkolatok. Ezen kívül minden vizes mező hozzáadódik egy listához aminek majd a vízszint meghatározásában lesz szerepe.
 
 \begin{figure}[h!]
 \centering
@@ -75,7 +75,7 @@ A folyók generálásakor két különböző esetet különböztettem meg. Amiko
 
 \subsection{Sík területek generálása}
 
-Az algoritmus minden olyan mezőre ahová még nem generált domborzatot vagy folyót oda sík terültet fog generálni. Ezek sima hexagonokból fognak állni és a további paraméterek segítségével kerülhetnek majd erre épületek, fák, virágok. Itt is a már megszokott 3 textúra áll majd rendelkezésre (fű, homok, jég).
+Az algoritmus minden olyan mezőre ahová még nem generált domborzatot vagy folyót oda sík terültet fog generálni. Ezek sima hexagonokból fognak állni és a további paraméterek segítségével kerülhetnek majd rá épületek, fák, virágok. Itt is a már megszokott 3 textúra áll majd rendelkezésre (fű, homok, jég).
 
 \subsection{Vízszint meghatározása}
 
