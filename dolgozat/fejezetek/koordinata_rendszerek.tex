@@ -1,28 +1,22 @@
 \Chapter{Koordináta-rendszerek}
 
-\section{Négyzet}
+\section{Négyzet alapú rendszerek}
 
-Négyzetrács esetében egy derékszögű koordináta-rendszer használata a legkézenfekvőbb. 
-\newline
-\newline A derékszögű koordináta rendszert két egymásra merőleges számegyenes alkotja. Az egyeneseket koordináta tengelyeknek, metszéspontjukat kezdőpontnak, origónak nevezzük. Az origóhoz mindkét számegyenesen a $0$-t rendeljük hozzá. A „vízszintes” tengely az $x$ (abszcissza) tengely, a „függőleges” az $y$ (ordináta) tengely.
-\newline
-\newline A koordináta rendszer segítségével a sík bármely $P$ pontjának a helyzete két jelzőszám (koordináta) segítségével egyértelműen meghatározható. A pont helyzetét a két tengelytől mért előjeles távolságával határozzuk meg. A pontnak a tengelyektől mért előjeles távolságai a pont koordinátái (jelzőszámai). Az előjelek a számegyenesek segítségével adhatóak meg. A jelzőszámokat, a pont neve után zárójelben adjuk meg: $P(x;y)$.
+Négyzetrács esetében kézenfekvő egy derékszögű koordináta-rendszer használata. A derékszögű koordináta rendszert két egymásra merőleges számegyenes alkotja. Az egyeneseket koordináta tengelyeknek, metszéspontjukat kezdőpontnak, origónak nevezzük. Az origóhoz mindkét számegyenesen a $0$-t rendeljük hozzá. A „vízszintes” tengely az $x$ (abszcissza) tengely, a „függőleges” az $y$ (ordináta) tengely.
 
-\section{Hexagon}
+A koordináta rendszer segítségével a sík bármely $P$ pontjának a helyzete két jelzőszám (koordináta) segítségével egyértelműen meghatározható. A pont helyzetét a két tengelytől mért előjeles távolságával határozzuk meg. A pontnak a tengelyektől mért előjeles távolságai a pont koordinátái. Az előjelek a számegyenesek segítségével adhatóak meg. A jelzőszámokat, a pont neve után zárójelben adjuk meg, például $P(x; y)$.
 
-A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyező fokúak. A szakdolgozatomban csak szabályos hatszögekkel fogok foglalkozni. 
-\newline
-\newline Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagonnak hat csúcsa van, minden csúcson 3 hexagon osztozik.
-\newline
-\newline A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni. 
+\section{Hexagon alapú rendszerek}
 
-\subsection{Eltolásos koordináta-rendszer (Offset coordinates)}
+A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyenlőek. A szakdolgozatomban csak szabályos hatszögekkel fogok foglalkozni. 
 
-A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a \textit{négyzet koordináta-rendszer}rel. 
-\newline
-\newline A \textit{négyzet koordináta-rendszer}hez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és az oszlopokat.
-\newline
-\newline Az \textit{eltolásos koordináta-rendszer} egyik hátránya, hogy a kettőből az egyik tengelye mentén nem egyenesen haladnak a hexagonok az eltolás miatt, ezáltal bonyolítva a dolgokat. A további rendszerek ezt a problémát orvosolják, viszont ott más problémák merülnek fel.	
+Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagonnak hat csúcsa van, minden csúcson 3 hexagon osztozik. A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni. 
+
+\subsection{Eltolásos koordináta-rendszer}
+
+A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a \textit{négyzet koordináta-rendszer}rel. A \textit{négyzet koordináta-rendszer}hez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és az oszlopokat.
+
+Az \textit{eltolásos koordináta-rendszer} egyik hátránya, hogy az egyik tengelye mentén nem egyenesen haladnak a sokszögek az eltolás miatt, és emiatt bonyolultabbá válnak a számítások (\ref{figOffsetCoord}. ábra). A további rendszerek ezt a problémát orvosolják, viszont ott más nehézségek merülnek fel.	
 
 \begin{figure}[h!]
 \centering
@@ -31,7 +25,7 @@ A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektő
 \label{fig:OffsetCoord}
 \end{figure}
 
-\noindent A négyzethálóval is elérhetünk a hexagonhálóhoz hasonló hatást, ha a négyzethálóban minden páros/páratlan sort/oszlopot eltolunk.
+A négyzethálóval is elérhetünk a hexagonhálóhoz hasonló hatást, ha a négyzethálóban minden páros/páratlan sort/oszlopot eltolunk (\ref{fig:Hex_Sq}. ábra).
 
 \begin{figure}[h!]
 \centering
@@ -40,7 +34,7 @@ A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektő
 \label{fig:Hex_Sq}
 \end{figure}
 
-\noindent Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért négy fajta variáció érhető el összesen.
+Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is állhatnak a hexagonok, ezért négy fajta variáció érhető el összesen (\ref{fig:OffsetFour}. ábra).
 
 \begin{figure}[h!]
 \centering
@@ -49,9 +43,9 @@ A leggyakoribb megközelítés az eltolásos módszer, ami kisebb eltérésektő
 \label{fig:OffsetFour}
 \end{figure}
 
-\subsection{Kocka koordináta-rendszer (Cube coordinates)}
+\subsection{Kocka koordináta-rendszer}
 
-Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek. 
+Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek (\ref{fig:CubeCoord}. ábra). 
 
 \begin{figure}[h!]
 \centering
@@ -60,9 +54,9 @@ Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor lát
 \label{fig:CubeCoord}
 \end{figure}
 
-\noindent Ahhoz, hogy megértsük a \textit{kocka koordináta-rendszer}t képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a \textit{Descartes-féle koordináta-rendszer}ben való műveleteket: hozzáadás a koordinátákhoz, kivonás a koordinátákból, szorzás vagy osztás skalárral, távolság számítás.
-\newline
-\newline Egy szemléletesebb példaként vizsgáljuk meg a \textit{Q*bert} nevű játékot.
+Ahhoz, hogy megértsük a \textit{kocka koordináta-rendszer}t képzeljünk el egy kockarácsot és vágjunk ki belőle egy átlós síkot az $x + y + z = 0$ mentén. Ez fogja majd a hexagon rácson használt algoritmusokat egyszerűbbé tenni azáltal, hogy használhatjuk a \textit{Descartes-féle koordináta-rendszer}ben való műveleteket. Ilyen műveletek az eltolás hozzáadása vagy kivonása a  koordinátákból, szorzás vagy osztás skalárral, távolság számítása.
+
+Egy szemléletesebb példaként vizsgáljuk meg a \textit{Q*bert} nevű játékot (\ref{fig:Qbert}. ábra).
 
 \begin{figure}[h!]
 \centering
@@ -71,37 +65,32 @@ Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor lát
 \label{fig:Qbert}
 \end{figure}
 
-\noindent A játék egy $28$ kockából álló piramis szerű játékmezőn zajlik (Ilyen alakzatot kapunk, ha végrehajtjuk a fent leírtakat.). A játékos \textit{Q*bert}-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt.
-\newline
-\newline Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha 2D-ben render-eljük, ha így nézzük, akkor \textit{Q*bert} 6 különböző irányba is léphet. Ez azt jelenti, hogy ha a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként.
-
+A játék egy $28$ kockából álló, piramis szerű játékmezőn zajlik. (Ilyen alakzatot kapunk, ha végrehajtjuk az előző részben leírt síkkal való vágást.) A játékos \textit{Q*bert}-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt. Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha síkba rajzoljuk le. Így tehát \textit{Q*bert} 6 különböző irányba is léphet. Ez azt jelenti, hogy ha a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként. Vegyük észre az alábbiakat.
 \begin{itemize}
 \item Minden hexagonnak 3 koordinátája van. 
 \item Mindegyik tengely egy egyenes vonalnak felel meg a hexagon hálón.
 \item Minden irány a hexagonon másik két iránynak a kombinációja a \textit{kocka koordináta-rendszer}en. Például, ha a \ref{fig:Qbert}. ábrán felfelé szeretnénk mozogni, akkor az a $+y$ és $-z$ között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az $y$-hoz és el kell vennünk 1-et a $z$-ből. 
 \end{itemize}
-
-\noindent Ez azért történik mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
+Ez azért történik így, mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
 
 \subsection{Tengely koordináta-rendszer (Axial coordinates)}
 
-A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül. Mivel a \textit{kocka koordináta-rendszer}nél volt az a megkötés, hogy $x + y + z = 0$, és ahogy a \textit{kocka koordináta-rendszer}nél már leírtam a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
+A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül (\ref{fig:AxialCoord}. ábra). Mivel a \textit{kocka koordináta-rendszer}nél volt az a megkötés, hogy $x + y + z = 0$, és ahogy a \textit{kocka koordináta-rendszer}nél már leírtam a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{kepek/AxialCoord.jpg}
-\caption{A \textit{tengelyes koordináta-                                   rendszer}ben a tengelyek elhelyezkedése}
+\caption{A \textit{tengelyes koordináta-rendszer}ben a tengelyek elhelyezkedése}
 \label{fig:AxialCoord}
 \end{figure}
 
-\noindent Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya ennek a rendszernek, a téglalap alakú térképek esetén való tárolás. 
-
-\newpage 
+Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya viszont, a téglalap alakú térképek esetén való tárolás. 
 
 \section{Térkép tárolási probléma}
 
+% TODO: Kicsit pontosítani kell, hogy itt a tárolási probléma pontosan miből adódik. (A megjelenített térrész, és a vetítés módját érdemes megvizsgálni.)
+
 Az egyik leggyakoribb probléma a \textit{tengelyes koordináta-rendszer}rel, hogy téglalap alakú térkép esetén elpazarolt helyek lesznek a mátrixban. Ez a fő érv az \textit{eltolásos koordináta-rendszer} mellett. Azonban az összes korábban említett koordináta-rendszer elpazarolt helyekhez vezet, amikor háromszög vagy hatszög alakú térképet használunk.
-\newline
 
 \begin{figure}[h!]
 \centering
@@ -113,10 +102,8 @@ Az egyik leggyakoribb probléma a \textit{tengelyes koordináta-rendszer}rel, ho
 \noindent Vegyük észre a \ref{fig:StorageProblem}. ábrán látható képeken, hogy az elpazarolt hely a sorok bal és jobb szélén jelentkezik (kivéve a rombusz esetén). Három lehetséges megoldás létezik a probléma kiküszöbölésére:
 \begin{itemize}
 \item Hagyjuk figyelmen kívül a problémát. Használjunk mátrixot a tárolásra és használjunk valamilyen speciális jelzőt a nem létező mezőkre. A legtöbb esetben nem éri meg ennél komplikáltabb megoldást alkalmazni.
-\item Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni. (pl: $Grid(Tile(x,y))$);
-\item Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is.
-\newline
-\newline Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - elsooszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
+\item Használjunk valamilyen listát a mezőkről a mátrix helyett. Ezáltal lehetőségünk lesz szabálytalan formájú térképek készítésére, beleértve azt is, hogy legyen egy lyuk a közepén. A rács osztályból \textit{getter/setter} metódusok segítségével könnyen el lehet érni (például \texttt{Grid(Tile(x,y)))}).
+\item Csúsztassuk el a sorokat úgy, hogy bal oldalt ne legyen “üres” hely. Néhány nyelvben a 2D tömb az egy tömbökből álló tömb, ilyen esetekben a tömböknek nem kell egyforma hosszúaknak lennie, így eltüntethető a felesleg a jobb oldalról is. Ahhoz, hogy ilyen különböző konvex formájú térképet tároljunk szükségünk lesz egy plusz tömbre az “első oszlopok” tárolásához. Amikor hozzá akarunk férni a hexagonhoz az q,r koordinátákon akkor az $array[r][q - elsooszlop[r]]$ kell használnunk inkább. A rács osztályból getter/setter metódusok segítségével könnyen el lehet érni.
 \newline
 \newline Ha a térkép fix formájú, akkor az első oszlop menet közben is számítható ahelyett, hogy tárolnánk.
 \begin{itemize}
