@@ -24,7 +24,7 @@ globalgamemanagers.assets level0 sharedassets0.assets
 \end{cpp}
 
 \section*{Használat}
-A programot a Szakdolgozat.exe futtatható állomány megnyitásával indíthatjuk el, ami után a \ref{fig:UnityStartUp}. ábrán látható ablak fogad minket.
+A programot a \texttt{Szakdolgozat.exe} futtatható állomány megnyitásával indíthatjuk el, ami után a \ref{fig:UnityStartUp}. ábrán látható ablak fogad minket.
 
 \begin{figure}[h!]
 \centering
@@ -33,9 +33,9 @@ A programot a Szakdolgozat.exe futtatható állomány megnyitásával indíthatj
 \label{fig:UnityStartUp}
 \end{figure}
 
-\noindent Itt van lehetőségünk a különböző grafikai beállításokat módosítani. Beállíthatjuk a kívánt felbontást, hogy teljes képernyős módban fusson az alkalmazás vagy ne. A grafikai beállítás leginkább a fényekre és az árnyékokra van hatással. Maximális beállítások mellett valósidejű árnyékokat generál az alkalmazás, viszont minimális beállítások mellett kikapcsolja az árnyékokat. Ezért nagyobb méretű térképek generálásakor vagy gyengébb specifikációjú rendszerek esetén érdemes az alacsonyabb grafikai beállításokat választani.
-\newline
-\newline A \ref{fig:UserGuide1}. ábrán látható a generálás előtti felhasználói felület, a \ref{fig:UserGuide2}. ábrán pedig a generálás utáni állapot. Ahogy az ábrákon látható nem minden beállítási lehetőség módosítható a generálás után, csak a hőmérsékletet lehet befolyásolni utólag. A térkép generálásához 10 db beállítási lehetőség tartozik.
+Itt van lehetőségünk a különböző grafikai beállításokat módosítani. Beállíthatjuk a kívánt felbontást, hogy teljes képernyős módban fusson az alkalmazás vagy ne. A grafikai beállítás leginkább a fényekre és az árnyékokra van hatással. Maximális beállítások mellett valósidejű árnyékokat generál az alkalmazás, viszont minimális beállítások mellett kikapcsolja az árnyékokat. Ezért nagyobb méretű térképek generálásakor vagy gyengébb specifikációjú rendszerek esetén érdemes az alacsonyabb grafikai beállításokat választani.
+
+A \ref{fig:UserGuide1}. ábrán látható a generálás előtti felhasználói felület, a \ref{fig:UserGuide2}. ábrán pedig a generálás utáni állapot. Ahogy az ábrákon látható nem minden beállítási lehetőség módosítható a generálás után, csak a hőmérsékletet lehet befolyásolni utólag. A térkép generálásához 10 különböző beállítási lehetőség tartozik.
 
 \begin{figure}[h!]
 \centering
@@ -51,27 +51,26 @@ A programot a Szakdolgozat.exe futtatható állomány megnyitásával indíthatj
 \label{fig:UserGuide2}
 \end{figure}
 
-\noindent Beállítási lehetőségek (felülről lefelé):
+Beállítási lehetőségek (felülről lefelé):
 \begin{itemize}
-\item Térkép magassága
-\item Térkép szélessége
-\item Hegyek számossága a térkép méretének megfelelő arányban
-\item Folyók számossága a térkép méretének megfelelő arányban
-\item Statikus hőmérséklet
-\item Dinamikus hőmérséklet
-\item Hőmérséklet átmenet a térkép teteje és az alja között
-\item Évszakok beállítása
-\item A növényzet számossága a a térképen százalékban kifejezve
-\item A városok számossága a a térképen százalékban kifejezve
+\item Térkép magassága,
+\item Térkép szélessége,
+\item Hegyek számossága a térkép méretének megfelelő arányban,
+\item Folyók számossága a térkép méretének megfelelő arányban,
+\item Statikus hőmérséklet,
+\item Dinamikus hőmérséklet,
+\item Hőmérséklet átmenet a térkép teteje és az alja között,
+\item Évszakok beállítása,
+\item A növényzet számossága a a térképen százalékban kifejezve,
+\item A városok számossága a a térképen százalékban kifejezve.
 \end{itemize}
 
-\noindent A “Generate Map” gomb megnyomására a kiválasztott beállításoknak a használatával az algoritmus létrehoz egy térképet. A “Clear Map” gomb megnyomására a legenerált térkép tőrlődik. Az “Exit” gomb megnyomására az alkalmazás bezárul.
+A ,,Generate Map'' gomb megnyomására a kiválasztott beállításoknak a használatával az algoritmus létrehoz egy térképet. A ,,Clear Map'' gomb megnyomására a legenerált térkép tőrlődik. Az ,,Exit'' gomb megnyomására az alkalmazás bezárul.
 
 \section*{Kamerakezelés}
 
 \begin{itemize}
-\item A “W,A,S,D” gombok, a nyilak és az egér mozgatásával (miközben lenyomva tartjuk a görgőt) lehetséges mozgatni a kamerát a vízszintes tengelyek mentén.
-\item A “Q, E” gombok és az egér mozgatásával (jobb gomb lenyomvatartása közben) lehetséges forgatni a kamerát a vertikális tengely mentén.
-\item A “R, F” gombok és az egér görgőjének a görgetésével lehet a kamera magasságát befolyásolni.
-
+\item A \textit{W, A, S, D} billentyűk, a nyilak és az egér mozgatásával (miközben lenyomva tartjuk a görgőt) lehetséges mozgatni a kamerát a vízszintes tengelyek mentén.
+\item A \textit{Q, E} gombok és az egér mozgatásával (jobb gomb lenyomvatartása közben) lehetséges forgatni a kamerát a vertikális tengely mentén.
+\item Az \textit{R, F} gombok és az egér görgőjének a görgetésével lehet a kamera magasságát befolyásolni.
 \end{itemize}
