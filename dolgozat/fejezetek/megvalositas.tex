@@ -1,71 +1,69 @@
-\chapter{Megvalósítás}
+\chapter{Megvalósítás C\# programozási nyelven}
 
-A megvalósított program osztály diagramja:
+A térkép generálásához az alkalmazást C\# programozási nyelven készítettem el. Az objektum orientált elvek figyelembe vételével a programot logikailag különálló osztályokra bontottam szét. Ezek hierarchiája, egymással való kapcsolatai \aref{fig:szorny}. ábrán láthatók.
+
+% TODO: Az ábra nagyon apró betűs. Szét kellene kicsit szedni vagy lényegesen leegyszerűsítve (akár éleket elhagyva felrajzolni.)
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/White_Monster.JPG}
-\caption{Az elkészült program osztály diagramja}
+\includegraphics[scale=0.25]{kepek/White_Monster.JPG}
+\caption{Az elkészült program osztálydiagramja}
 \label{fig:szorny}
 \end{figure}
 
-\noindent A különböző osztályokat és működésüket a következő pontokban fogom bemutatni kisebb logikailag összetartozó egységek alapján a könnyebb átláthatóság miatt. 
-
-\section{Modellek}
+A különböző osztályokat és működésüket a következő pontokban fogom bemutatni, kisebb logikailag összetartozó egységek alapján a könnyebb átláthatóság érdekében.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/White_modellek.JPG}
+\includegraphics[scale=0.3]{kepek/White_modellek.JPG}
 \caption{A programban szereplő modellek hierarchiája}
 \label{fig:modellek}
 \end{figure}
 
-A BaseMapObject osztályból származik le az összes modellekhez kapcsolt osztály, ebben vannak leírva a közös tulajdonságaik a térképen szereplő objektumoknak (pozíció a térképen, milyen típusú objektum, kiválasztható vagy nem). A térképen megjelenő objektumokhoz kapcsolt osztályokat a hexagon osztály kapcsolja össze. Ez az osztály tárolja  a hexagonhoz tartozó statikus hőmérsékletet, vízszintet és amikor változás áll be az aktuális hőmérsékletben akkor meghívja a hozzá kapcsolt objektumoknak a megfelelő metódusait. A kisebb objektumok (virág, kaktusz, kő) és a nagyobb objektumok (épületek, fák) 1-1 osztályhoz (LargeMapObjectManager, SmallMapObjectManager) vannak hozzákötve, ezáltal könnyítve a kezelésüket.
-\newline
-\newline Minden egyes hexagon modell egy map elnevezésű üres objektum leszármazottjaként jön létre. Az összes többi modell pedig a hexagon modell leszármazottja lesz. Ezáltal könnyebben kereshetőek az objektumok a Unity API-k segítségével.
-\newline
-\newline A Tree osztályban egy tömbben megadható a fa modelleknek azok a részei amik a lombot alkotják. Az algoritmus pedig a környezeti viszonyoknak megfelelően módosítja (szabályozza a láthatóságát vagy az évszaknak megfelelően módosítja a színeket).
-\newline
-\newline Az épületek esetében is a fáknál már megismert módszert alkalmaztam arra, hogy szabályozzam a környezeti viszonyoknak a behatását az épületekre vonatkozóan.
-\newline
-\newline Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák és az anyagjellemzők (material), ezeket az inspector panelen lehet megadni.
+\section{Modellek kezeléséhez szükséges osztályok}
+
+A \texttt{BaseMapObject} osztályból származik az összes modellekhez kapcsolt osztály. Ez írja le a közös tulajdonságaikat, a térképen szereplő objektumok pozícióját, típusát, azt hogy kiválasztható mezőről van-e szó. A térképen megjelenő objektumokhoz kapcsolt osztályokat a \texttt{Hexagon} osztály kapcsolja össze. Ez az osztály tárolja  a hexagonhoz tartozó statikus hőmérsékletet, vízszintet és amikor változás áll be az aktuális hőmérsékletben, akkor meghívja a hozzá kapcsolt objektumoknak a megfelelő metódusait. A kisebb objektumok (virág, kaktusz, kő) és a nagyobb objektumok (épületek, fák) a \texttt{LargeMapObjectManager} és \texttt{SmallMapObjectManager} osztályokkal kezelhetők.
+
+Minden egyes hexagon modell egy \texttt{Map} elnevezésű üres objektum leszármazottjaként jön létre. Az összes többi modell pedig a \texttt{Hexagon} leszármazottja. Ezáltal könnyebben kereshetőek az objektumok a Unity API-k segítségével.
+
+A \texttt{Tree} osztályban egy tömbben megadható a fa modelleknek azok a részei, amik a lombot alkotják. Az algoritmus pedig a környezeti viszonyoknak megfelelően módosítja (szabályozza a láthatóságát vagy az évszaknak megfelelően módosítja a színeket).
+
+Az épületek esetében is a fáknál már megismert módszert alkalmaztam arra, hogy szabályozzam a környezeti viszonyoknak a behatását az épületekre vonatkozóan.
+
+Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák és az anyagjellemzők (\textit{material}), ezeket az inspector panelen lehet megadni (\ref{fig:Managers}. ábra).
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{kepek/Managers.jpg}
+\includegraphics[scale=0.45]{kepek/Managers.jpg}
 \caption{Manager osztályok állítási lehetősége az Inspector panelen}
 \label{fig:Managers}
 \end{figure}
 
-\newpage
-\section{UI és paraméterek szabályzása}
+\section{UI és paraméterek szabályozása}
+
+A felhasználói felületen található vezérlő elemek segítségével szabályozhatjuk a generálni kívánt térkép paramétereit. Minden vezérlő elemhez tartozik egy script fájl, ami a játék indításakor beállítja a vezérlő elemekhez tartozó alapértéket és bizonyos esetekben a minimum, maximum vagy a további lehetséges értékeket is. Ezek az értékek az \texttt{Engine} osztályban kerültek rögzítésre. A paraméterek aktuális értékét az \texttt{Engine} megfelelő metódusainak meghívásával lehet módosítani (\ref{fig:UI} ábra.).
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.37]{kepek/White_UI.JPG}
+\includegraphics[scale=0.3]{kepek/White_UI.JPG}
 \caption{A felhasználói felülethez kapcsolódó osztályok és az Engine kapcsolata}
 \label{fig:UI}
 \end{figure}
 
-\noindent A felhasználói felületen található vezérlő elemek segítségével szabályozhatjuk a generálni kívánt térkép paramétereit. Minden vezérlő elemhez tartozik egy script fájl ami a játék indításakor beállítja a vezérlő elemekhez tartozó alapértéket és bizonyos esetekben a minimum, maximum vagy a további lehetséges értékeket is. Ezek az értékek az Engine osztályban vannak “beégetve”. A paraméterek aktuális értékét az Engine megfelelő metódusainak meghívásával lehet módosítani.
-\newline
-\newline A CameraMovement osztály felelős a kamera mozgatásért. Ennek az osztálynak a kódját a Unity store-ból szereztem be, mivel minden alapvető kritériumnak megfelelt amit terveztem és csak apróbb módosításokra volt szükségem (tengelyeken való mozgás limitálásának kiegészítése). 
+A \texttt{CameraMovement} osztály felelős a kamera mozgatásért. Ennek az osztálynak a kódját a \textit{Unity store}-ból szereztem be \cite{unitycamera}, mivel minden alapvető kritériumnak megfelelt amit terveztem és csak apróbb módosításokra volt szükségem (tengelyeken való mozgás limitálásának kiegészítése). 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/White_Generalas.JPG}
+\includegraphics[scale=0.3]{kepek/White_Generalas.JPG}
 \caption{Generálási folyamathoz kapcsolódó főbb osztályok}
 \label{fig:generalas}
 \end{figure}
 
-\noindent A MapGenerator osztály ami a generálást elvégzi, a Tervezés fejezetben már ismertetett 8 lépés alapján.
+A \texttt{MapGenerator} osztály az, ami a generálást elvégzi. Ennek \aref{chap:tervezes}. fejezetben már ismertetett 8 lépés alapján (\ref{fig:generalas}. ábra).
 
 \subsection{Térkép szélének generálása}
 
-Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hexagonnal lehet körülhatárolni, de jövőbeli igény esetén minimális módosítások által elérhető lesz más objektumok használata is. 
-\newline
-\newline Algoritmus:
-
+Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hexagonnal lehet körülhatárolni, de jövőbeli igény esetén minimális módosítások által elérhető lesz más objektumok használata is. A térkép széleinek generálási módját az alábbi kód részletezi.
 \begin{cpp}
 for (int x = 0; x < map.GetLength(0); x++)
 {
@@ -86,10 +84,7 @@ for (int y = 0; y < map.GetLength(1); y++)
 
 \subsection{Domborzat generálása}
 
-A domborzat generálása véletlenszerű pozíciókba történik.
-\newline
-\newline Algoritmus:
-
+A domborzat generálása véletlenszerű pozíciókba történik, amely konkrétan az alábbi kóddal került megvalósításra.
 \begin{cpp}
 int maxNumOfMountainTiles = 
 (int)(Engine.Instance.MapWidth.Value * Engine.Instance.MapHeight.Value * 
@@ -120,10 +115,7 @@ while (i < maxNumOfMountainTiles)
 
 \subsection{Folyók generálása}
 
-A folyók generálásához \textit{A* útkereső algoritmus}t használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt.
-\newline
-\newline Algoritmus:
-
+A folyók generálásához \textit{A*-algoritmus}t használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt.
 \begin{cpp}
 OPEN 
 CLOSED 
@@ -149,14 +141,11 @@ loop
             add neighbour to OPEN
 \end{cpp}
 
-\noindent Fontosnak tartom még megemlíteni azt, hogy az algoritmus során szükséges tárolnunk minden egyes csomópontról, hogy melyik csomópontról értük el. Amikor vizsgálunk egy csomópontot, akkor az összes szomszédját megvizsgáljuk, hogy rajta vannak-e valamelyik listán. Ha már rajta van a lezárt listán akkor tovább lépünk a következőre, viszont, ha a vizsgálandó csomópontok listáján szerepel, akkor meg kell, hogy vizsgáljuk, hogy az aktuálisan vizsgált csomópontról nem rövidebb-e az út mint a korábbi útvonal volt.
+Fontosnak tartom még megemlíteni azt, hogy az algoritmus során szükséges tárolnunk minden egyes csomópontról, hogy melyik csomópontról értük el. Amikor vizsgálunk egy csomópontot, akkor az összes szomszédját megvizsgáljuk, hogy rajta vannak-e valamelyik listán. Ha már rajta van a lezárt listán akkor tovább lépünk a következőre, viszont, ha a vizsgálandó csomópontok listáján szerepel, akkor meg kell, hogy vizsgáljuk, hogy az aktuálisan vizsgált csomópontról nem rövidebb-e az út mint a korábbi útvonal volt.
 
 \subsection{További mezők generálása}
 
-Olyan mezők generálása amelyeken nem szerepel folyó vagy hegy de szerepelhetnek épületek vagy növények.
-\newline
-\newline Algoritmus:   
-
+További mezők generálása alatt jelen esetben olyan mezők generálását értjük, amelyeken nem szerepel folyó vagy hegy, de szerepelhetnek rajta épületek vagy növények. Ennek a generálási módja a következő kódrészben olvasható.
 \begin{cpp}
 for (int y = 0; y < map.GetLength(1); y++)
 {
@@ -177,13 +166,11 @@ MaxNumOfBiome = (int)(OpenFlatTiles.Count *
 (Engine.Instance.BiomePercent.Value / 100.0));
 \end{cpp}
 
-\noindent A szabad mezők nyilvántartásba vételére azért van szükség, hogy a generálás későbbi szakaszaiban tudjuk, hogy mennyi épületet vagy növényzetet kell generálni.
+A szabad mezők nyilvántartásba vételére azért van szükség, hogy a generálás későbbi szakaszaiban tudjuk, hogy mennyi épületet vagy növényzetet kell generálni.
 
-\subsection{Épületek}
+\subsection{Épületek generálása}
+
 Az alábbi algoritmus véletlenszerűen kiválasztott mezőkre generál épületeket/városokat a korábban meghatározott mértékben.
-\newline
-\newline Algoritmus:
-
 \begin{cpp}
 if (OpenFlatTiles.Count > 0)
 {
@@ -203,11 +190,9 @@ if (OpenFlatTiles.Count > 0)
 }
 \end{cpp}
 
-\subsection{Növények}
-Ebben a pontban azt az algoritmust mutatom be, amelyik meghatározza, hogy a szabad mezők közül melyikre és milyen növényzetet generáljon.
-\newline
-\newline Algoritmus:
+\subsection{Növényzet generálása}
 
+Ebben a pontban azt az algoritmust mutatom be, amelyik meghatározza, hogy a szabad mezők közül melyikre és milyen növényzetet generáljon.
 \begin{cpp}
 if (OpenFlatTiles.Count > 0)
 {

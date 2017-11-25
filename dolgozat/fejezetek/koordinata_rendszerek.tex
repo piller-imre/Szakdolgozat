@@ -7,6 +7,7 @@ Négyzetrács esetében kézenfekvő egy derékszögű koordináta-rendszer hasz
 A koordináta rendszer segítségével a sík bármely $P$ pontjának a helyzete két jelzőszám (koordináta) segítségével egyértelműen meghatározható. A pont helyzetét a két tengelytől mért előjeles távolságával határozzuk meg. A pontnak a tengelyektől mért előjeles távolságai a pont koordinátái. Az előjelek a számegyenesek segítségével adhatóak meg. A jelzőszámokat, a pont neve után zárójelben adjuk meg, például $P(x, y)$.
 
 \section{Hexagon alapú rendszerek}
+\label{sec:hexagon}
 
 A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyenlőek. A szakdolgozatomban olyan hexagonokkal foglalkozok, amelyeknek a szemközti oldalai egyenlő hosszúságúak és párhuzamosak, viszont nem minden esetben feltétlenül szabályosak.
 
@@ -335,9 +336,12 @@ evencolumn_{row} - \dfrac{evencolumn_{col} + (evencolumn_{col} \bmod 2)}{2}
 %      return Cube(x, y, z)
 %\end{verbatim}
 
-\noindent Érdemes \textit{bitenkénti “és”} ($a \& 1$) operátort használni \textit{modulo} ($a \% 2$) helyett, amikor megpróbáljuk meghatározni, hogy páros ($0$) vagy páratlan ($1$) sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is. Az ok nagyon egyszerű, mivel néhány nyelvben nincs lehetőség egy lépésben \textit{modulo} számítására. A maradék számítás esetén negatív számot kapnánk eredményül. 
+Az implementációban érdemes \textit{bitenkénti “és”} (\texttt{a \& 1}) operátort használni \textit{modulo} (\texttt{a \% 2}) helyett, amikor meghatározzuk, hogy páros vagy páratlan sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is, függetlenül a maradékképzés műveletének programnyelvi implementálási módjától.
 
 \section{Távolságok számítása}
+\label{sec:tavolsag}
+
+Ahhoz, hogy távolságokat tudjunk számolni a térképet definiálnunk kell hozzá metrikákat. A különböző típusú koordinátarendszerek esetén ennek különféle módjai lehetnek. A következő szakaszok ezek közül mutatnak be néhányat.
 
 \subsection{Kocka koordináta-rendszer}
 
