@@ -4,6 +4,12 @@
 Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomban. Ehhez \textit{eltolásos koordináta-rendszer}t fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tünt célszerű döntésnek. Mivel az \textit{eltolásos koordináta-rendszer}ben a számítások bonyolultabbak, mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a \textit{kocka koordináta-rendszer}beli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az \textit{A*}-algoritmusra esett a választásom, mivel általános esetben ez bizonyult hatékonynak.
 
 \section{Stílus és modellek}
+\cite{Unity}
+\cite{hegyek}
+\cite{buildings}
+\cite{trees}
+\cite{flowers}
+\cite{cactus}
 
 A játékban szereplő grafikai stílusként a low-poly irányzatot választottam. Ehhez kezdetben saját készítésű modelleket használtam. Mivel a térkép generálásához nagy meny\-nyi\-sé\-gű, kidolgozott, egységes kinézetű modell szükséges, és a dolgozat tárgyköre elsődlegesen nem grafikai modellezés, ezért az Interneten kerestem további modelleket.
 
@@ -28,6 +34,8 @@ A generálás során a térképen a különböző környezeti viszonyoknak megfe
 \end{figure}
  \newpage
 \section{Kamera}
+\cite{RTS_Camera}
+\cite{Isometic}
 
 A programban izometrikus megjelenítési módot használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az izometrikus nézet nem fedi teljes mértékben a matematikai értelemben vett izometrikus nézetet. A számítógépes játékokban eleinte azért alkalmazták az izometriát, mivel ezt egyszerűbb volt megjeleníteni a korabeli hardvereken. Manapság  izometrikusnak nevezik (matematikai értelemben helytelenül) azokat az eseteket, amikor a kamera tengelye tipikusan 30, 45, 53 vagy 60 fokos szöget zár be a játék térképének síkjával. (Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott.)
 
@@ -96,7 +104,7 @@ A vízszint meghatározása minden mezőre a növényzet generálásához szüks
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/Buildings.JPG}
+\includegraphics[scale=0.25]{kepek/Buildings.JPG}
 \caption[épület]{Egy épület normál körülmények között (bal oldal) és havas körülmények között (jobb oldal). \footnotemark}
 \label{fig:Buildings}
 \end{figure}
@@ -113,7 +121,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Normal.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Normal.JPG}
 \caption[normal]{Normál esetben a fák lombja a zöld különböző árnyalataiból állhat. \footnotemark}
 \label{fig:Tree_Normal}
 \end{figure}
@@ -122,7 +130,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Fall.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Fall.JPG}
 \caption[Ősz]{“Ősz” A lomb színei ebben az esetben több különböző szín árnyalatából tevődik össze (piros, barna, sárga). \footnotemark}
 \label{fig:Tree_Fall}
 \end{figure}
@@ -131,7 +139,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Winter.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Winter.JPG}
 \caption[tél]{Kiszáradt vagy jeges esetben az algoritmus elrejti a lombokat. \footnotemark}
 \label{fig:Tree_Winter}
 \end{figure}
@@ -161,6 +169,7 @@ Véletlenszerű pozíciókban generálja az algoritmus a sík mezőkön. A kiseb
 
 \footnotetext{www.assetstore.unity3d.com/en/\#!/content/11547}
 
+\newpage
 \subsection{Hőmérséklet beállítása}
 
 Lehetőség van az évszakok között váltogatni. Ez a funkció fontos a játék tovább fejlesztésével kapcsolatban, mivel a játékban szerepet kap majd az évszakok változása. A tavasz és az ősz nem változtatja az alap hőmérsékleti viszonyokat csak a nyár és a tél módosítja a globális hőmérsékletet egy konstans értékkel. 

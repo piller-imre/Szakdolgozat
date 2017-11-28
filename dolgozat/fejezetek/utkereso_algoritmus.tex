@@ -3,6 +3,12 @@
 A későbbiekben bemutatásra kerülő generálási módokhoz szükséges áttekinteni az útkereső algoritmusok témakörét. A hexagonokból és a négyzetekből felépülő rácsok esetében az útvonalkeresés alapvetően ugyanúgy működik. Lényegi különbség a cellák szomszédos elemeinek számában van, így elegendő az útvonakeresést csak a négyzetrács esetében megvizsgálni.
 
 \section{Algoritmusok}
+\cite{algoritmusok}
+\cite{redblobA*}
+\cite{Dijkstra}
+\cite{Pathfinding}
+\cite{A*}
+\cite{Breadth-first_search}
 
 A kereső algoritmusokat két pont közötti út megtalálására alkalmazzuk. 
 A kereső algoritmusoknak több fajtája van, ezek különbözőképpen közelítik meg a problémát. 
@@ -24,7 +30,7 @@ keresés} vagy a \textit{mélységi keresés} nagyon egyszerűen megoldják az e
 
 A legrövidebb út megtalálása már ennél jóval komplexebb probléma. Edsger Dijkstra találta meg erre a problémára a megoldást 1956-ban \cite{Dijkstra}. Az algoritmusából manapság már több változat is létezik. Dijkstra eredeti algoritmusa megtalálta a legrövidebb utat két csúcs között egy súlyozott gráfon, de manapság a leggyakoribb változata úgy változtatja meg az algoritmust, hogy egy megadott csúcsponthoz viszonyítva kiszámítja az összes többi csúcsponthoz vezető legrövidebb utat, ezáltal előállítva a legrövidebb út fát. Ennek a futásideje $\mathcal{O}(|E| + |V| log|V|)$.
 
-A \textit{Bellman-Ford} algoritmus ugyanazt a problémát oldja meg mint a \textit{Dijkstra algoritmus}, viszont ez egy sokoldalúbb algoritmus, mivel az élek értéke negatív értéket is felvehet \cite{bellmanford}. Mindössze azt kell kizárni, hogy a gráf negatív összköltségű kört tartalmazzon. Negatív költségű él például úgy keletkezhet, hogy nagyobb bevételhez jutunk azon a szakaszon mint amennyi ráfordítással jár. A legrosszabb esetű futásideje $\mathcal{O}(|V||E|)$, de bizonyos esetekben akár $\mathcal{O}(|V|)$ is lehet, ami azt jelenti, hogy legrosszabb esetben lassabb mint a \textit{Dijkstra-féle algoritmus}.
+A \textit{Bellman-Ford} algoritmus ugyanazt a problémát oldja meg mint a \textit{Dijkstra algoritmus}, viszont ez egy sokoldalúbb algoritmus, mivel az élek értéke negatív értéket is felvehet \cite{bellman}. Mindössze azt kell kizárni, hogy a gráf negatív összköltségű kört tartalmazzon. Negatív költségű él például úgy keletkezhet, hogy nagyobb bevételhez jutunk azon a szakaszon mint amennyi ráfordítással jár. A legrosszabb esetű futásideje $\mathcal{O}(|V||E|)$, de bizonyos esetekben akár $\mathcal{O}(|V|)$ is lehet, ami azt jelenti, hogy legrosszabb esetben lassabb mint a \textit{Dijkstra-féle algoritmus}.
 
 Általában nem szükséges az összes lehetséges útvonalat bejárni ahhoz, hogy megtaláljuk az optimális útvonalat. Olyan algoritmusok, mint a \textit{Dijkstra} vagy az \textit{A*} algoritmus heurisztikák segítségével eliminálja az olyan útvonalakat amik nem lehetségesek vagy nem vezetnek a megoldás felé. Ezáltal el tudják érni az $\mathcal{O}(|E| log(|V|))$ futásidőt. 
 
@@ -33,8 +39,11 @@ A fent említett algoritmusok a legjobb általános algoritmusok közé tartozna
 A következő szakaszokban ismeretésre kerülnek a leggyakrabban alkalmazott algoritmusok.
 
 \subsection{A szélességi keresés algoritmusa}
+\cite{algoritmusok}
+\cite{Pathfinding}
+\cite{Breadth-first_search}
 
-A \textit{szélességi keresés} (\textit{breadth-first search}) egy egyszerűnek számító keresési algoritmus (\ref{fig:breadth-first_search}. ábra). A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot kiértékel ami a gyökér csomópontból elérhető. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki. Ez mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
+A \textit{szélességi keresés} (\textit{breadth-first search}) egy egyszerűnek számító keresési algoritmus (\ref{fig:breadth-first_search}. ábra). A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot kiértékeli ami a gyökér csomópontból elérhető. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki. Ez mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
 
 \begin{figure}[h!]
 \centering
@@ -43,6 +52,7 @@ A \textit{szélességi keresés} (\textit{breadth-first search}) egy egyszerűne
 \label{fig:breadth-first_search}
 \end{figure}
 
+\newpage
 Mivel ez egy teljes keresés, az egész gráf kiértékelésre kerül. Nem feltétlenül a legmagasabban található cél csomóponthoz vezető úton jutunk el a leggyorsabban a célhoz, ha az éleknek különbözik a súlya. Ezért érdemes olyan esetekben használni amikor a gráf éleinek nincs súlya vagy egységes súlyuk van, mert általában elegendő a legmagasabban található cél csomópontig eljutni. Érdemes továbbá tisztázni, hogy ha a térképen egy darab célpontunk van, az a gráfban több célcsomópontként is megjelenhet, mivel a gráf különböző útvonalai a különböző útvonalakat jelölik ugyanazon célhoz, de egyszerre akár több célunk is lehet a térképen.
 
 A \textit{szélességi keresés algoritmus} legnagyobb hátránya a tárigénye. Vegyünk például egy hipotetikus állapotteret, ahol minden kifejtéskor $x$ darab új csomópontot kapunk állapotunk van. Tehát a gyökér kifejtésekor $x$ darab elemünk lesz. Második szinten $x^2$. Tegyük fel, hogy a cél csomópontunk n mélységben található, ekkor legrosszabb esetben $x^n - x$ csomópontot kell kiértékelnünk, mivel az utolsó mélységet már nem szükséges kiértékelnünk. 
@@ -50,10 +60,18 @@ A \textit{szélességi keresés algoritmus} legnagyobb hátránya a tárigénye.
 A \textit{szélességi keresés algoritmus} egy nem informált keresés mivel a cél csomópontról nem rendelkezik információval. A továbbiakban csak informált keresésekről esik majd szó.
 
 \subsection{Dijkstra algoritmus}
+\cite{algoritmusok}
+\cite{Dijkstra}
+\cite{Pathfinding}
 
 Gyakori példa a gráf alapú útkereső algoritmusra a \textit{Dijkstra algoritmus}. A \textit{szélességi keresés} módszerrel ellentétben nem egységesen fedezi fel az utakat, hanem a kisebb útköltségűeket priorizálja. Ennek az algoritmusnak az elején szükségünk lesz egy kezdő csomópontra és egy listára a ,,nyitott'' csomópontoknak. Ebbe kerülnek azok a csomópontok amiket még ki kell értékelnünk. Minden iterációban az a csomópont kerül kiértékelésre amelyiknek a legkisebb az útköltsége a kezdő csomóponttól mérve. A számítógépes játékok esetében az útköltség függhet például attól, hogy milyen területen haladunk (magassági viszonyok változásától, a talaj anyagától, időjárási viszonyoktól, egyéb környezeti viszonyoktól, ha az úton ellenség van akkor is megnövelhetjük az út költségét). Az algoritmus alapvetően súlyozott élek esetén működik, de használható súlyozatlan élek esetén is, ekkor a súlyozatlan élek értékét válasszuk 1-nek. Akkor kerül egy csomópont ,,lezárásra'', hogy ha már az összes szomszédja hozzá lett adva a nyitott csomópontok listájához, vagy már lezárásra került. Ez a folyamat addig ismétlődik amíg az algoritmus megtalálja az első útvonalat a célhoz (ami lehet akár az összes csomópont is). Mivel mindig a legkisebb útköltségre lévő út fog kiértékelődni, ezért amit először megtalál, az lesz a legrövidebb út. Tehát változatos útköltségek esetén érdemesebb a \textit{Dijkstra algoritmus}t használni a \textit{szélességi keresés} módszer helyett.
 
+\newpage
 \subsection{A*-algoritmus}
+\cite{algoritmusok}
+\cite{redblobA*}
+\cite{Pathfinding}
+\cite{A*}
 
 Az \textit{A*-algoritmus} a \textit{Dijkstra algoritmus} továbbfejlesztett változata, amit gyorsasága és a pontossága miatt előszeretettel alkalmaznak játékok készítésekor, olyan esetekben, amikor csak egy konkrét célponthoz kell eljutni. A két algoritmus közötti fő különbség abban rejlik, hogy melyik csomópontot választja ki az algoritmus kiértékelésre a nyitott csomópontok közül. Ahhoz, hogy megértsük az \textit{A*} kiválasztási módszerét először meg kell ismernünk 3 fogalmat:
 \begin{itemize}
@@ -69,12 +87,14 @@ A \textit{G költség} tulajdonképpen a \textit{Dijkstra algoritmus} használat
 Az útkereső algoritmus készítéséhez szükséges ismernünk azt, hogy a térkép egy mezőjéről hogyan érhetőek el a szomszédos mezők és szükséges ismernünk a távolság számító algoritmusokat is. A távolság számító algoritmusok \aref{sec:tavolsag}. szakaszban már ismertetésre kerültek, ezért most vizsgáljuk meg a szomszédok kezelését.
 
 \section{Szomszédok}
+\cite{redblobgamesHexagonalGrids}
 
 Ahhoz, hogy útkereső algoritmust tudjunk készíteni ismernünk kell, hogy a különböző alakzatok és koordináta-rendszerek esetén milyen algoritmussal érhetjük el az adott alakzat szomszédait. 
 
 \subsection{Négyzet}
+\cite{redblobA*}
 
-Derékszögű, két dimenziós koordinátarendszer esetén egy adott $(u, v)$ koordinátára eső pont (ahol $u, v \in \mathbb{Z}$) szomszédos pontjait a következő hozzárendeléssel adhatjuk meg:
+Derékszögű, két dimenziós koordináta-rendszer esetén egy adott $(u, v)$ koordinátára eső pont (ahol $u, v \in \mathbb{Z}$) szomszédos pontjait a következő hozzárendeléssel adhatjuk meg:
 $$
 (u, v) \rightarrow
 \left\{
@@ -86,9 +106,10 @@ Ahogy láthatjuk, a szomszédok koordinátáinak kiszámítása vektorokkal val�
 
 \subsection{Hexagon}
 
-Hexagonok esetén az egyes koordinátarendszer típusoktól függően különböző módokon tudjuk kiszámítani a szomszédos elemek halmazát.
+Hexagonok esetén az egyes koordináta-rendszer típusoktól függően különböző módokon tudjuk kiszámítani a szomszédos elemek halmazát.
 
 \subsubsection{Kocka koordináta-rendszer}
+\cite{redblobgamesHexagonalGrids}
 
 Ahhoz, hogy elmozduljunk eggyel meg kell változtatnunk egyet a három kocka koordináta közül $+1$-el és egy másikat $-1$-el (a változtatások összege $0$ kell, hogy legyen). Három koordinátát lehet megváltoztatni $+1$-el, a másik két lehetséges koordináta közül az egyiket kell csökkenteni $-1$-el. Ez hat lehetséges változatot eredményez. Mindegyik megfeleltethető a hexagon egyik irányának. A lehető legegyszerűbb és leggyorsabb megoldás az, ha az összes lehetséges permutációt előre kiszámítjuk, és beleírjuk egy tömbbe (\texttt{cubeDirections}). Ezzel az irányok egy $[0, 3]$ közötti egész értékkel (\texttt{direction}) megadhatók.
 \begin{cpp}
@@ -115,8 +136,9 @@ public Cube CubeNeighbor(Cube cube, int direction)
 \end{cpp}
 
 \subsubsection{Tengely koordináta-rendszer}
+\cite{redblobgamesHexagonalGrids}
 
-A tengely koordinátarendszerben való számításokhoz a kocka koordinátarendszerhez megadott irányokat kell átalakítanunk tengely koordináta-rendszernek megfelelően. A 6 lehetséges irány miatt az egyes irányok egy $[0, 5]$ intervallumon értelmezett indexszel jelölhetők ki.
+\noindent A \textit{tengely koordináta-rendszer}ben való számításokhoz a \textit{kocka koordináta-rendszer}hez megadott irányokat kell átalakítanunk \textit{tengely koordináta-rendszer}nek megfelelően. A 6 lehetséges irány miatt az egyes irányok egy $[0, 5]$ intervallumon értelmezett indexszel jelölhetők ki.
 \begin{cpp}
 Axial[] axialDirections = 
 { 
@@ -140,6 +162,7 @@ public Axial AxialNeighbor(Axial axial, int direction)
 \end{cpp}
 
 \subsubsection{Eltolásos koordináta-rendszer}
+\cite{redblobgamesHexagonalGrids}
 
 \textit{Eltolásos koordináta-rendszer} esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól, mint ha egy nem eltolt oszlopban/sorban állnánk.
 
@@ -242,6 +265,7 @@ public EvenColumn EvenColumnNeighbor
 \end{cpp}
 
 \subsubsection{Átlós szomszédok}
+\cite{redblobgamesHexagonalGrids}
 
 \noindent Az “átlós” szomszédok a kocka koordináták esetén úgy kerülnek meghatározásra, hogy a lehetséges három koordináta közül az egyiket $ \pm 2$ -vel, míg a másik kettőt $\mp 1$ -el módosítjuk, hogy a három koordináta összege mindig $0$ legyen (\ref{fig:Diagonals}).
 

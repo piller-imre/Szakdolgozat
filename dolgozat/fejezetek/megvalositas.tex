@@ -41,7 +41,7 @@ A felhasználói felületen található vezérlő elemek segítségével szabál
 \label{fig:UI}
 \end{figure}
 
-A \texttt{CameraMovement} osztály felelős a kamera mozgatásért. Ennek az osztálynak a kódját a \textit{Unity store}-ból szereztem be \cite{unitycamera}, mivel minden alapvető kritériumnak megfelelt amit terveztem és csak apróbb módosításokra volt szükségem (tengelyeken való mozgás limitálásának kiegészítése). 
+A \texttt{CameraMovement} osztály felelős a kamera mozgatásért. Ennek az osztálynak a kódját a \textit{Unity store}-ból szereztem be \cite{RTS_Camera}, mivel minden alapvető kritériumnak megfelelt amit terveztem és csak apróbb módosításokra volt szükségem (tengelyeken való mozgás limitálásának kiegészítése). 
 
 \begin{figure}[h!]
 \centering
@@ -49,6 +49,8 @@ A \texttt{CameraMovement} osztály felelős a kamera mozgatásért. Ennek az osz
 \caption{Generálási folyamathoz kapcsolódó főbb osztályok}
 \label{fig:generalas}
 \end{figure}
+
+\newpage
 
 A \texttt{MapGenerator} osztály az, ami a generálást elvégzi. Ennek \aref{chap:tervezes}. fejezetben már ismertetett 8 lépés alapján (\ref{fig:generalas}. ábra).
 
@@ -105,6 +107,7 @@ while (i < maxNumOfMountainTiles)
 \end{cpp}
 
 \subsection{Folyók generálása}
+\cite{A*Code}
 
 A folyók generálásához \textit{A*-algoritmus}t használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt.
 \begin{cpp}

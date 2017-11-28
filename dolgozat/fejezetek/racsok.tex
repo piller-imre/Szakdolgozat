@@ -3,6 +3,9 @@
 % TODO: Definiálni kellene, hogy mi pontosan itt a rács!
 
 \section{Rácsok összehasonlítása}
+\cite{KoordinataRendszer}
+\cite{redblobgamesHexagonalGrids}
+\cite{HexMap}
 
 Legyen szó társasjátékról vagy számítógépes játékról, az egyik leggyakrabban használt rács a négyzetrács. Egyszerű, könnyen kezelhető és jól illeszthető a számítógép kijelzőjére.
 
@@ -10,7 +13,7 @@ A cellák pozícióit sík esetén a \textit{Descartes-féle derékszögű koord
 Kirajzolásához ismernünk kell a cella méreteit (szélesség, magasság) illetve a rács méreteit (oszlopok, sorok száma). 
 A nyilvántartáshoz ismernünk kell a viszonyítási pontot (origó), illetve tudnunk kell az objektum pozícióját ($x, y$).
 
-Könnyen kezelhetősége mellett viszont van egy nagy hátránya. Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A problémára akkor jelentkezik, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza $1$. Ha a négyzetek középpontjához viszonyítunk, akkor a függőlegesen és a vízszintesen lévő szomszédok távolsága $1$, míg az átlósan lévők távolsága $\sqrt{2}$. Ez azért jelent problémát, mert így az átlós szomszédok távolabbra esnek, ezáltal nem lesz arányos a mozgás minden irányban \ref{fig:SqDistance}.
+Könnyen kezelhetősége mellett viszont van egy nagy hátránya. Egy négyzetnek nyolc szomszédja van. Oldalain keresztül vízszintesen, valamint függőlegesen 2-2 szomszédja érhető el. További négy szomszédja átlósan található meg. A probléma akkor jelentkezik, amikor megvizsgáljuk a távolságot a különböző szomszédok között. A vizsgálathoz tegyük fel, hogy az oldalak hossza $1$. Ha a négyzetek középpontjához viszonyítunk, akkor a függőlegesen és a vízszintesen lévő szomszédok távolsága $1$, míg az átlósan lévők távolsága $\sqrt{2}$. Ez azért jelent problémát, mert így az átlós szomszédok távolabbra esnek, ezáltal nem lesz arányos a mozgás minden irányban \ref{fig:SqDistance}.
 
 \begin{figure}[h!]
 \centering
@@ -54,24 +57,25 @@ Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben.  Mive
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.1]{kepek/SqVsHex.png}
-\caption{A hexagon és a négyzet rács zárt térbeli összehasonlítása}
+\caption{A hexagon- és a négyzetrács zárt térbeli összehasonlítása}
 \label{fig:SqVsHex}
 \end{figure}
 
 \noindent Egyik megoldással sem lehetünk maradéktalanul elégedettek az alábbi okok miatt.
 \begin{itemize}
 \item Ha csak kihagyjuk a széleken a hexagonokat amik nem férnek el, az a felhasználó számára furcsa összhatást nyújthat.
-\item Ha mindenképpen hexagonokat szeretnénk használni kis méretű térképen (például $8 \times 20$ mező esetén), akkor lehetőleg ne egy zárt szobában alkalmazzuk hanem szabad téren (például mező, erdő, tengerpart esetén) vagy próbáljuk a hexagon rács széleihez igazítani a környezetet.
+\item Ha mindenképpen hexagonokat szeretnénk használni kis méretű térképen (például $8 \times 20$ mező esetén), akkor lehetőleg ne egy zárt szobában alkalmazzuk hanem szabad téren (például mező, erdő, tengerpart esetén) vagy próbáljuk a hexagonrács széleihez igazítani a környezetet.
 \item Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
 \end{itemize}
 
 \section{Rácsok részei}
+\cite{Grids}
 
 A rácsoknak három különböző része van: a lapok, az élek és a csúcsok (\ref{fig:PartsOfGrid}. ábra). Minden lap két dimenziós felület élek által határolva. Minden él egy dimenziós szakasz aminek mind a két végén csúcsok találhatóak. Minden csúcs nulla dimenziós pont. 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/PartsOfGrid.jpg}
+\includegraphics[scale=0.35]{kepek/PartsOfGrid.jpg}
 \caption{A rács részei}
 \label{fig:PartsOfGrid}
 \end{figure}
@@ -93,24 +97,26 @@ A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például le
 
 \subsection{Négyzetrácsok}
 
-A négyzetháló esetén van a legkönnyebb dolgunk ismételten. A négyzeteket ebben az esetben, úgy tudjuk egymás mellé helyezni, hogy a szomszédos négyzetek középpontjai közötti távolság megegyezik az oldal hosszal. 
+A négyzetháló esetén van a legkönnyebb dolgunk ismételten. A négyzeteket ebben az esetben úgy tudjuk egymás mellé helyezni, hogy a szomszédos négyzetek középpontjai közötti távolság megegyezik az oldal hosszal. 
 
 Abban az esetben sincs sokkal nehezebb dolgunk, ha úgy döntünk, hogy az eltolt négyzetrácsos megoldást választjuk, ebben az esetben minden páros/páratlan sort/oszlopot kell eltolnunk az oldalak hosszának felével.
 
 \subsection{Hexagonális rácsok}
+\cite{redblobgamesHexagonalGrids}
 
 A hexagonok alapvetően kétféleképpen állhatnak. Az egyik lehetőség, hogy az egyik csúcs van felül, a másik lehetőség, hogy az egyik oldal van felül. A klasszikus, két dimenziós játékok esetén külön figyelmet kell fordítani a rács irányultságára. A következő lépésként vizsgáljuk meg, hogy hogyan tudjuk egymás mellé elhelyezni a hexagonokat.
 \begin{itemize}
-    \item A \textit{felül hegyes} elrendezés esetén vízszintesen a hexagon szélességével, függőlegesen pedig a hexagon magasságának a $\frac{3}{4}$ vel kell eltolni következő hexagont. Ezen kívül minden páros/páratlan sort vízszintesen a szélesség felével kell még eltolni (\ref{fig:PointyTop}. ábra).
-    \item A \textit{felül lapos} elrendezés esetén vízszintesen az egymás melletti hexagonok közötti távolság a hexagon szélességének $\frac{3}{4}$ része. Függőlegesen minden páros/páratlan oszlopot a magasság felével kell eltolni (\ref{fig:FlatTop}. ábra).
-\end{itemize}
-
+    \item A \textit{felül hegyes} elrendezés esetén vízszintesen a hexagon szélességével, függőlegesen pedig a hexagon magasságának a $\frac{3}{4}$ -vel kell eltolni a következő hexagont. Ezen kívül minden páros/páratlan sort vízszintesen a szélesség felével kell még eltolni (\ref{fig:PointyTop}. ábra).
+    
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1.0]{kepek/PointyTop.jpg}
 \caption{\textit{Felül hegyes} elrendezés esetén az eltolások}
 \label{fig:PointyTop}
 \end{figure}
+
+    \item A \textit{felül lapos} elrendezés esetén vízszintesen az egymás melletti hexagonok közötti távolság a hexagon szélességének $\frac{3}{4}$ része. Függőlegesen minden páros/páratlan oszlopot a magasság felével kell eltolni (\ref{fig:FlatTop}. ábra).
+\end{itemize}
 
 \begin{figure}[h!]
 \centering
