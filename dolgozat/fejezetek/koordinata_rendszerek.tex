@@ -1,22 +1,22 @@
 \Chapter{Koordináta-rendszerek}
 
 \section{Négyzet alapú rendszerek}
-\cite{WikiSquare}
 
-"A síkbeli \textit{Descartes-féle koordináta-rendszer}ben egy $P$ pont helyzetét az $XY$ síkon az $(x;y)$ rendezett számpárral (koordináta-kettős) adjuk meg. A két tengely metszéspontja a koordináta-rendszer kezdőpontja az origó $(O)$. A megállapodás szerinti első $x$ koordináta az abszcissza, a második $y$ koordináta az ordináta. Ugyanezekkel a jelzőkkel különböztetjük meg a tengelyeket. A vektoros értelmezésnél az $X$ és $Y$ tengelyek irányába mutató egységvektorokat $(i;j)$ jelöli."
+A négyzet alapú koordinátarendszer alatt jelen esetben a hagyományos \textit{Descartes-féle} koordinátarendszert értjük. Ennek a pontjait az $(x, y) \in \mathbb{Z}^2$ alakban írhatjuk föl.
+
+% "A síkbeli \textit{Descartes-féle koordináta-rendszer}ben egy $P$ pont helyzetét az $XY$ síkon az $(x;y)$ rendezett számpárral (koordináta-kettős) adjuk meg. A két tengely metszéspontja a koordináta-rendszer kezdőpontja az origó $(O)$. A megállapodás szerinti első $x$ koordináta az abszcissza, a második $y$ koordináta az ordináta. Ugyanezekkel a jelzőkkel különböztetjük meg a tengelyeket. A vektoros értelmezésnél az $X$ és $Y$ tengelyek irányába mutató egységvektorokat $(i;j)$ jelöli." \cite{WikiSquare}
 
 \section{Hexagon alapú rendszerek}
 \label{sec:hexagon}
-\cite{redblobgamesHexagonalGrids}
 
-A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyenlőek. A szakdolgozatomban olyan hexagonokkal foglalkozok, amelyeknek a szemközti oldalai egyenlő hosszúságúak és párhuzamosak, viszont nem minden esetben feltétlenül szabályosak.
+A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyenlőek. A szakdolgozatomban olyan hexagonokkal foglalkozok, amelyeknek a szemközti oldalai egyenlő hosszúságúak és párhuzamosak, viszont nem minden esetben feltétlenül szabályosak \cite{redblobgamesHexagonalGrids}.
 
 Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagonnak hat csúcsa van, minden csúcson 3 hexagon osztozik. A hexagonháló esetében többfajta megközelítés is szóbajöhet, most ezek közül fogok néhányat ismertetni.
 
 A hexagonokból felépülő rácsokban a koordináták kezelésére többféle módszer is adódik. A következő szakaszokban ezeket veszem sorra, és hasonlítom össze.
 
 \subsection{Eltolásos koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
+% \cite{redblobgamesHexagonalGrids}
 
 A leggyakoribb megközelítés a hexagon alapú rácsokban lévő koordináták kezeléséhez az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a \textit{négyzet koordináta-rendszer}rel. A \textit{négyzet koordináta-rendszer}hez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és az oszlopokat.
 
@@ -49,10 +49,9 @@ Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is ál
 
 \newpage
 \subsection{Kocka koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
-\cite{HexagonalGrids}
+%\cite{redblobgamesHexagonalGrids}
 
-Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek (\ref{fig:CubeCoord}. ábra). 
+Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek (\ref{fig:CubeCoord}. ábra) \cite{HexagonalGrids}.
 
 \begin{figure}[h!]
 \centering
@@ -81,9 +80,8 @@ A játék egy $28$ kockából álló, piramis szerű játékmezőn zajlik. (Ilye
 Ez azért történik így, mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt). 
 
 \subsection{Tengely koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
 
-A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül (\ref{fig:AxialCoord}. ábra). Mivel a \textit{kocka koordináta-rendszer}nél szükségszerű, hogy  $x + y + z = 0$ teljesüljön, a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható.
+A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül (\ref{fig:AxialCoord}. ábra). Mivel a \textit{kocka koordináta-rendszer}nél szükségszerű, hogy  $x + y + z = 0$ teljesüljön, a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható \cite{redblobgamesHexagonalGrids}.
 
 \begin{figure}[h!]
 \centering
@@ -96,7 +94,7 @@ Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok eg
 
 \newpage
 \section{Térkép tárolási probléma}
-\cite{redblobgamesHexagonalGrids}
+% \cite{redblobgamesHexagonalGrids}
 
 A megjelenítő eszközeink néhány ritka kivételtől eltekintve téglalap alakúak. A számítógépes játékok jelentős része szintén téglalap alakú elrendezésekben gondolkozik. A számítógép az adatokat lineáris elrendezésben képes tárolni. A problémát az jelenti, hogy az indexeket hogyan számoljuk át úgy, hogy lehetőleg hézagmentesen tudjuk tárolni az egyes koordinátákhoz tartozó adatokat.
 
@@ -169,7 +167,7 @@ a_r &=
 Mivel a három terület ahol a koordinátákat használjuk (tárolás, megjelenítés, számítások) nem feltétlenül ugyanabban a koordináta-rendszerben fognak megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a \textit{kocka koordináta-rendszer}t fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat.
 
 \subsection{Tengely - Kocka konverziók}
-\cite{redblobgamesHexagonalGrids}
+% \cite{redblobgamesHexagonalGrids}
 
 A \textit{tengely koordináta-rendszer} nagyon közel áll a \textit{kocka koordináta-rendszer}hez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján.
 
@@ -205,7 +203,7 @@ axial_r \\
 \end{align*}
 
 \subsection{Eltolásos - Kocka konverziók}
-\cite{redblobgamesHexagonalGrids}
+% \cite{redblobgamesHexagonalGrids}
 
 Az \textit{eltolásos koordináta-rendszer}nek négy fajta típusa lehet az alapján, hogy melyik sor/oszlop lett eltolva. A páratlan indexű sorok eltolása esetén a következő formában számítható az összefüggés.
 \begin{align*}
@@ -351,10 +349,9 @@ Az implementációban érdemes \textit{bitenkénti “és”} (\texttt{a \& 1}) 
 Ahhoz, hogy távolságokat tudjunk számolni a térképen definiálnunk kell hozzá metrikákat. A különböző típusú koordináta-rendszerek esetén ennek különféle módjai lehetnek. A következő szakaszok ezek közül mutatnak be néhányat.
 
 \subsection{Kocka koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
-\cite{HexagonalGrids}
+% \cite{redblobgamesHexagonalGrids}
 
-A \textit{kocka koordináta-rendszer}ben, minden hexagon egy kockának felel meg a három dimenziós térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a \textit{kocka koordináta-rendszer}ben. Ezáltal egyszerűbbé válik a távolságszámítás.
+A \textit{kocka koordináta-rendszer}ben, minden hexagon egy kockának felel meg a három dimenziós térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a \textit{kocka koordináta-rendszer}ben. Ezáltal egyszerűbbé válik a távolságszámítás \cite{HexagonalGrids}.
 
 Jelölje $dx$ az $x$ tengely irányú különbségeket, a $dy$ és $dz$ pedig hasonlóképp az $y$ és $z$ tengelyek esetében. A \textit{négyzet koordináta-rendszer} esetén a \textit{Manhattan-távolság} távolság az $|dx| + |dy|$ formában írható föl. Ugyanez \textit{kocka koordináta-rendszer}ben $|dx| + |dy| + |dz|$. Ezekből következik, hogy a hexagonrács esetén a \textit{Manhattan-távolság} a kockarács esetén fennálló távolság fele, vagyis
 $$
@@ -371,8 +368,8 @@ d_{\text{cube}}(a, b) =
 $$
 
 \subsection{Tengelyes koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
-\cite{HexagonalGrids}
+%\cite{redblobgamesHexagonalGrids}
+%\cite{HexagonalGrids}
 
 A \textit{tengelyes koordináta-rendszer}ben a számításokhoz szükséges három koordinátából kettőt ismerünk, ezért konvertálnunk kell majd a \textit{kocka koordináta-rendszer}re:
 $$
@@ -380,8 +377,8 @@ d_{hex}(a, b) = \frac{|a_x - b_x| + |a_x + a_y - b_x - b_y| + |a_z - b_z|}{2}.
 $$
 
 \subsection{Eltolásos koordináta-rendszer}
-\cite{redblobgamesHexagonalGrids}
-\cite{HexagonalGrids}
+%\cite{redblobgamesHexagonalGrids}
+%\cite{HexagonalGrids}
 
 Az \textit{eltolásos koordináta-rendszer} esetén azt a megoldást fogjuk használni, hogy átalakítjuk a koordinátákat a \textit{kocka koordináta-rendszer}re, vagyis
 $$
