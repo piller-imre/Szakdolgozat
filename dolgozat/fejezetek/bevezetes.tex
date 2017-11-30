@@ -1,10 +1,14 @@
 \chapter*{Bevezetés}
 \addcontentsline{toc}{chapter}{Bevezetés}
 
-A szakdolgozatom célja egy olyan procedurális generálási mód kidolgozása, amellyel izometrikus grafikájú játékokhoz változatos térképeket lehet előállítani. A térképek hexagon alapúak. A dolgozat azt a többlépcsős folyamatot mutatja be, amely során a program a nagyobb összefüggő egységek meghatározása után sorban határozza meg a különböző részletességi szinteken lévő elemeket. Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként a program. Bizonyos paraméterek szabályozhatóak a generálás után is (mint például a hőmérséklet), de a többségük nem. A térképnek a főbb paraméterei szabályozhatóak: méret, környezeti viszonyok, domborzat, folyók, növényzet, épületek. 
+A szakdolgozatom célja egy olyan procedurális generálási mód kidolgozása, amellyel izometrikus grafikájú játékokhoz változatos térképeket lehet előállítani.
 
-A szoftver C\# programozási nyelven készül. A C\# ismerete és a fejlesztéshez való alkalmazhatósága miatt esett a választásom erre a nyelvre, ezáltal a fejlesztéshez használt játékmotornak a Unity-t, fejlesztő környezetnek pedig a Visual Studio-t választottam Windows 10 platformon.
+Egy számítógépes játék megítélésénél nagyon fontos szerepet játszik a benne lévő tartalom (például textúrák, modellek, térképek) változatossága. A dolgozat alapvetően arra keres megoldást, hogy hogyan lehet meglévő elemekből, adott szabályszerűségek alapján természetesnek ható, a játékosok számára tetszetős térképeket automatikusan létrehozni.
 
-A dolgozat elején bemutatom az elméleti ismereteket, amik szükségesek egy hasonló alkalmazás elkészítéséhez, ezután a program implementációjának bemutatása következik.
+A generált térképek hexagon alapúak. A dolgozat azt a többlépcsős folyamatot mutatja be, amely során a program a nagyobb összefüggő egységek meghatározása után sorban határozza meg a különböző részletességi szinteken lévő elemeket. Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként a program. Bizonyos paraméterek szabályozhatóak a generálás után is (mint például a hőmérséklet), de a többségük nem. A térképnek a főbb paraméterei szabályozhatóak: méret, környezeti viszonyok, domborzat, folyók, növényzet, épületek. 
 
-% TODO: Érdemes lenne még néhány dolgot írni az eltervezett dolgokról, a megoldandó probléma fontosságáról.
+A hexagon alapú térképek mezőinek indexelésére, a hozzájuk rendelt adatok tárolási módjára nincs elfogadott, egységes megoldás. A dolgozat bemutatja a gyakrabban előforduló változatokat.
+
+A számítógépes játékok lényeges elemei a textúrák és a modellek. A dolgozathoz készült alkalmazásban alacsony poligonszámú (\textit{low-poly}) modellek használatát választottam, mivel ez egy elterjedt stílusjegy, főként az indie játékok esetében.
+
+A szoftver C\# programozási nyelven készül. A C\# ismerete és a fejlesztéshez való alkalmazhatósága miatt esett a választásom erre a nyelvre, ezáltal a fejlesztéshez használt játékmotornak a \textit{Unity}-t, fejlesztő környezetnek pedig a \textit{Visual Studio}-t választottam Windows 10 platformon. A program megtervezését követően a dolgozatban bemutatom a térkép generálására és megjelenítésére szolgáló alkalmazás implementációját. Ebben külön kitérek a térkép széleinek, a folyóknak, a hegyeknek és az épületeknek létrehozására, amelyek a térképek jellegzetes kialakítását eredményezik.
