@@ -4,6 +4,12 @@
 Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomban. Ehhez \textit{eltolásos koordináta-rendszer}t fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tünt célszerű döntésnek. Mivel az \textit{eltolásos koordináta-rendszer}ben a számítások bonyolultabbak, mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a \textit{kocka koordináta-rendszer}beli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az \textit{A*}-algoritmusra esett a választásom, mivel általános esetben ez bizonyult hatékonynak.
 
 \section{Stílus és modellek}
+\cite{Unity}
+\cite{hegyek}
+\cite{buildings}
+\cite{trees}
+\cite{flowers}
+\cite{cactus}
 
 A játékban szereplő grafikai stílusként a low-poly irányzatot választottam. Ehhez kezdetben saját készítésű modelleket használtam. Mivel a térkép generálásához nagy meny\-nyi\-sé\-gű, kidolgozott, egységes kinézetű modell szükséges, és a dolgozat tárgyköre elsődlegesen nem grafikai modellezés, ezért az Interneten kerestem további modelleket.
 
@@ -26,14 +32,16 @@ A generálás során a térképen a különböző környezeti viszonyoknak megfe
   \caption{A különböző típusokhoz és környezeti viszonyokhoz tartozó objektumok száma.}
   \label{tab:models}
 \end{figure}
-
+ \newpage
 \section{Kamera}
+\cite{RTS_Camera}
+\cite{Isometic}
 
 A programban izometrikus megjelenítési módot használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az izometrikus nézet nem fedi teljes mértékben a matematikai értelemben vett izometrikus nézetet. A számítógépes játékokban eleinte azért alkalmazták az izometriát, mivel ezt egyszerűbb volt megjeleníteni a korabeli hardvereken. Manapság  izometrikusnak nevezik (matematikai értelemben helytelenül) azokat az eseteket, amikor a kamera tengelye tipikusan 30, 45, 53 vagy 60 fokos szöget zár be a játék térképének síkjával. (Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott.)
 
 A 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerettem volna elérni, végül a 45 fokos szög mellett döntöttem. Ehhez 60 fokos látószöget (FOV, \textit{Field of View}) alkalmaztam. A kamera körbeforgatható a horizontális tengely körül 360 fokban, ezt a 3D-s modellek miatt van lehetőség megoldani, ezáltal a térkép objektumainak elhelyezkedése szemléletesebb. Lehetőség van arra, hogy a térképre ráközelítsünk vagy távolodjunk tőle, ennek megvan a felső és alsó határa. Igyekeztem úgy megválasztani ezeket a határokat, hogy ne lehessen túl közel, vagy túl távol vinni a kamerát a térképtől. A kamera természetesen a térkép mentén mozgatható mind a 4 irányban. 
 
-A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalósítása, mivel ha jól működik senki sem veszi észre, ha pedig hibásan működik akkor a teljes felhasználói élményt tönkreteheti. Ezért úgy döntöttem, hogy egy olyan kódot használok fel a Unity store-ból amit már korábban is használtam és kisebb módosítások alkalmazásával minden szempontot megvalósít \cite{unitycamera}.
+A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalósítása, mivel ha jól működik senki sem veszi észre, ha pedig hibásan működik akkor a teljes felhasználói élményt tönkreteheti. Ezért úgy döntöttem, hogy egy olyan kódot használok fel a Unity store-ból amit már korábban is használtam és kisebb módosítások alkalmazásával minden szempontot megvalósít \cite{RTS_Camera}.
 
 \section{Generálás lépései}
 
@@ -55,13 +63,11 @@ A beállított magasság és szélesség értékeken felül fog az algoritmus mi
 
 \subsection{Domborzat kialakítása}
 
-A második elem ami majd a térképen meghatározásra kerül, az a domborzat. Ez két fajta magasságban jelenik meg (domb, hegy), amihez két különböző modellt használok. A térkép méreteihez viszonyítva lehet majd százalékos arányban kifejezni a domborzat mennyiséget, egy $0\%$-tól $40\%$-ig terjedő skálán. Ezt az intervallumot találtam megfelelőnek ahhoz, hogy ha sok hegyet akarunk akkor sok hegyet kapjunk, de még a karakterek által bejárható maradhasson a térkép. Ezt az intervallumot a generálás előtt a felhasználó be tudja állítani. A hegyek és a dombok véletlenszerű pozícióban helyezkednek el. A különböző környezeti viszonyokhoz három különböző textúra áll rendelkezésre (fű, homok, hó). A hegyek és a dombok egyenletes eloszlás szerint kerülnek a térkép egyes részeire.
-
-% TODO: Az azonos pontra eső hegyek/dombok hogy kerültek kezelésre?
+A második elem ami majd a térképen meghatározásra kerül, az a domborzat. Ez két fajta magasságban jelenik meg (domb, hegy), amihez két különböző modellt használok. A térkép méreteihez viszonyítva lehet majd százalékos arányban kifejezni a domborzat mennyiséget, egy $0\%$-tól $30\%$-ig terjedő skálán. Ezt az intervallumot találtam megfelelőnek ahhoz, hogy ha sok hegyet akarunk akkor sok hegyet kapjunk, de még a karakterek által bejárható maradhasson a térkép. Ezt az intervallumot a generálás előtt a felhasználó be tudja állítani. A hegyek és a dombok véletlenszerű pozícióban helyezkednek el. A különböző környezeti viszonyokhoz három különböző textúra áll rendelkezésre (fű, homok, hó). A hegyek és a dombok egyenletes eloszlás szerint kerülnek a térkép egyes részeire. Ha egy olyan mezőt választott ki az algoritmus amin már volt egy hegy/domb, akkor újrakezdi a keresést.
 
 \subsection{Folyók elhelyezése}
 
-A folyók generálásakor két különböző esetet különböztettem meg; amikor vannak hegyek és amikor nincsenek. Amikor vannak hegyek akkor az egyik hegy lábától egy másik vizes mezőig (a térkép szélei vagy egy már meglévő folyó) generál az algoritmus folyót az útkereső algoritmus felhasználásával. Abban az esetben, amikor nincs egy darab hegy sem, akkor az algoritmus vagy véletlenszerűen választ egy mezőt a térképen és egy vizes mezőig generál. A domborzathoz hasonlóan a vizes mezők mértéke is szabályozható a felhasználó által a generálás előtt. Ez is a domborzatnál már megismert $0\%$-tól $40\%$-ig tartó skálán mozog a térkép méretéhez viszonyítva. A környezeti viszonyokhoz alkalmazkodva kétfajta textúra jöhet szóba, úgy mint a normál és a jeges. Ez a módszer viszonylag könnyen implementálható az útkereső algoritmus ismeretében, és kellően egyedi megjelenést tud kölcsönözni a térképnek. Keletkezhetnek szigetek (\ref{fig:Island}. ábra), szélesebb folyók, torkolatok (\ref{fig:Branch}. ábra). Ezen kívül minden vizes mező hozzáadódik egy listához aminek majd a vízszint meghatározásában lesz szerepe.
+A folyók generálásakor két különböző esetet különböztettem meg; amikor vannak hegyek és amikor nincsenek. Amikor vannak hegyek akkor az egyik hegy lábától egy másik vizes mezőig (a térkép szélei vagy egy már meglévő folyó) generál az algoritmus folyót az útkereső algoritmus felhasználásával. Abban az esetben, amikor nincs egy darab hegy sem, akkor az algoritmus vagy véletlenszerűen választ egy mezőt a térképen és egy vizes mezőig generál. A domborzathoz hasonlóan a vizes mezők mértéke is szabályozható a felhasználó által a generálás előtt. Ez is a domborzatnál már megismert $0\%$-tól $30\%$-ig tartó skálán mozog a térkép méretéhez viszonyítva. A környezeti viszonyokhoz alkalmazkodva kétfajta textúra jöhet szóba, úgy mint a normál és a jeges. Ez a módszer viszonylag könnyen implementálható az útkereső algoritmus ismeretében, és kellően egyedi megjelenést tud kölcsönözni a térképnek. Keletkezhetnek szigetek (\ref{fig:Island}. ábra), szélesebb folyók, torkolatok (\ref{fig:Branch}. ábra). Ezen kívül minden vizes mező hozzáadódik egy listához aminek majd a vízszint meghatározásában lesz szerepe.
 
 \begin{figure}[h!]
 \centering
@@ -98,7 +104,7 @@ A vízszint meghatározása minden mezőre a növényzet generálásához szüks
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.3]{kepek/Buildings.JPG}
+\includegraphics[scale=0.25]{kepek/Buildings.JPG}
 \caption[épület]{Egy épület normál körülmények között (bal oldal) és havas körülmények között (jobb oldal). \footnotemark}
 \label{fig:Buildings}
 \end{figure}
@@ -115,7 +121,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Normal.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Normal.JPG}
 \caption[normal]{Normál esetben a fák lombja a zöld különböző árnyalataiból állhat. \footnotemark}
 \label{fig:Tree_Normal}
 \end{figure}
@@ -124,7 +130,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Fall.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Fall.JPG}
 \caption[Ősz]{“Ősz” A lomb színei ebben az esetben több különböző szín árnyalatából tevődik össze (piros, barna, sárga). \footnotemark}
 \label{fig:Tree_Fall}
 \end{figure}
@@ -133,7 +139,7 @@ Az épületeknél már megismert módszerrel 7 fix helyre kerülhetnek egy mező
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.32]{kepek/Tree_Winter.JPG}
+\includegraphics[scale=0.26]{kepek/Tree_Winter.JPG}
 \caption[tél]{Kiszáradt vagy jeges esetben az algoritmus elrejti a lombokat. \footnotemark}
 \label{fig:Tree_Winter}
 \end{figure}
@@ -163,6 +169,7 @@ Véletlenszerű pozíciókban generálja az algoritmus a sík mezőkön. A kiseb
 
 \footnotetext{www.assetstore.unity3d.com/en/\#!/content/11547}
 
+\newpage
 \subsection{Hőmérséklet beállítása}
 
 Lehetőség van az évszakok között váltogatni. Ez a funkció fontos a játék tovább fejlesztésével kapcsolatban, mivel a játékban szerepet kap majd az évszakok változása. A tavasz és az ősz nem változtatja az alap hőmérsékleti viszonyokat csak a nyár és a tél módosítja a globális hőmérsékletet egy konstans értékkel. 
