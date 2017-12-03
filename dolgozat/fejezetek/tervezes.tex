@@ -41,6 +41,7 @@ Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvár
 
 A térképnek a főbb paraméterei szabályozhatóak: méret, környezeti viszonyok, domborzat, folyók, növényzet, épületek. Egyéb apró paraméterei nem módosíthatóak a játék használata közben, de a Unity szerkesztőben (\textit{Unity editor}) az Inspector ablakokban a többségük állítható. Ezt azért alakítottam így ki mert nem akartam a felhasználói felületet túl komplikálttá tenni, inkább az egyszerűségre törekedtem. Az Inspector ablakon lehetséges módosítani a poligonhálókat, textúrákat, árnyalókat, skalár paramétereket.
 
+\newpage
 A térkép egy többlépcsős folyamat eredményeként készül el. Ezeket a lépéseket a következő pontokban fogom bemutatni.
 \begin{itemize}
 \item Első lépésként szükségünk lesz egy csempére (tile), ami az alapelem lesz a térképen. Erre a célra én egy 3D-s hexagon modellt használtam különböző textúrákkal. A különböző textúrák és a modellek csak a Unity-n belül egy úgynevezett Inspector panelen módosíthatóak. A játékban jelenleg a hexagonhoz 6 különböző textúra szerepel (fű, homok, hó, víz, jég, óceán (térkép széle)).

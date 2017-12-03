@@ -92,7 +92,7 @@ Hexagonok esetén az egyes koordináta-rendszer típusoktól függően különb�
 
 \subsubsection{Kocka koordináta-rendszer}
 
-Ahhoz, hogy elmozduljunk eggyel meg kell változtatnunk egyet a három kocka koordináta közül $+1$-el és egy másikat $-1$-el (a változtatások összege $0$ kell, hogy legyen). Három koordinátát lehet megváltoztatni $+1$-el, a másik két lehetséges koordináta közül az egyiket kell csökkenteni $-1$-el. Ez hat lehetséges változatot eredményez. Mindegyik megfeleltethető a hexagon egyik irányának. A lehető legegyszerűbb és leggyorsabb megoldás az, ha az összes lehetséges permutációt előre kiszámítjuk, és beleírjuk egy tömbbe (\texttt{cubeDirections}). Ezzel az irányok egy $[0, 3]$ közötti egész értékkel (\texttt{direction}) megadhatók \cite{redblobgamesHexagonalGrids}.
+Ahhoz, hogy elmozduljunk eggyel meg kell változtatnunk egyet a három kocka koordináta közül $+1$-el és egy másikat $-1$-el (a változtatások összege $0$ kell, hogy legyen). Három koordinátát lehet megváltoztatni $+1$-el, a másik két lehetséges koordináta közül az egyiket kell csökkenteni $-1$-el. Ez hat lehetséges változatot eredményez. Mindegyik megfeleltethető a hexagon egyik irányának. A lehető legegyszerűbb és leggyorsabb megoldás az, ha az összes lehetséges permutációt előre kiszámítjuk, és beleírjuk egy tömbbe (\texttt{cubeDirections}). Ezzel az irányok egy $[0, 3]$ közötti egész értékkel (\texttt{direction}) megadhatók \cite{Neighbors_Cube}.
 \begin{cpp}
 Cube[] cubeDirections = 
 { 
@@ -118,7 +118,7 @@ public Cube CubeNeighbor(Cube cube, int direction)
 
 \subsubsection{Tengely koordináta-rendszer}
 
-\noindent A \textit{tengely koordináta-rendszer}ben való számításokhoz a \textit{kocka koordináta-rendszer}hez megadott irányokat kell átalakítanunk \textit{tengely koordináta-rendszer}nek megfelelően. A 6 lehetséges irány miatt az egyes irányok egy $[0, 5]$ intervallumon értelmezett indexszel jelölhetők ki \cite{redblobgamesHexagonalGrids}.
+\noindent A \textit{tengely koordináta-rendszer}ben való számításokhoz a \textit{kocka koordináta-rendszer}hez megadott irányokat kell átalakítanunk \textit{tengely koordináta-rendszer}nek megfelelően. A 6 lehetséges irány miatt az egyes irányok egy $[0, 5]$ intervallumon értelmezett indexszel jelölhetők ki \cite{Neighbors_Axial}.
 \begin{cpp}
 Axial[] axialDirections = 
 { 
@@ -145,7 +145,7 @@ public Axial AxialNeighbor(Axial axial, int direction)
 
 \textit{Eltolásos koordináta-rendszer} esetén a lépések változnak annak a függvényében, hogy hol állunk a hálóban. Ha mi egy eltolt oszlopban/sorban állunk akkor a szabály eltér attól, mint ha egy nem eltolt oszlopban/sorban állnánk.
 
-Ahogy a korábbi esetekben úgy most is kell készítenünk egy táblázatot amiben azt tároljuk majd, hogy a különböző tengelyeken mennyit kell hozzáadni, hogy elérjük a szomszédokat. Ebben az esetben most két tömbre lesz szükségünk, az egyik a páros sor/oszlop a másik pedig a páratlan sor/oszlop esetére \cite{redblobgamesHexagonalGrids}.
+Ahogy a korábbi esetekben úgy most is kell készítenünk egy táblázatot amiben azt tároljuk majd, hogy a különböző tengelyeken mennyit kell hozzáadni, hogy elérjük a szomszédokat. Ebben az esetben most két tömbre lesz szükségünk, az egyik a páros sor/oszlop a másik pedig a páratlan sor/oszlop esetére \cite{Neighbors_Offset}.
 
 A táblázat különbözik mind a négy eltolásos módszernél.
 
@@ -245,7 +245,7 @@ public EvenColumn EvenColumnNeighbor
 
 \subsubsection{Átlós szomszédok}
 
-\noindent Az “átlós” szomszédok a kocka koordináták esetén úgy kerülnek meghatározásra, hogy a lehetséges három koordináta közül az egyiket $ \pm 2$ -vel, míg a másik kettőt $\mp 1$ -el módosítjuk, hogy a három koordináta összege mindig $0$ legyen (\ref{fig:Diagonals}) \cite{redblobgamesHexagonalGrids}.
+\noindent Az “átlós” szomszédok a kocka koordináták esetén úgy kerülnek meghatározásra, hogy a lehetséges három koordináta közül az egyiket $ \pm 2$ -vel, míg a másik kettőt $\mp 1$ -el módosítjuk, hogy a három koordináta összege mindig $0$ legyen (\ref{fig:Diagonals}) \cite{Neighbors_Diagonal}.
 
 \begin{figure}[h!]
 \centering
