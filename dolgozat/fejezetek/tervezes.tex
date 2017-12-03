@@ -11,7 +11,7 @@ A játék fejlesztése során három dimenziós modelleket használtam, mert ez�
 
 A térkép hexagonokból épül fel, és a hexagonháló egyik fő jellemzője az, hogy a háló szélein lévő hexagonok nem egy vonalba esnek. Ennek az előnyeit és hátrányait korábban \aref{sec:hexagon} fejezetben már taglaltam. Jelen esetben a már említett problémák nem jelentkeznek, mivel nem kell igazodni semmilyen körülhatároló objektumhoz.
 
-A generálás során a térképen a különböző környezeti viszonyoknak megfelelően más és más objektumok jelennek meg. \Aref{tab:models}. táblázatban azt láthatjuk, hogy a különböző objektum tipusokból a különböző környezeti viszonyok között mennyi áll rendelkezésre.
+A generálás során a térképen a különböző környezeti viszonyoknak megfelelően más és más objektumok jelennek meg. \Aref{tab:models}. táblázatban azt láthatjuk, hogy a különböző objektum típusokból a különböző környezeti viszonyok között mennyi áll rendelkezésre.
 
 \begin{figure}[h!]
   \centering
@@ -37,7 +37,7 @@ A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalós
 
 \section{Generálás lépései}
 
-Bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként a program. Bizonyos paraméterek szabályozhatóak a generálás után is (mint például a hőmérséklet), de a többségük nem.
+A program bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként. Bizonyos paraméterek szabályozhatóak a generálás után is (mint például a hőmérséklet), de a többségük nem.
 
 A térképnek a főbb paraméterei szabályozhatóak: méret, környezeti viszonyok, domborzat, folyók, növényzet, épületek. Egyéb apró paraméterei nem módosíthatóak a játék használata közben, de a Unity szerkesztőben (\textit{Unity editor}) az Inspector ablakokban a többségük állítható. Ezt azért alakítottam így ki mert nem akartam a felhasználói felületet túl komplikálttá tenni, inkább az egyszerűségre törekedtem. Az Inspector ablakon lehetséges módosítani a poligonhálókat, textúrákat, árnyalókat, skalár paramétereket.
 
