@@ -1,8 +1,8 @@
-\chapter{Útkereső algoritmus}
+\Chapter{Útkereső algoritmus}
 
 A későbbiekben bemutatásra kerülő generálási módokhoz szükséges áttekinteni az útkereső algoritmusok témakörét. A hexagonokból és a négyzetekből felépülő rácsok esetében az útvonalkeresés alapvetően ugyanúgy működik. Lényegi különbség a cellák szomszédos elemeinek számában van, így elegendő az útvonalkeresést csak a négyzetrács esetében megvizsgálni.
 
-\section{Algoritmusok}
+\Section{Algoritmusok}
 
 A kereső algoritmusokat két pont közötti út megtalálására alkalmazzuk. 
 A kereső algoritmusoknak több fajtája van, ezek különbözőképpen közelítik meg a problémát. 
@@ -32,7 +32,7 @@ A fent említett algoritmusok a legjobb általános algoritmusok közé tartozna
 
 A következő szakaszokban ismeretésre kerülnek a leggyakrabban alkalmazott algoritmusok.
 
-\subsection{A szélességi keresés algoritmusa}
+\SubSection{A szélességi keresés algoritmusa}
 
 A \textit{szélességi keresés} (\textit{breadth-first search}) egy egyszerűnek számító keresési algoritmus (\ref{fig:breadth-first_search}. ábra). A térképen minden egyes irányban egységes mértékben keres. Ez egy teljes keresés, ezáltal minden esetben a legrövidebb utat fogja megtalálni a célhoz. A keresés a gyökér csomóponttól indul és úgy folytatódik, hogy az összes csomópontot kiértékeli ami a gyökér csomópontból elérhető. Ezután ezekből a csomópontokból elérhető csomópontokat értékeli ki. Ez mindig egy adott mélységen lévő csomópontokat értékeli ki egyszerre és ezután halad tovább a következő szintre. Könnyen belátható, hogy az algoritmus a FIFO (first-in-first-out) elv alapján működik. Tehát azokat az elemeket értékeli ki először egy adott listáról amik először felkerültek a listára. Ezáltal belátható, hogy ez az algoritmus a legmagasabb szinten található cél csomópontot fogja megtalálni először. 
 
@@ -50,12 +50,12 @@ A \textit{szélességi keresés algoritmus} legnagyobb hátránya a tárigénye.
 
 A \textit{szélességi keresés algoritmus} egy nem informált keresés mivel a cél csomópontról nem rendelkezik információval \cite{Breadth-first_search}. A továbbiakban csak informált keresésekről esik majd szó.
 
-\subsection{Dijkstra algoritmus}
+\SubSection{Dijkstra algoritmus}
 
 Gyakori példa a gráf alapú útkereső algoritmusra a \textit{Dijkstra algoritmus}. A \textit{szélességi keresés} módszerrel ellentétben nem egységesen fedezi fel az utakat, hanem a kisebb útköltségűeket priorizálja. Ennek az algoritmusnak az elején szükségünk lesz egy kezdő csomópontra és egy listára a ,,nyitott'' csomópontoknak. Ebbe kerülnek azok a csomópontok amiket még ki kell értékelnünk. Minden iterációban az a csomópont kerül kiértékelésre amelyiknek a legkisebb az útköltsége a kezdő csomóponttól mérve. A számítógépes játékok esetében az útköltség függhet például attól, hogy milyen területen haladunk (magassági viszonyok változásától, a talaj anyagától, időjárási viszonyoktól, egyéb környezeti viszonyoktól, ha az úton ellenség van akkor is megnövelhetjük az út költségét). Az algoritmus alapvetően súlyozott élek esetén működik, de használható súlyozatlan élek esetén is, ekkor a súlyozatlan élek értékét válasszuk 1-nek. Akkor kerül egy csomópont ,,lezárásra'', hogy ha már az összes szomszédja hozzá lett adva a nyitott csomópontok listájához, vagy már lezárásra került. Ez a folyamat addig ismétlődik amíg az algoritmus megtalálja az első útvonalat a célhoz (ami lehet akár az összes csomópont is). Mivel mindig a legkisebb útköltségre lévő út fog kiértékelődni, ezért amit először megtalál, az lesz a legrövidebb út. Tehát változatos útköltségek esetén érdemesebb a \textit{Dijkstra algoritmus}t használni a \textit{szélességi keresés} módszer helyett \cite{Dijkstra}.
 
 \newpage
-\subsection{A*-algoritmus}
+\SubSection{A*-algoritmus}
 
 Az \textit{A*-algoritmus} a \textit{Dijkstra algoritmus} továbbfejlesztett változata, amit gyorsasága és a pontossága miatt előszeretettel alkalmaznak játékok készítésekor, olyan esetekben, amikor csak egy konkrét célponthoz kell eljutni. A két algoritmus közötti fő különbség abban rejlik, hogy melyik csomópontot választja ki az algoritmus kiértékelésre a nyitott csomópontok közül. Ahhoz, hogy megértsük az \textit{A*} kiválasztási módszerét először meg kell ismernünk 3 fogalmat:
 \begin{itemize}
@@ -70,11 +70,11 @@ A \textit{G költség} tulajdonképpen a \textit{Dijkstra algoritmus} használat
 
 Az útkereső algoritmus készítéséhez szükséges ismernünk azt, hogy a térkép egy mezőjéről hogyan érhetőek el a szomszédos mezők és szükséges ismernünk a távolság számító algoritmusokat is \cite{A*}. A távolság számító algoritmusok \aref{sec:tavolsag}. szakaszban már ismertetésre kerültek, ezért most vizsgáljuk meg a szomszédok kezelését.
 
-\section{Szomszédok}
+\Section{Szomszédok}
 
-Ahhoz, hogy útkereső algoritmust tudjunk készíteni ismernünk kell, hogy a különböző alakzatok és koordináta-rendszerek esetén milyen algoritmussal érhetjük el az adott alakzat szomszédait. 
+Ahhoz, hogy útkereső algoritmust tudjunk készíteni ismernünk kell, hogy a különböző alakzatok és koordináta-rendszerek esetén milyen algoritmussal érhetjük el az adott alakzat szomszédait. A következő szakaszokban különböző koordinátarendszerek esetén tekintjük át a problémakört.
 
-\subsection{Négyzet}
+\SubSection{Négyzet}
 
 Derékszögű, két dimenziós koordináta-rendszer esetén egy adott $(u, v)$ koordinátára eső pont (ahol $u, v \in \mathbb{Z}$) szomszédos pontjait a következő hozzárendeléssel adhatjuk meg:
 $$
@@ -86,7 +86,7 @@ $$
 
 Ahogy láthatjuk, a szomszédok koordinátáinak kiszámítása vektorokkal való eltolásokat jelent. A következőkben a példák C\# programozási nyelven szerepelnek, mivel így közvetlenül látszódnak a számítási módjuk, és a matematikai leírásmód sem eredményezne egyszerűbb felírást.
 
-\subsection{Hexagon}
+\SubSection{Hexagon}
 
 Hexagonok esetén az egyes koordináta-rendszer típusoktól függően különböző módokon tudjuk kiszámítani a szomszédos elemek halmazát.
 

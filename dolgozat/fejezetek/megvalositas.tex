@@ -1,4 +1,4 @@
-\chapter{Megvalósítás C\# programozási nyelven}
+\Chapter{Megvalósítás C\# programozási nyelven}
 
 A térkép generálásához az alkalmazást C\# programozási nyelven készítettem el. Az objektum orientált elvek figyelembe vételével a programot logikailag különálló osztályokra bontottam szét. Ezek hierarchiája, egymással való kapcsolatai egy az adathordozón mellékelt ábrán láthatóak.
 
@@ -11,7 +11,7 @@ A különböző osztályokat és működésüket a következő pontokban fogom b
 \label{fig:modellek}
 \end{figure}
 
-\section{Modellek kezeléséhez szükséges osztályok}
+\Section{Modellek kezeléséhez szükséges osztályok}
 
 A \texttt{BaseMapObject} osztályból származik az összes modellekhez kapcsolt osztály. Ez írja le a közös tulajdonságaikat, a térképen szereplő objektumok pozícióját, típusát, azt hogy kiválasztható mezőről van-e szó. A térképen megjelenő objektumokhoz kapcsolt osztályokat a \texttt{Hexagon} osztály kapcsolja össze. Ez az osztály tárolja  a hexagonhoz tartozó statikus hőmérsékletet, vízszintet és amikor változás áll be az aktuális hőmérsékletben, akkor meghívja a hozzá kapcsolt objektumoknak a megfelelő metódusait. A kisebb objektumok (virág, kaktusz, kő) és a nagyobb objektumok (épületek, fák) a \texttt{LargeMapObjectManager} és \texttt{SmallMapObjectManager} osztályokkal kezelhetők.
 
@@ -30,7 +30,7 @@ Manager osztályokat hoztam létre amikben tömbökben megadhatóak a textúrák
 \label{fig:Managers}
 \end{figure}
 
-\section{UI és paraméterek szabályozása}
+\Section{UI és paraméterek szabályozása}
 
 A felhasználói felületen található vezérlő elemek segítségével szabályozhatjuk a generálni kívánt térkép paramétereit. Minden vezérlő elemhez tartozik egy script fájl, ami a játék indításakor beállítja a vezérlő elemekhez tartozó alapértéket és bizonyos esetekben a minimum, maximum vagy a további lehetséges értékeket is. Ezek az értékek az \texttt{Engine} osztályban kerültek rögzítésre. A paraméterek aktuális értékét az \texttt{Engine} megfelelő metódusainak meghívásával lehet módosítani (\ref{fig:UI} ábra.).
 
@@ -54,7 +54,7 @@ A \texttt{CameraMovement} osztály felelős a kamera mozgatásért. Ennek az osz
 
 A \texttt{MapGenerator} osztály az, ami a generálást elvégzi. Ennek \aref{chap:tervezes}. fejezetben már ismertetett 8 lépés alapján (\ref{fig:generalas}. ábra).
 
-\subsection{Térkép szélének generálása}
+\SubSection{Térkép szélének generálása}
 
 Jelenlegi állapotában a térképet csak valamilyen speciális textúrájú hexagonnal lehet körülhatárolni, de jövőbeli igény esetén minimális módosítások által elérhető lesz más objektumok használata is. A térkép széleinek generálási módját az alábbi kód részletezi.
 \begin{cpp}
@@ -75,7 +75,7 @@ for (int y = 0; y < map.GetLength(1); y++)
 }
 \end{cpp}
 
-\subsection{Domborzat generálása}
+\SubSection{Domborzat generálása}
 
 A domborzat generálása véletlenszerű pozíciókba történik, amely konkrétan az alábbi kóddal került megvalósításra.
 \begin{cpp}
@@ -106,7 +106,7 @@ while (i < maxNumOfMountainTiles)
 }
 \end{cpp}
 
-\subsection{Folyók generálása}
+\SubSection{Folyók generálása}
 
 A folyók generálásához \textit{A*-algoritmus}t használtam. A nagy terjedelmű algoritmus helyett csak a pszeudokódot mutatnám be, ami alapján implementáltam ezt a részt \cite{A*Code}.
 \begin{cpp}
@@ -136,7 +136,7 @@ loop
 
 Fontosnak tartom még megemlíteni azt, hogy az algoritmus során szükséges tárolnunk minden egyes csomópontról, hogy melyik csomópontról értük el. Amikor vizsgálunk egy csomópontot, akkor az összes szomszédját megvizsgáljuk, hogy rajta vannak-e valamelyik listán. Ha már rajta van a lezárt listán akkor tovább lépünk a következőre, viszont, ha a vizsgálandó csomópontok listáján szerepel, akkor meg kell, hogy vizsgáljuk, hogy az aktuálisan vizsgált csomópontról nem rövidebb-e az út mint a korábbi útvonal volt.
 
-\subsection{További mezők generálása}
+\SubSection{További mezők generálása}
 
 További mezők generálása alatt jelen esetben olyan mezők generálását értjük, amelyeken nem szerepel folyó vagy hegy, de szerepelhetnek rajta épületek vagy növények. Ennek a generálási módja a következő kódrészben olvasható.
 \begin{cpp}
@@ -161,7 +161,7 @@ MaxNumOfBiome = (int)(OpenFlatTiles.Count *
 
 A szabad mezők nyilvántartásba vételére azért van szükség, hogy a generálás későbbi szakaszaiban tudjuk, hogy mennyi épületet vagy növényzetet kell generálni.
 
-\subsection{Épületek generálása}
+\SubSection{Épületek generálása}
 
 Az alábbi algoritmus véletlenszerűen kiválasztott mezőkre generál épületeket/városokat a korábban meghatározott mértékben.
 \begin{cpp}
@@ -183,7 +183,7 @@ if (OpenFlatTiles.Count > 0)
 }
 \end{cpp}
 
-\subsection{Növényzet generálása}
+\SubSection{Növényzet generálása}
 
 Ebben a pontban azt az algoritmust mutatom be, amelyik meghatározza, hogy a szabad mezők közül melyikre és milyen növényzetet generáljon.
 \begin{cpp}

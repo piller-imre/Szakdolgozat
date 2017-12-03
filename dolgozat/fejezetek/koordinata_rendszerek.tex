@@ -1,12 +1,12 @@
 \Chapter{Koordináta-rendszerek}
 
-\section{Négyzet alapú rendszerek}
+\Section{Négyzet alapú rendszerek}
 
 A négyzet alapú koordináta-rendszer alatt jelen esetben a hagyományos \textit{Descartes-féle} koordináta-rendszert értjük. Ennek a pontjait az $(x, y) \in \mathbb{Z}^2$ alakban írhatjuk föl.
 
 % "A síkbeli \textit{Descartes-féle koordináta-rendszer}ben egy $P$ pont helyzetét az $XY$ síkon az $(x;y)$ rendezett számpárral (koordináta-kettős) adjuk meg. A két tengely metszéspontja a koordináta-rendszer kezdőpontja az origó $(O)$. A megállapodás szerinti első $x$ koordináta az abszcissza, a második $y$ koordináta az ordináta. Ugyanezekkel a jelzőkkel különböztetjük meg a tengelyeket. A vektoros értelmezésnél az $X$ és $Y$ tengelyek irányába mutató egységvektorokat $(i;j)$ jelöli." \cite{WikiSquare}
 
-\section{Hexagon alapú rendszerek}
+\Section{Hexagon alapú rendszerek}
 \label{sec:hexagon}
 
 A hexagonok hat oldalú poligonok. A szabályos hatszögnek minden oldala egyenlő hosszúságú és belső szögei is egyenlőek. A szakdolgozatomban olyan hexagonokkal foglalkozok, amelyeknek a szemközti oldalai egyenlő hosszúságúak és párhuzamosak, viszont nem minden esetben feltétlenül szabályosak \cite{HexWiki}.
@@ -15,7 +15,7 @@ Egy hexagonnak hat oldala van. Minden oldalon két hexagon osztozik. Egy hexagon
 
 A hexagonokból felépülő rácsokban a koordináták kezelésére többféle módszer is adódik. A következő szakaszokban ezeket veszem sorra, és hasonlítom össze.
 
-\subsection{Eltolásos koordináta-rendszer}
+\SubSection{Eltolásos koordináta-rendszer}
 % \cite{redblobgamesHexagonalGrids}
 
 A leggyakoribb megközelítés a hexagon alapú rácsokban lévő koordináták kezeléséhez az eltolásos módszer, ami kisebb eltérésektől eltekintve gyakorlatilag megegyezik a \textit{négyzet koordináta-rendszer}rel. A \textit{négyzet koordináta-rendszer}hez hasonlóan itt is a hálónk egyik sarka lesz a kezdő pont (origó) amihez viszonyítva számozzuk majd a sorokat és az oszlopokat.
@@ -49,7 +49,7 @@ Eltolható a páros és a páratlan oszlop/sor is. Mivel kétféleképpen is ál
 \end{figure}
 
 \newpage
-\subsection{Kocka koordináta-rendszer}
+\SubSection{Kocka koordináta-rendszer}
 %\cite{redblobgamesHexagonalGrids}
 
 Ha egy másik fajta megközelítésből nézzük a hexagon hálókat, akkor láthatjuk, hogy három elsődleges tengelye van, nem úgy mint a korábbi koordináta-rendszereknek (\ref{fig:CubeCoord}. ábra).
@@ -72,15 +72,15 @@ Egy szemléletesebb példaként vizsgáljuk meg a \textit{Q*bert} nevű játéko
 \label{fig:Qbert}
 \end{figure}
 
-A játék egy $28$ kockából álló, piramis szerű játékmezőn zajlik. (Ilyen alakzatot kapunk, ha végrehajtjuk az előző részben leírt síkkal való vágást.) \newpage \noindent A játékos \textit{Q*bert}-et (narancssárga karakter) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt. Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha síkba rajzoljuk le. Így tehát \textit{Q*bert} 6 különböző irányba is léphet. Ez azt jelenti, hogy ha a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként. Vegyük észre az alábbiakat \cite{HexagonalGrids}.
+A játék egy $28$ kockából álló, piramis szerű játékmezőn zajlik. (Ilyen alakzatot kapunk, ha végrehajtjuk az előző részben leírt síkkal való vágást.) \newpage \noindent A játékos \textit{Q*bert}-et (a narancssárga karaktert) irányítja, aki, ha ráugrik egy kockára akkor átszínezi azt. Ha jobban megfigyeljük az ábrát, akkor láthatjuk, hogy a kockák valójában hexagonok, ha síkba rajzoljuk le. Így tehát \textit{Q*bert} 6 különböző irányba is léphet. Ez azt jelenti, hogy ha a párhuzamosan lévő oldalakra merőlegesen helyezünk tengelyeket, akkor hármat tudunk elhelyezni 120 fokonként. Vegyük észre az alábbiakat \cite{HexagonalGrids}.
 \begin{itemize}
 \item Minden hexagonnak 3 koordinátája van. 
 \item Mindegyik tengely egy egyenes vonalnak felel meg a hexagon hálón.
 \item Minden irány a hexagonon másik két iránynak a kombinációja a \textit{kocka koordináta-rendszer}en. Például, ha a \ref{fig:Qbert}. ábrán felfelé szeretnénk mozogni, akkor az a $+y$ és $-z$ között fekszik, ezért minden lépésnél ami felfelé történik hozzá kell adnunk 1-et az $y$-hoz és el kell vennünk 1-et a $z$-ből. 
 \end{itemize}
-Ez azért történik így, mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (útkereső algoritmus) kell használni az előnye egyértelműen látszik (az algoritmusok könnyebb használhatósága miatt) \cite{Cube}. 
+Ez azért történik így, mert minden egyes mező koordinátájának az összege $0$ kell, hogy legyen ($x + y + z = 0$). Ez azt is jelenti, hogy a harmadik tengely bizonyos esetekben redundáns is lehet, például amikor meghatározzuk, hogy az egyes mezők hol jelenjenek meg a képernyőn. Ugyanakkor olyan esetekben amikor algoritmusokat (például útkereső algoritmust) kell használni az előnye egyértelműen látszik az algoritmusok egyszerűbb megadása miatt \cite{Cube}. 
 
-\subsection{Tengely koordináta-rendszer}
+\SubSection{Tengely koordináta-rendszer}
 
 A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \textit{kocka koordináta-rendszer} három koordinátája közül (\ref{fig:AxialCoord}. ábra). Mivel a \textit{kocka koordináta-rendszer}nél szükségszerű, hogy  $x + y + z = 0$ teljesüljön, a harmadik koordináta redundáns.  A \textit{tengelyes koordináta-rendszer} használható tárolásra és megjelenítésre, mivel az $x + y + z = 0$ egyenlet alapján kiszámítható a harmadik koordináta ezért a számításokhoz is könnyen használható \cite{Axial}.
 
@@ -94,7 +94,7 @@ A \textit{tengely koordináta-rendszer} csak két koordinátát használ a \text
 Az előnye ennek a rendszernek az eltolásoshoz képest, hogy az algoritmusok egyszerűbbek. A hátránya viszont a téglalap alakú térképek esetén való tárolás. 
 
 \newpage
-\section{Térkép tárolási probléma}
+\Section{Térkép tárolási probléma}
 % \cite{redblobgamesHexagonalGrids}
 
 A megjelenítő eszközeink néhány ritka kivételtől eltekintve téglalap alakúak. A számítógépes játékok jelentős része szintén téglalap alakú elrendezésekben gondolkozik. A számítógép az adatokat lineáris elrendezésben képes tárolni. A problémát az jelenti, hogy az indexeket hogyan számoljuk át úgy, hogy lehetőleg hézagmentesen tudjuk tárolni az egyes koordinátákhoz tartozó adatokat.
@@ -163,11 +163,11 @@ a_r &=
 \item A rombusz formájú térkép esetén minden tökéletesen egyezik, ezért egyszerűen csak az $a_r = 0$ kezdőindexekkel kell számolnunk.
 \end{itemize}
 
-\section{Koordináta konverziók}
+\Section{Koordináta konverziók}
 
 Mivel a három terület ahol a koordinátákat használjuk (tárolás, megjelenítés, számítások) nem feltétlenül ugyanabban a koordináta-rendszerben fognak megvalósulni, ezért szükséges ismernünk a különböző konverziós eljárásokat oda-vissza a különböző rendszerek között. Mivel a számításokhoz a \textit{kocka koordináta-rendszer}t fogom alkalmazni, ezért erre a rendszerre fogom alapozni az algoritmusokat \cite{Conversion}.
 
-\subsection{Tengely - Kocka konverziók}
+\SubSection{Tengely - Kocka konverziók}
 % \cite{redblobgamesHexagonalGrids}
 
 A \textit{tengely koordináta-rendszer} nagyon közel áll a \textit{kocka koordináta-rendszer}hez. A tengelyes csak elhagyja a harmadik koordinátát, a kocka pedig kiszámolja a harmadikat a másik kettő alapján \cite{Conv_Axial}.
@@ -203,7 +203,7 @@ axial_r \\
 \right)
 \end{align*}
 
-\subsection{Eltolásos - Kocka konverziók}
+\SubSection{Eltolásos - Kocka konverziók}
 % \cite{redblobgamesHexagonalGrids}
 
 Az \textit{eltolásos koordináta-rendszer}nek négy fajta típusa lehet az alapján, hogy melyik sor/oszlop lett eltolva. A páratlan indexű sorok eltolása esetén a következő formában számítható az összefüggés \cite{Conv_Offset}.
@@ -344,12 +344,12 @@ evencolumn_{row} - \dfrac{evencolumn_{col} + (evencolumn_{col} \bmod 2)}{2}
 Az implementációban érdemes \textit{bitenkénti “és”} (\texttt{a \& 1}) operátort használni \textit{modulo} (\texttt{a \% 2}) helyett, amikor meghatározzuk, hogy páros vagy páratlan sorban/oszlopban vagyunk, mivel ez működik negatív számok esetén is, függetlenül a maradékképzés műveletének programnyelvi implementálási módjától.
 
 \newpage
-\section{Távolságok számítása}
+\Section{Távolságok számítása}
 \label{sec:tavolsag}
 
 Ahhoz, hogy távolságokat tudjunk számolni a térképen definiálnunk kell hozzá metrikákat. A különböző típusú koordináta-rendszerek esetén ennek különféle módjai lehetnek. A következő szakaszok ezek közül mutatnak be néhányat \cite{Distance}.
 
-\subsection{Kocka koordináta-rendszer}
+\SubSection{Kocka koordináta-rendszer}
 % \cite{redblobgamesHexagonalGrids}
 
 A \textit{kocka koordináta-rendszer}ben, minden hexagon egy kockának felel meg a három dimenziós térben. A szomszédos hexagonok 1 távolságra vannak egymástól a hexagonháló esetén, viszont 2 távolságra vannak egymástól a \textit{kocka koordináta-rendszer}ben. Ezáltal egyszerűbbé válik a távolságszámítás.
@@ -368,7 +368,7 @@ d_{\text{cube}}(a, b) =
 ).
 $$
 
-\subsection{Tengelyes koordináta-rendszer}
+\SubSection{Tengelyes koordináta-rendszer}
 %\cite{redblobgamesHexagonalGrids}
 %\cite{HexagonalGrids}
 
@@ -377,11 +377,11 @@ $$
 d_{hex}(a, b) = \frac{|a_x - b_x| + |a_x + a_y - b_x - b_y| + |a_z - b_z|}{2}.
 $$
 
-\subsection{Eltolásos koordináta-rendszer}
+\SubSection{Eltolásos koordináta-rendszer}
 %\cite{redblobgamesHexagonalGrids}
 %\cite{HexagonalGrids}
 
-Az \textit{eltolásos koordináta-rendszer} esetén azt a megoldást fogjuk használni, hogy átalakítjuk a koordinátákat a \textit{kocka koordináta-rendszer}re, vagyis \cite{Distance_Offset}
+Az \textit{eltolásos koordináta-rendszer} esetén azt a megoldást fogjuk használni \cite{Distance_Offset}, hogy átalakítjuk a koordinátákat a \textit{kocka koordináta-rendszer}re, vagyis
 $$
 d_{of\!fset} (a, b) = d_{cube}(cube_a, cube_b).
 $$

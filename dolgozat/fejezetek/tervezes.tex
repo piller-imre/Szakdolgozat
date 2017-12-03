@@ -1,19 +1,19 @@
-\chapter{A térképgenerálás módja}
+\Chapter{A térképgenerálás módja}
 \label{chap:tervezes}
 
 Mivel korábban már több játékot is készítettem ami négyzetrács alapú térképet használ, most szerettem volna megismerni, hogy a hexagon alapú térképek, hogyan készülnek, ezért választottam a hexagont a programom térképének alapjául a szakdolgozatomban. Ehhez \textit{eltolásos koordináta-rendszer}t fogok használni a megjelenítésben és a tárolásban, mivel téglalap alakú térképet szeretnék használni és ehhez a megoldáshoz a fentebb említettek alapján ez tünt célszerű döntésnek. Mivel az \textit{eltolásos koordináta-rendszer}ben a számítások bonyolultabbak, mint a többi ismertetett koordináta-rendszerben, ezért a számításokhoz a koordinátákat átalakítom a \textit{kocka koordináta-rendszer}beli megfelelőjére és azzal fogom elvégezni a számításokat, majd pedig visszaalakítom a tároláshoz és a megjelenítéshez. Az útkereső algoritmusok közül az \textit{A*}-algoritmusra esett a választásom, mivel általános esetben ez bizonyult hatékonynak.
 
-\section{Stílus és modellek}
+\Section{Stílus és modellek}
 
 A játékban szereplő grafikai stílusként a low-poly irányzatot választottam. Ehhez kezdetben saját készítésű modelleket használtam. Mivel a térkép generálásához nagy meny\-nyi\-sé\-gű, kidolgozott, egységes kinézetű modell szükséges, és a dolgozat tárgyköre elsődlegesen nem grafikai modellezés, ezért az Interneten kerestem további modelleket.
 
 A játék fejlesztése során három dimenziós modelleket használtam, mert ezáltal lehetőség nyílt arra, hogy a térképet forgatni lehessen és különböző szemszögekből meg lehessen azt nézni. Úgy ítéltem meg, hogy ez több előnnyel jár, mint amennyi plusz energiát követel meg.
 
-A térkép hexagonokból épül fel, és a hexagonháló egyik fő jellemzője az, hogy a háló szélein lévő hexagonok nem egy vonalba esnek. Ennek az előnyeit és hátrányait korábban \aref{sec:hexagon} fejezetben már taglaltam. Jelen esetben a már említett problémák nem jelentkeznek, mivel nem kell igazodni semmilyen körülhatároló objektumhoz.
+A térkép hexagonokból épül fel, és a hexagonháló egyik fő jellemzője az, hogy a háló szélein lévő hexagonok nem egy vonalba esnek. Ennek az előnyeit és hátrányait korábban \aref{sec:hexagon}. fejezetben már taglaltam. Jelen esetben a már említett problémák nem jelentkeznek, mivel nem kell igazodni semmilyen körülhatároló objektumhoz.
 
 A generálás során a térképen a különböző környezeti viszonyoknak megfelelően más és más objektumok jelennek meg. \Aref{tab:models}. táblázatban azt láthatjuk, hogy a különböző objektum típusokból a különböző környezeti viszonyok között mennyi áll rendelkezésre.
 
-\begin{figure}[h!]
+\begin{table}[h!]
   \centering
   \begin{tabular}{ | c | c | c | c | }
     \hline
@@ -25,9 +25,9 @@ A generálás során a térképen a különböző környezeti viszonyoknak megfe
   \end{tabular}
   \caption{A különböző típusokhoz és környezeti viszonyokhoz tartozó objektumok száma.}
   \label{tab:models}
-\end{figure}
+\end{table}
  \newpage
-\section{Kamera}
+\Section{Kamera}
 
 A programban izometrikus megjelenítési módot használok. Ez a megoldás gyakori a stratégiai játékoknál. A legtöbb számítógépes játék esetében az izometrikus nézet nem fedi teljes mértékben a matematikai értelemben vett izometrikus nézetet. A számítógépes játékokban eleinte azért alkalmazták az izometriát, mivel ezt egyszerűbb volt megjeleníteni a korabeli hardvereken. Manapság  izometrikusnak nevezik (matematikai értelemben helytelenül) azokat az eseteket, amikor a kamera tengelye tipikusan 30, 45, 53 vagy 60 fokos szöget zár be a játék térképének síkjával \cite{Isometic}. (Ezek közül talán a legérdekesebb az 53 fok, ami a régebbi kijelzőknek a felbontásának arányából (4:3) adódott.)
 
@@ -35,7 +35,7 @@ A 45 és a 60 fokos megoldás nyújtotta azt a hatást amit szerettem volna elé
 
 A játékfejlesztésben az egyik legnehezebb feladat a kamera kezelés megvalósítása, mivel ha jól működik senki sem veszi észre, ha pedig hibásan működik akkor a teljes felhasználói élményt tönkreteheti. Ezért úgy döntöttem, hogy egy olyan kódot használok fel a Unity store-ból amit már korábban is használtam és kisebb módosítások alkalmazásával minden szempontot megvalósít \cite{RTS_Camera}.
 
-\section{Generálás lépései}
+\Section{Generálás lépései}
 
 A program bemenetként a térkép fő jellemzőit, a generált térképpel szembeni elvárásokat kapja paraméterezésként. Bizonyos paraméterek szabályozhatóak a generálás után is (mint például a hőmérséklet), de a többségük nem.
 
@@ -48,17 +48,17 @@ A térkép egy többlépcsős folyamat eredményeként készül el. Ezeket a lé
 \item Ezen kívül szükség van a generálni kívánt térkép méreteire (szélesség, magasság). Ezek a paraméterek a generálás előtt a felhasználó által is szabályozhatóak bizonyos intervallumon.
 \end{itemize}
 
-\subsection{Térkép széleinek létrehozása}
+\SubSection{Térkép széleinek létrehozása}
 
 A térkép körülhatárolására egy speciális hexagon textúrát hoztam létre, ami az óceánt szimbolizálja. Ez gyakori megközelítés a stratégiai játékok esetén a térkép körülhatárolására (például \textit{Civilization IV: Colonization}). A játékfejlesztők különböző módszerekkel határolják körbe a térképet, mint például felhők, hegyek, várfalak, óceánok. Ennek a célja, hogy a karakterek ne tudjanak a széleket határoló néhány mezőre lépni.
 
 A beállított magasság és szélesség értékeken felül fog az algoritmus minden egyes szélre egy plusz sort/oszlopot generálni. Amikor a felhasználó a térkép bejárható részének méreteit $x \times y$ -nak adta meg, a kapott térkép mérete $(x+2) \times (y+2)$ méretű lesz.
 
-\subsection{Domborzat kialakítása}
+\SubSection{Domborzat kialakítása}
 
 A második elem ami majd a térképen meghatározásra kerül, az a domborzat. Ez két fajta magasságban jelenik meg (domb, hegy), amihez két különböző modellt használok. A térkép méreteihez viszonyítva lehet majd százalékos arányban kifejezni a domborzat mennyiséget, egy $0\%$-tól $30\%$-ig terjedő skálán. Ezt az intervallumot találtam megfelelőnek ahhoz, hogy ha sok hegyet akarunk akkor sok hegyet kapjunk, de még a karakterek által bejárható maradhasson a térkép. Ezt az intervallumot a generálás előtt a felhasználó be tudja állítani. A hegyek és a dombok véletlenszerű pozícióban helyezkednek el. A különböző környezeti viszonyokhoz három különböző textúra áll rendelkezésre (fű, homok, hó). A hegyek és a dombok egyenletes eloszlás szerint kerülnek a térkép egyes részeire. Ha egy olyan mezőt választott ki az algoritmus amin már volt egy hegy/domb, akkor újrakezdi a keresést.
 
-\subsection{Folyók elhelyezése}
+\SubSection{Folyók elhelyezése}
 
 A folyók generálásakor két különböző esetet különböztettem meg; amikor vannak hegyek és amikor nincsenek. Amikor vannak hegyek akkor az egyik hegy lábától egy másik vizes mezőig (a térkép szélei vagy egy már meglévő folyó) generál az algoritmus folyót az útkereső algoritmus felhasználásával. Abban az esetben, amikor nincs egy darab hegy sem, akkor az algoritmus vagy véletlenszerűen választ egy mezőt a térképen és egy vizes mezőig generál. A domborzathoz hasonlóan a vizes mezők mértéke is szabályozható a felhasználó által a generálás előtt. Ez is a domborzatnál már megismert $0\%$-tól $30\%$-ig tartó skálán mozog a térkép méretéhez viszonyítva. A környezeti viszonyokhoz alkalmazkodva kétfajta textúra jöhet szóba, úgy mint a normál és a jeges. Ez a módszer viszonylag könnyen implementálható az útkereső algoritmus ismeretében, és kellően egyedi megjelenést tud kölcsönözni a térképnek. Keletkezhetnek szigetek (\ref{fig:Island}. ábra), szélesebb folyók, torkolatok (\ref{fig:Branch}. ábra). Ezen kívül minden vizes mező hozzáadódik egy listához aminek majd a vízszint meghatározásában lesz szerepe.
 
@@ -76,15 +76,15 @@ A folyók generálásakor két különböző esetet különböztettem meg; amiko
 \label{fig:Branch}
 \end{figure}
 
-\subsection{Sík területek generálása}
+\SubSection{Sík területek generálása}
 
 Az algoritmus minden olyan mezőre, ahová még nem generált domborzatot vagy folyót, oda sík terültet fog generálni. Ezek sima hexagonokból fognak állni és a további paraméterek segítségével kerülhetnek majd rá épületek, fák, virágok. Itt is a már megszokott 3 textúra áll majd rendelkezésre, úgy mint fű, homok és jég stílusú.
 
-\subsection{Vízszint meghatározása}
+\SubSection{Vízszint meghatározása}
 
 A vízszint meghatározása minden mezőre a növényzet generálásához szükséges. A vízszint a vizes mezőktől távolodva lineárisan csökken. Ezáltal megvalósítható, hogy minél távolabb van egy mező a víztől, annál kisebb az esélye, hogy sok növényzet legyen rajta. A hőmérséklet mellett még a vízszint fog közrejátszani abban, hogy hogyan ,,száradjanak ki'' a különböző mezők.
 
-\subsection{Épületek elhelyezése}
+\SubSection{Épületek elhelyezése}
 
 Úgy terveztem, hogy az épületek és a fák 7 fix pozícióban állhatnak a hexagonon (\ref{fig:Places}. ábra). Azért döntöttem a 7 fix pont mellett mert így egyszerűbb az algoritmus, mint ha véletlenszerű pozíciókban szerepelnének a hexagonon. Így nem kell vizsgálni, hogy az objektumok amiket elhelyezne az algoritmus azok ütköznek-e valamilyen egyéb objektummal a térképen. Mindössze csak arra kell figyelni, hogy egy helyen csak egy objektumot tudjunk elhelyezni. A további fejlesztések esetén például az úthálózatot is könnyebben megvalósíthatónak tartom mintha véletlenszerű helyeken lennének és nem is feltétlenül lenne jobb megoldás. Kétfajta épület van. A házak esetén a környezeti változások a falakat nem, csak a háztetők textúráját érintik. Így például havas stílusú hexagonon az épület teteje is havas lesz (\ref{fig:Buildings}. ábra).
 
@@ -104,7 +104,7 @@ A vízszint meghatározása minden mezőre a növényzet generálásához szüks
 
 \footnotetext{www.assetstore.unity3d.com/en/\#!/content/50095}
 
-\subsection{Növényzet kialakítása}
+\SubSection{Növényzet kialakítása}
 
 A növényzetet úgy tervezem megvalósítani, hogy két csoportra bontom azt. Az egyikbe a fák, a másikba pedig a kisebb objektumok, például virágok, kaktuszok, kövek kerültek. Mind a két csoportot másképpen valósítottam meg.
 
@@ -163,7 +163,7 @@ Véletlenszerű pozíciókban generálja az algoritmus a sík mezőkön. A kiseb
 \footnotetext{www.assetstore.unity3d.com/en/\#!/content/11547}
 
 \newpage
-\subsection{Hőmérséklet beállítása}
+\SubSection{Hőmérséklet beállítása}
 
 Lehetőség van az évszakok között váltogatni. Ez a funkció fontos a játék tovább fejlesztésével kapcsolatban, mivel a játékban szerepet kap majd az évszakok változása. A tavasz és az ősz nem változtatja az alap hőmérsékleti viszonyokat csak a nyár és a tél módosítja a globális hőmérsékletet egy konstans értékkel. 
 

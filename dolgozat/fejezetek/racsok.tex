@@ -2,7 +2,7 @@
 
 % TODO: Definiálni kellene, hogy mi pontosan itt a rács!
 
-\section{Rácsok összehasonlítása}
+\Section{Rácsok összehasonlítása}
 %\cite{KoordinataRendszer}
 %\cite{redblobgamesHexagonalGrids}
 %\cite{HexMap}
@@ -50,7 +50,7 @@ A hexagonrácsot azért szokták játékokban használni mert kevésbé torzítj
 
 A fő indok a hexagonháló mellett az eltolt négyzethálóval szemben az, hogy természetesebben adódik a hat lehetséges mozgási iránynak a használata. Sok ember számára zavaró, vagy nem teljesen egyértelmű első ránézésre, hogy hogyan történik a horizontális mozgás az eltolt négyzetrács esetén. Emellett még esztétikailag is kellemesebb érzetet nyújt a felhasználó számára \cite{catlikecoding}.
 \newpage
-\section{Rácsok felhasználása}
+\Section{Rácsok felhasználása}
 
 Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben.  Mivel a beltéri helyszínek (szobák) és az azon belüli elemek (bútorok) általában téglalap alakúak, praktikusabb a négyzetrács használata. A négyzetrács a falakhoz tökéletesen illeszkedik, ugyanakkor a hexagonok esetében problémák merülnek fel, ugyanis a hexagonok nem fognak szabályosan illeszkedni a falak mentén. Erre kétfajta megoldás létezik: a fal menti hexagonokat elvághatjuk, vagy másik megoldás, ha nem töltjük ki a fennmaradó helyeket.
 
@@ -68,7 +68,7 @@ Alapvetően mindkét rácsnak megvan a maga helye a játékfejlesztésben.  Mive
 \item Kültéren, falak hiányában ezek a problémák nem merülnek fel. Emiatt, valamint a négyzetrács átlós mozgásával kapcsolatos problémák miatt előnyösebb a hexagonháló használata ezekben az esetekben.
 \end{itemize}
 
-\section{Rácsok részei}
+\Section{Rácsok részei}
 
 A rácsoknak három különböző része van: a lapok, az élek és a csúcsok (\ref{fig:PartsOfGrid}. ábra). Minden lap két dimenziós felület élek által határolva. Minden él egy dimenziós szakasz aminek mind a két végén csúcsok találhatóak. Minden csúcs nulla dimenziós pont. 
 
@@ -92,15 +92,15 @@ Lapok, élek és csúcsok feltűnnek a különböző poligonokból álló térk�
 
 A gráf struktúra megengedi számunkra, hogy gráf algoritmusokat (például legrövidebb utak számítását) használjunk a térképen. A rácsok és a poligonális térképek átalakíthatóak gráf struktúrákra azáltal, hogy minden lapból csomópontot és minden lapok között lévő élből pedig a csomópontokat összekötő éleket készítünk \cite{Parts}.
 
-\section{Rácsok ábrázolása}
+\Section{Rácsok ábrázolása}
 
-\subsection{Négyzetrácsok}
+\SubSection{Négyzetrácsok}
 
 A négyzetháló esetén van a legkönnyebb dolgunk ismételten. A négyzeteket ebben az esetben úgy tudjuk egymás mellé helyezni, hogy a szomszédos négyzetek középpontjai közötti távolság megegyezik az oldal hosszal. 
 
 Abban az esetben sincs sokkal nehezebb dolgunk, ha úgy döntünk, hogy az eltolt négyzetrácsos megoldást választjuk, ebben az esetben minden páros/páratlan sort/oszlopot kell eltolnunk az oldalak hosszának felével.
 
-\subsection{Hexagonális rácsok}
+\SubSection{Hexagonális rácsok}
 
 A hexagonok alapvetően kétféleképpen állhatnak. Az egyik lehetőség, hogy az egyik csúcs van felül, a másik lehetőség, hogy az egyik oldal van felül. A klasszikus, két dimenziós játékok esetén külön figyelmet kell fordítani a rács irányultságára. A következő lépésként vizsgáljuk meg, hogy hogyan tudjuk egymás mellé elhelyezni a hexagonokat \cite{redblobgamesHexagonalGrids}.
 \begin{itemize}
